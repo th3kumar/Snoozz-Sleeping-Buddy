@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "392095101434",
+    "project_id": "snoozz-1a819",
+    "storage_bucket": "snoozz-1a819.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392095101434:android:f6c85ebd08019595f17443",
+        "android_client_info": {
+          "package_name": "com.fridayhouse.snoozz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392095101434-v50o3iq8h4mt88ml1lrhh6q39cch2o5e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fridayhouse.snoozz",
+            "certificate_hash": "058f9a8209ab3a6056bed5c6994cb3f343c57b8d"
+          }
+        },
+        {
+          "client_id": "392095101434-uj8otkm0ong5bcah3agji0q4sg52ara7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1EV_KB5mHcjOGYJ0zM-w5nfwbjxZZhDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392095101434-uj8otkm0ong5bcah3agji0q4sg52ara7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
