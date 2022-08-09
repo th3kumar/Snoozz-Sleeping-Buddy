@@ -14,11 +14,6 @@
 •	Implemented Dark Mode Interface, liked by 120+ developers on Discord UI Community.
 
 
-![sNoozz sleeping buddy](https://user-images.githubusercontent.com/72141924/182041467-e5c950d4-9418-465b-8ef8-5f6ac2c8646e.jpg)
-
-
-
-
 
 
 
