@@ -10,10 +10,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.fridayhouse.snoozz.R
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ApplicationComponentManager::class) //should be only ApplicationComponent
+@InstallIn(SingletonComponent::class) //should be only ApplicationComponent
 object AppModule {
     @Singleton
     @Provides

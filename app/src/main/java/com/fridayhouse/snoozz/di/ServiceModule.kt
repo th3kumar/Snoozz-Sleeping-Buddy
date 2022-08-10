@@ -1,6 +1,7 @@
 package com.fridayhouse.snoozz.di
 
 import android.content.Context
+import com.fridayhouse.snoozz.data.remote.MusicDatabase
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
@@ -17,6 +18,9 @@ import dagger.hilt.android.scopes.ServiceScoped
 @InstallIn(ServiceComponent::class)
 object ServiceModule {
 
+    @ServiceScoped
+    @Provides
+    fun providesMusicDatabase() = MusicDatabase()
 
     @ServiceScoped
     @Provides
