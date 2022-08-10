@@ -1,27 +1,17 @@
 package com.fridayhouse.snoozz.exoplayer
 
 import android.media.MediaMetadata.*
-import android.media.browse.MediaBrowser
-import android.net.Uri
-import android.provider.Settings.Global.getString
-import android.provider.Settings.Secure.getString
-import android.provider.Settings.System.getString
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.core.net.toUri
-import androidx.navigation.NavDeepLinkRequest.Builder.fromUri
-import com.fridayhouse.snoozz.data.entities.sound
 import com.fridayhouse.snoozz.data.remote.MusicDatabase
 import com.fridayhouse.snoozz.exoplayer.State.*
 import com.google.android.exoplayer2.MediaItem
-import com.google.android.exoplayer2.MediaItem.fromUri
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import io.grpc.internal.JsonUtil.getString
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -32,8 +22,13 @@ class FirebaseMusicSource  @Inject constructor(
 
     var sounds = emptyList<MediaMetadataCompat>()
 
-    suspend fun fetchMediaData() = withContext(Dispatchers.IO) {
+    suspend fun fetchMediaData() {
       state = STATE_INITIALIZING
+        getAllSounds()
+        state = STATE_INITIALIZED
+    }
+
+    suspend fun getAllSounds()  = withContext(Dispatchers.IO){
         val allSounds = musicDatabase.getAllSounds()
         sounds = allSounds.map { sound ->
             MediaMetadataCompat.Builder()
@@ -52,7 +47,6 @@ class FirebaseMusicSource  @Inject constructor(
 
 
         }
-        state = STATE_INITIALIZED
     }
 
     fun asMediaSource(dataSourceFactory: DefaultDataSourceFactory) : ConcatenatingMediaSource{
@@ -74,7 +68,7 @@ class FirebaseMusicSource  @Inject constructor(
             .setMediaUri(sound.getString(METADATA_KEY_MEDIA_URI).toUri())
             .setTitle(sound.description.title)
             .setSubtitle(sound.description.subtitle)
-            .setMediaUri(sound.description.mediaUri)
+            .setMediaId(sound.description.mediaId)
             .setIconUri(sound.description.iconUri)
             .build()
 
