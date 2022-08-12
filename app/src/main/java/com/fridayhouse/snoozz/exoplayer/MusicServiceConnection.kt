@@ -72,7 +72,7 @@ class MusicServiceConnection (
 
         override fun onConnectionFailed() {
              _isConnected.postValue(Events(Resource.error(
-                 "Could't connect to media Browser", false
+                 "Couldn't connect to media Browser", false
              )))
         }
     }

@@ -8,4 +8,11 @@
         android:id="@+id/homeFragment"
         android:name="com.fridayhouse.snoozz.ui.fragments.HomeFragment"
         android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/songFragments"
+        android:name="com.fridayhouse.snoozz.ui.fragments.SongFragments"
+        android:label="SongFragments" />
+
+    <action android:id="@+id/globalActionToSongFragment"
+        app:destination="@id/songFragments"/>
 </navigation>

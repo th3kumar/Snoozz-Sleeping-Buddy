@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
@@ -57,7 +59,37 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.playOrToggleSound(it, true)
             }
         }
+           swipeSongAdapter.setItemClickListener {
+               navHostFragment.findNavController().navigate(
+                   R.id.globalActionToSongFragment
+               )
+           }
+        navHostFragment.findNavController().addOnDestinationChangedListener  { _, destination, _ ->
+            when(destination.id) {
+                R.id.songFragments -> hideBottombar()
+                R.id.homeFragment -> showBottombar()
+                else -> showBottombar()
+            }
+
+        }
+
+
     }
+
+    private fun hideBottombar() {
+       ivCurSongImage.isVisible = false
+    vpSong.isVisible = false
+    ivPlayPause.isVisible = false
+    }
+
+    private fun showBottombar() {
+        ivCurSongImage.isVisible = true
+        vpSong.isVisible = true
+        ivPlayPause.isVisible = true
+    }
+
+
+
     private fun switchViewPagerToCurrentSong(sound: sound){
         val newItemIndex = swipeSongAdapter.sounds.indexOf(sound)
         if (newItemIndex != -1) {

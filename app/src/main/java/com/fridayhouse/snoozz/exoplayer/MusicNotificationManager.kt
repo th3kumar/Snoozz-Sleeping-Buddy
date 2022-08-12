@@ -12,6 +12,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.others.Constants.NOTIFICATION_CHANNEL_ID
 import com.fridayhouse.snoozz.others.Constants.NOTIFICATION_ID
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
@@ -19,6 +20,7 @@ class MusicNotificationManager(
     private val context: Context,
     sessionToken: MediaSessionCompat.Token,
     notificationListener: PlayerNotificationManager.NotificationListener,
+
     private val newSongCallback: () -> Unit
 ) {
     private val notificationManager: PlayerNotificationManager
@@ -45,7 +47,10 @@ class MusicNotificationManager(
     private inner class DescriptionAdapter(
         private val mediaController: MediaControllerCompat
     ) : PlayerNotificationManager.MediaDescriptionAdapter{
+
         override fun getCurrentContentTitle(player: Player): CharSequence {
+
+            newSongCallback()
             return mediaController.metadata?.description?.title.toString()
         }
 
