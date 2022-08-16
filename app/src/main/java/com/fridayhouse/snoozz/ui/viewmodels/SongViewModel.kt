@@ -8,10 +8,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fridayhouse.snoozz.exoplayer.*
 import com.fridayhouse.snoozz.others.Constants.UPDATE_PLAYER_POSITION_INTERVAL
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-
-class SongViewModel @ViewModelInject constructor(
+import javax.inject.Inject
+@HiltViewModel
+class SongViewModel @Inject constructor(
     musicServiceConnection: MusicServiceConnection
 ) : ViewModel() {
 
