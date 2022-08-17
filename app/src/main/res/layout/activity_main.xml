@@ -13,25 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/gradient_title"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_round_menu"
-            app:tint="@color/white"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_1sdp"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/white"
             android:text="Snoozz"
-            android:textSize="24sp"
-            android:fontFamily="@font/bridgeb"/>
+            android:textStyle="bold"
+            android:textSize="36sp"
+            android:fontFamily="@font/hanged_letters"/>
 
 
 

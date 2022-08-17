@@ -17,9 +17,27 @@
 
 
     <color name="darkPink">#404040</color>
-    <color name="bluishBackground">	#181818</color>
+    <color name="bluishBackground">#2F3238</color>
     <color name="darkOrchid"> #36454F</color>
 
 
+    <!--    cUSTOM STYLE-->
+    <color name="primary">#A3B5BF</color>
+    <color name="background">#EBEBEB</color>
+    <color name="primary_text">#676767</color>
+    <color name="secondary_text">#212121</color>
+    <color name="dark_shadow">#C5C5C5</color>
+    <color name="light_shadow">#FFFFFF</color>
+
+    <!--    for dark theme -->
+    <color name="primary_dark">#84898C</color>
+    <color name="background_dark">#2F3238</color>
+    <color name="primary_text_dark">#A8AAAB</color>
+    <color name="secondary_text_dark">#80858A</color>
+    <color name="dark_shadow_dark">#232529</color>
+    <color name="light_shadow_dark">#383D45</color>
+
+
+    <color name="orange">#ED4E12</color>
 
 </resources>

@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.data.entities.sound
@@ -17,13 +17,24 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.fridayhouse.snoozz.ui.viewmodels.SongViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.android.synthetic.main.fragment_song.*
+import kotlinx.android.synthetic.main.fragment_song.ivPlayPauseDetail
+import kotlinx.android.synthetic.main.fragment_song.ivSkip
+import kotlinx.android.synthetic.main.fragment_song.ivSkipPrevious
+import kotlinx.android.synthetic.main.fragment_song.ivSongImage
+import kotlinx.android.synthetic.main.fragment_song.seekBar
+import kotlinx.android.synthetic.main.fragment_song.tvCurTime
+import kotlinx.android.synthetic.main.fragment_song.tvSongDuration
+import kotlinx.android.synthetic.main.fragment_song.tvSongName
+import kotlinx.android.synthetic.main.fragment_song_custom.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
+
 @AndroidEntryPoint
-class SongFragments : Fragment(R.layout.fragment_song) {
+class SongFragments : Fragment(R.layout.fragment_song_custom) {
 
     @Inject
     lateinit var glide: RequestManager
@@ -51,6 +62,8 @@ class SongFragments : Fragment(R.layout.fragment_song) {
             }
         }
 
+
+
        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                if (fromUser) {
@@ -77,6 +90,30 @@ class SongFragments : Fragment(R.layout.fragment_song) {
         }
         ivSkip.setOnClickListener{
             mainViewModel.skipToNextSound()
+        }
+        imageShuffle.setOnClickListener {
+            mainViewModel.skipToNextSound()
+        }
+        imageSearch.setOnClickListener {
+            val text = "currently unavailable !"
+            val duration = Toast.LENGTH_SHORT
+
+            val toast = Toast.makeText(context, text, duration)
+            toast.show()
+        }
+        imageMenu.setOnClickListener {
+            val text = "currently in beta version !"
+            val duration = Toast.LENGTH_SHORT
+
+            val toast = Toast.makeText(context, text, duration)
+            toast.show()
+        }
+        imageLoop.setOnClickListener{
+            val text = " looped "
+            val duration = Toast.LENGTH_SHORT
+
+            val toast = Toast.makeText(context, text, duration)
+            toast.show()
         }
     }
 
