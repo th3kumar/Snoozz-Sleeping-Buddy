@@ -1,18 +1,18 @@
 package com.fridayhouse.snoozz.ui.viewmodels
 
-import android.annotation.SuppressLint
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.fridayhouse.snoozz.exoplayer.*
+import com.fridayhouse.snoozz.exoplayer.MusicService
+import com.fridayhouse.snoozz.exoplayer.MusicServiceConnection
+import com.fridayhouse.snoozz.exoplayer.currentPlaybackPosition
 import com.fridayhouse.snoozz.others.Constants.UPDATE_PLAYER_POSITION_INTERVAL
-import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class SongViewModel @Inject constructor(
     musicServiceConnection: MusicServiceConnection

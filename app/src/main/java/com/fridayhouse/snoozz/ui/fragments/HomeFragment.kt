@@ -11,7 +11,6 @@ import com.fridayhouse.snoozz.adapters.SongAdapter
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 

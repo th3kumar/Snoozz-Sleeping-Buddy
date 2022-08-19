@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.data.entities.sound
-import kotlinx.android.synthetic.main.list_item.view.*
 
 abstract class BaseSongAdapter (
     private val layoutId: Int

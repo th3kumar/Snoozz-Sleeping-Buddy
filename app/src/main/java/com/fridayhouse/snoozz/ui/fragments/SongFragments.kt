@@ -17,8 +17,6 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.fridayhouse.snoozz.ui.viewmodels.SongViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.android.synthetic.main.fragment_song.*
 import kotlinx.android.synthetic.main.fragment_song.ivPlayPauseDetail
 import kotlinx.android.synthetic.main.fragment_song.ivSkip
 import kotlinx.android.synthetic.main.fragment_song.ivSkipPrevious
