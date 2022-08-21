@@ -165,7 +165,7 @@
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
-        app:tint="@color/secondary_text_dark" />
+        app:tint="#ED4E12" />
 
     <soup.neumorphism.NeumorphImageView
         android:id="@+id/imageSearch"
