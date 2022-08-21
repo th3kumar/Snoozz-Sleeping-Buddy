@@ -93,15 +93,16 @@ class SongFragments : Fragment(R.layout.fragment_song_custom) {
             mainViewModel.skipToNextSound()
         }
         imageSearch.setOnClickListener {
-            val text = "currently unavailable !"
+            val text = "available soon !"
             val duration = Toast.LENGTH_SHORT
 
             val toast = Toast.makeText(context, text, duration)
             toast.show()
         }
         imageMenu.setOnClickListener {
-            val text = "currently in beta version !"
-            val duration = Toast.LENGTH_SHORT
+            val text = " By Default 'dulcet Mode' is Enabled !"
+            val duration = Toast.LENGTH_LONG
+
 
             val toast = Toast.makeText(context, text, duration)
             toast.show()

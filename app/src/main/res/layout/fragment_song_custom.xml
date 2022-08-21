@@ -159,7 +159,7 @@
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:padding="@dimen/_16sdp"
-        android:src="@drawable/ic_round_menu"
+        android:src="@drawable/ic_ear_friendly"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"

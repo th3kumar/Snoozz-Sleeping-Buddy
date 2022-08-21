@@ -1,5 +1,6 @@
 package com.fridayhouse.snoozz
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
@@ -18,6 +19,7 @@ import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_splash_screen.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -40,6 +42,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         subscribeToObservers()
+
+        snoozz_title_main.alpha = 0f
+        snoozz_title_main.animate().setDuration(2000).alpha(1f).withEndAction{}
+//            val i = Intent(this, MainActivity::class.java)
+//            startActivity(i)
+//            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
+//            finish()
+
+
 
         vpSong.adapter = swipeSongAdapter
 

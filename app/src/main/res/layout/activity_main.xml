@@ -19,6 +19,7 @@
 
 
         <TextView
+            android:id="@+id/snoozz_title_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_1sdp"
