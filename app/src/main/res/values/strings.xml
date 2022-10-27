@@ -2,5 +2,6 @@
     <string name="app_name">Snoozz</string>
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
+    <string name="notification_message">Snoozz is running...</string>
 
 </resources>

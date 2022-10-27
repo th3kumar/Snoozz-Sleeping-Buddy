@@ -100,7 +100,7 @@ class SongFragments : Fragment(R.layout.fragment_song_custom) {
             toast.show()
         }
         imageMenu.setOnClickListener {
-            val text = " By Default 'dulcet Mode' is Enabled !"
+            val text = " By Default 'DULCET MODE ' is Enabled!"
             val duration = Toast.LENGTH_LONG
 
 

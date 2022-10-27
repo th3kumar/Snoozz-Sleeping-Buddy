@@ -17,13 +17,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <soup.neumorphism.NeumorphCardView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            app:cardElevation="10dp"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            app:cardCornerRadius="15dp">
+            app:cardElevation="5dp"
+            android:padding="1dp"
+            app:neumorph_strokeColor="#060606"
+            app:neumorph_strokeWidth="2dp"
+            app:neumorph_shapeType="flat"
+            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+            app:neumorph_shadowColorLight="@color/light_shadow_dark"
+            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+            app:cardCornerRadius="12dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -36,10 +41,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginRight="10dp"
                     android:text="Sample"
-                    android:textColor="#ffff"
-                    android:textSize="30sp"
+                    android:textColor="@color/primary_text_dark"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -47,10 +53,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvPrimary"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="3dp"
                     android:text="Sample description"
-                    android:textColor="#ffff" />
+                    android:textColor="@color/primary_text" />
 
                 <ImageView
                     android:id="@+id/ivItemImage"
@@ -62,8 +68,7 @@
 
             </RelativeLayout>
 
-
-        </androidx.cardview.widget.CardView>
+        </soup.neumorphism.NeumorphCardView>
 
 
     </LinearLayout>

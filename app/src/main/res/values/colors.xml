@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_200">#F44336</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#C6E48E</color>
 
     <color name="colorPrimary">#08FF04</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#08FF04</color>
     <color name="mediumDarkBackground">#303030</color>
-    <color name="darkBackground">#202020</color>
+    <color name="darkBackground">#171717</color>
     <color name="lightBackground">#404040</color>
 
+    <color name="yellow">#EFcc00</color>
+    <color name="red">#722f37</color>
 
-    <color name="darkPink">#404040</color>
+
+
+    <color name="darkWood">#484848</color>
+    <color name="leaveGreen">#697E50</color>
     <color name="bluishBackground">#2F3238</color>
-    <color name="darkOrchid"> #36454F</color>
+    <color name="darkOrchid">#111111</color>
 
 
     <!--    cUSTOM STYLE-->
@@ -31,11 +36,15 @@
 
     <!--    for dark theme -->
     <color name="primary_dark">#84898C</color>
-    <color name="background_dark">#2F3238</color>
+    <color name="background_dark">#19191E</color>
     <color name="primary_text_dark">#A8AAAB</color>
     <color name="secondary_text_dark">#80858A</color>
-    <color name="dark_shadow_dark">#232529</color>
-    <color name="light_shadow_dark">#383D45</color>
+    <color name="dark_shadow_dark">#121215</color>
+    <color name="light_shadow_dark">#26262A</color>
+
+    <color name="torquiese">#36D9AE</color>
+    <color name="torquiese_light">#B6F1F0</color>
+    <color name="torquiese_dark">#36D9AE</color>
 
 
     <color name="orange">#ED4E12</color>

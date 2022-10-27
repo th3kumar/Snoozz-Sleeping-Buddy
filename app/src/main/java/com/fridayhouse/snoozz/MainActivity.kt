@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -20,6 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash_screen.*
+import kotlinx.android.synthetic.main.fragment_song_custom.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -69,6 +71,15 @@ class MainActivity : AppCompatActivity() {
             curPlayingSong?.let {
                 mainViewModel.playOrToggleSound(it, true)
             }
+        }
+        imageCustom.setOnClickListener {
+            val i = Intent(this, CustomActivity::class.java)
+            startActivity(i)
+        }
+        imageSetting.setOnClickListener {
+            val i = Intent(this, SettingActivity::class.java)
+            startActivity(i)
+
         }
            swipeSongAdapter.setItemClickListener {
                navHostFragment.findNavController().navigate(

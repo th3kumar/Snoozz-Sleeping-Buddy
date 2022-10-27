@@ -17,13 +17,6 @@ class SplashScreen : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
             finish()
         }
-
-
-        sleeping_panda.alpha = 0f
-        sleeping_panda.animate().setDuration(2500).alpha(1f).withEndAction {
-
-        }
-
             snoozzTitle.alpha = 0f
         snoozzTitle.animate().setDuration(2500).alpha(1f).withEndAction {
 

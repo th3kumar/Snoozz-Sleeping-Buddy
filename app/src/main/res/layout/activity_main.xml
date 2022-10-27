@@ -5,35 +5,66 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bluishBackground"
+    android:background="@color/darkBackground"
     tools:context=".MainActivity">
 
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@drawable/gradient_title"
-        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
+        <soup.neumorphism.NeumorphImageView
+            android:id="@+id/imageSetting"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:padding="@dimen/_16sdp"
+            app:neumorph_strokeWidth="1dp"
+            app:neumorph_strokeColor="@color/black"
+            android:src="@drawable/ic_setting"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+            app:neumorph_shadowColorLight="@color/light_shadow_dark"
+            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+            app:tint="@color/secondary_text_dark" />
+
+        <soup.neumorphism.NeumorphImageView
+            android:id="@+id/imageCustom"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:padding="@dimen/_16sdp"
+            android:src="@drawable/ic_eco"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+            app:neumorph_shadowColorLight="@color/light_shadow_dark"
+            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+            app:neumorph_strokeColor="@color/black"
+            app:neumorph_strokeWidth="1dp"
+            app:tint="@color/torquiese" />
+
         <TextView
             android:id="@+id/snoozz_title_main"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_1sdp"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
+            android:fontFamily="@font/alba"
+            android:gravity="center"
             android:text="Snoozz"
+            android:textColor="@color/primary_text_dark"
+            android:textSize="@dimen/_24ssp"
             android:textStyle="bold"
-            android:textSize="36sp"
-            android:fontFamily="@font/hanged_letters"/>
+            app:layout_constraintBottom_toBottomOf="@id/imageSetting"
+            app:layout_constraintEnd_toStartOf="@id/imageCustom"
+            app:layout_constraintStart_toEndOf="@id/imageSetting"
+            app:layout_constraintTop_toTopOf="@id/imageSetting" />
 
-
-
-    </LinearLayout>
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <FrameLayout
         android:id="@+id/flFragmentContainer"
         android:layout_width="match_parent"
@@ -79,7 +110,9 @@
         android:layout_height="56dp"
         android:background="@drawable/gradient_lower_tab"
         android:src="@drawable/ic_play"
+        android:tint="@color/primary_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="UseAppTint" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
