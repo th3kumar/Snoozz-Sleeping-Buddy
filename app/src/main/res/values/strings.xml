@@ -3,5 +3,6 @@
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
     <string name="notification_message">Snoozz is running...</string>
+    <string name="buy_me_a_coffee">Buy me a Coffee</string>
 
 </resources>

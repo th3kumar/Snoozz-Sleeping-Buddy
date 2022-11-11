@@ -43,6 +43,11 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".exoplayer.PlayerService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

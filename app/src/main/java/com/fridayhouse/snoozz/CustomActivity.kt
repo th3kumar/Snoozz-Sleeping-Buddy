@@ -1,6 +1,6 @@
 package com.fridayhouse.snoozz
 
-import PlayerService
+import com.fridayhouse.snoozz.exoplayer.PlayerService
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.ComponentName
@@ -20,23 +20,7 @@ import kotlinx.android.synthetic.main.activity_custom.view.*
 
 
 class CustomActivity : AppCompatActivity() {
-//    var keyboardplaybool: Boolean = false
-//    var rainplaybool: Boolean = false
-//    var thunderplaybool: Boolean = false
-//    var oceanplaybool: Boolean = false
-//    var windplaybool: Boolean = false
-//    var musicplaybool: Boolean = false
-//    var pianoplaybool: Boolean = false
-//    var fluteplaybool: Boolean = false
-//    var grassplaybool: Boolean = false
-//    var bowlplaybool: Boolean = false
-//    var birdplaybool: Boolean = false
-//    var harpplaybool: Boolean = false
-//    var omplaybool: Boolean = false
-//    var railplaybool: Boolean = false
-//    var catplaybool: Boolean = false
-//    var fireplaybool: Boolean = false
-//    var tablaplaybool: Boolean = false
+
 
     private var playerService: PlayerService? = null
 
@@ -69,7 +53,7 @@ class CustomActivity : AppCompatActivity() {
         icon_keyboard.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.KEYBOARD)
             toggleProgressBar(keyboard_volume)
-            toggleImageView(icon_keyboard)
+           // toggleImageView(icon_keyboard)
         }
 
         //val rainplay: ImageView = findViewById(R.id.icon_rain)
@@ -173,8 +157,8 @@ class CustomActivity : AppCompatActivity() {
         thunder_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.THUNDER))
         ocean_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.OCEAN))
         wind_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.WIND))
-        music_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.MUSIC))
-        piano_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.PIANO))
+        music_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.PIANO))
+        piano_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.MUSIC))
         flute_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.FLUTE))
         grass_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.GRASS))
         bowl_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.BOWL))
@@ -193,9 +177,10 @@ class CustomActivity : AppCompatActivity() {
             //fab.visibility = View.INVISIBLE
             // hide all volume bars
             arrayOf(keyboard_volume, rain_volume,thunder_volume,ocean_volume,wind_volume,music_volume,piano_volume,flute_volume,
-                grass_volume,bowl_volume,bird_volume,harp_volume,om_volume,rail_volume,cat_volume,fire_volume.tabla_volume,).forEach { bar ->
-                bar.visibility = View.INVISIBLE
+                grass_volume,bowl_volume,bird_volume,harp_volume,om_volume,rail_volume,cat_volume,fire_volume,tabla_volume,).forEach { bar ->
+                bar?.visibility = View.INVISIBLE
             }
+
         }
     }
 
@@ -205,6 +190,7 @@ class CustomActivity : AppCompatActivity() {
 
     private fun toggleImageView(imageView: ImageView) {
         imageView.isActivated = if(imageView.isActivated == true) false else true
+
     }
 
 

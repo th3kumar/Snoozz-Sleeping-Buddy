@@ -52,7 +52,7 @@
                 android:textStyle="bold"
                 android:text="Tap into a calm"
                 android:textColor="@color/primary_text"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_14sdp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:textStyle="bold"
                 android:text="state of mind and"
                 android:textColor="@color/primary_text"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_14sdp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
                 android:textStyle="bold"
                 android:text="relive the days when"
                 android:textColor="@color/primary_text"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_14sdp" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="4dp"
                 android:textColor="@color/primary_text"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_14sdp" />
 
         </LinearLayout>
 
@@ -114,6 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -137,9 +138,9 @@
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
                             android:layout_marginStart="@dimen/_12sdp"
-                            android:padding="@dimen/_28sdp"
                             android:clickable="true"
-                            android:src="@drawable/keyboard_selector"
+                            android:padding="@dimen/_28sdp"
+                            android:src="@drawable/keyboard_grey"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:neumorph_shadowColorDark="@color/dark_shadow_dark"
@@ -147,15 +148,16 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
-                             />
+                            app:neumorph_strokeWidth="1dp" />
 
                         <SeekBar
                             android:id="@+id/keyboard_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -170,8 +172,8 @@
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
                             android:layout_marginStart="@dimen/_12sdp"
-                            android:padding="@dimen/_28sdp"
                             android:clickable="true"
+                            android:padding="@dimen/_28sdp"
                             android:src="@drawable/rain_selector"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -188,7 +190,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -221,7 +225,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -262,7 +268,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -295,7 +303,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -328,7 +338,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -370,6 +382,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
+                            android:max="19"
+                            android:progress="19"
                             android:visibility="invisible" />
 
 
@@ -403,7 +417,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -436,7 +452,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -477,7 +495,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -510,7 +530,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -543,7 +565,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -584,7 +608,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -617,7 +643,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -650,12 +678,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/ll_6"
                     android:layout_width="wrap_content"
@@ -691,7 +722,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
@@ -724,11 +757,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/_10sdp"
-                            android:visibility="invisible"/>
+                            android:max="19"
+                            android:progress="19"
+                            android:visibility="invisible" />
 
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -751,8 +785,8 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <soup.neumorphism.NeumorphImageView
-            android:layout_width="85dp"
-            android:layout_height="85dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -763,13 +797,15 @@
             app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
             android:src="@drawable/ic_round_stop"
+            android:backgroundTint="@color/darkBackground"
+            android:background="@color/torquiese"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:tint="@color/torquiese"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

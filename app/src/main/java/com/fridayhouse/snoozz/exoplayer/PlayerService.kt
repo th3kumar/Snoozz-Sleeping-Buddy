@@ -1,3 +1,5 @@
+package com.fridayhouse.snoozz.exoplayer
+
 import android.app.PendingIntent
 import android.app.Service
 import android.content.Intent
@@ -14,12 +16,8 @@ import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
 import com.google.android.exoplayer2.upstream.DefaultDataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
 
 class PlayerService : Service() {
-
-
 
     private val notificationID = 132
     private val tag = "Player"
@@ -67,13 +65,15 @@ class PlayerService : Service() {
 
     private fun initializeExoPlayer(soundFile: String): ExoPlayer {
 
+
         // create the player
         val trackSelector = DefaultTrackSelector(this)
         val exoPlayer = ExoPlayer.Builder(this).setTrackSelector(trackSelector).build()
 
+        //exoPlayer?.playWhenReady = true
+
         // load the media source
-        val dataSource = DefaultDataSource.Factory(this,
-            Util.getUserAgent(this, this.getString(R.string.app_name)))
+        val dataSource = DefaultDataSource.Factory(this)
 
         val mediaSource = ProgressiveMediaSource.Factory(dataSource)
             .createMediaSource(MediaItem.fromUri(Uri.parse("asset:///$soundFile")))
@@ -82,7 +82,8 @@ class PlayerService : Service() {
         Log.d("MAIN", "loading $soundFile")
         exoPlayer.setMediaSource(mediaSource)
         exoPlayer.prepare()
-        exoPlayer.play()
+        //exoPlayer.play()
+        //exoPlayer.playWhenReady = exoPlayer.playWhenReady
         // loop indefinitely
         exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
 
@@ -108,7 +109,7 @@ class PlayerService : Service() {
         // move to the foreground if we are playing sound
         if (isPlaying()) {
             val notificationIntent = Intent(this, CustomActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,0 )
+            val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,PendingIntent.FLAG_IMMUTABLE )
 
             val notification = NotificationCompat.Builder(this, "softsound")
                 .setContentTitle(getText(R.string.app_name))
