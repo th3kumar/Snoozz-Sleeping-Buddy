@@ -1,11 +1,62 @@
 package com.fridayhouse.snoozz
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Button
+import com.google.android.play.core.review.ReviewManagerFactory
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+
+        val openUrl: Button = findViewById(R.id.buy_me_btn)
+        openUrl.setOnClickListener{
+          val openUrl = Intent(android.content.Intent.ACTION_VIEW)
+            //here we will pass an URL to be opened
+            openUrl.data = Uri.parse("https://www.buymeacoffee.com/mantukumar")
+            startActivity(openUrl)
+        }
+
+        rating_btn.setOnClickListener{
+            inAppReview()
+        }
+
+        feedback_btn.setOnClickListener {
+            val i = Intent(this, FeedbackActivity::class.java)
+            startActivity(i)
+        }
+
+    }
+
+    private fun inAppReview() {
+        val reviewManager = ReviewManagerFactory.create(this)
+        val requestReviewFlow = reviewManager.requestReviewFlow()
+        requestReviewFlow.addOnCompleteListener { request ->
+            if (request.isSuccessful) {
+                // We got the ReviewInfo object
+                val reviewInfo = request.result
+                val flow = reviewManager.launchReviewFlow(this, reviewInfo)
+                flow.addOnCompleteListener {
+                    // The flow has finished. The API does not indicate whether the user
+                    // reviewed or not, or even whether the review dialog was shown. Thus, no
+                    // matter the result, we continue our app flow.
+                }
+            } else {
+                Log.d("Error: ", request.exception.toString())
+                // There was some problem, continue regardless of the result.
+            }
+        }
+
     }
 }
