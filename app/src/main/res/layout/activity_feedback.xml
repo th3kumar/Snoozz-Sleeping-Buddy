@@ -7,6 +7,14 @@
     android:layout_margin="16dp"
     tools:context=".FeedbackActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Feedback"
+        android:textSize="@dimen/_30sdp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/_15sdp"/>
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/topicFA"
         android:layout_width="match_parent"

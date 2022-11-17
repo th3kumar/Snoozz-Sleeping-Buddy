@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import com.google.android.play.core.review.ReviewManagerFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -51,6 +52,10 @@ class SettingActivity : AppCompatActivity() {
                     // The flow has finished. The API does not indicate whether the user
                     // reviewed or not, or even whether the review dialog was shown. Thus, no
                     // matter the result, we continue our app flow.
+                    val text = " Reviewed "
+                    val duration = Toast.LENGTH_SHORT
+                    val toast = Toast.makeText(this, text, duration)
+                    toast.show()
                 }
             } else {
                 Log.d("Error: ", request.exception.toString())

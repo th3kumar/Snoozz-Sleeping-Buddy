@@ -2,11 +2,11 @@
     <string name="app_name">Snoozz</string>
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
-    <string name="notification_message">Snoozz is running...</string>
+    <string name="notification_message">Playing Create Mode</string>
     <string name="buy_me_a_coffee">Buy me a Coffee</string>
     <string name="email_feedback">Email Address (Optional)</string>
     <string name="feedback">Feedback</string>
     <string name="send">Send</string>
-    <string name="topic_feedback">Suggestions, Crashes, Bugs</string>
+    <string name="topic_feedback">Subject...</string>
 
 </resources>

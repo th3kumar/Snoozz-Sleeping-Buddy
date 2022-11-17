@@ -53,7 +53,7 @@ class FeedbackActivity : AppCompatActivity() {
                 Toast.makeText(this, "Thanks For Feedback!!", Toast.LENGTH_SHORT).show()
                 finish()
             }
-            else Toast.makeText(this, "INTERNET error OR fill Mandatory box!!", Toast.LENGTH_SHORT).show()
+            else Toast.makeText(this, "INTERNET error OR Empty EditText!!", Toast.LENGTH_SHORT).show()
         }
 
     }
