@@ -1,7 +1,8 @@
 #                           Snoozz-Sleeping Buddy
 
 
-![smartmockups_l737ss6a](https://user-images.githubusercontent.com/72141924/191040326-1dc40302-dad8-4d44-a948-dd89f164cf5a.jpg)
+![clay_device_mockup_108](https://user-images.githubusercontent.com/72141924/211245705-99366731-7535-49c4-ab31-2e5a12427ee6.png)
+
 
 
 •	A white noise app developed with kotlin. It helps to mediate, sleep better, focus, relax and be calm.
