@@ -3,6 +3,9 @@
 
 ![clay_device_mockup_108](https://user-images.githubusercontent.com/72141924/211245705-99366731-7535-49c4-ab31-2e5a12427ee6.png)
 
+https://youtu.be/Uw_7rAUW0rU
+
+
 
 
 •	A white noise app developed with kotlin. It helps to mediate, sleep better, focus, relax and be calm.
