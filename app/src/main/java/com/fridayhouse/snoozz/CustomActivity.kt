@@ -10,6 +10,7 @@ import android.content.ServiceConnection
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -22,10 +23,52 @@ import kotlinx.android.synthetic.main.activity_custom.view.*
 class CustomActivity : AppCompatActivity() {
 
 
+    private lateinit var keyboardVolumeSeekBar: SeekBar
+    private lateinit var rainVolumeSeekBar: SeekBar
+    private lateinit var thunderVolumeSeekBar: SeekBar
+    private lateinit var seaVolumeSeekBar: SeekBar
+    private lateinit var windVolumeSeekBar: SeekBar
+    private lateinit var musicVolumeSeekBar: SeekBar
+    private lateinit var pianoVolumeSeekBar: SeekBar
+    private lateinit var fluteVolumeSeekBar: SeekBar
+    private lateinit var grassVolumeSeekBar: SeekBar
+    private lateinit var bowlVolumeSeekBar: SeekBar
+    private lateinit var birdVolumeSeekBar: SeekBar
+    private lateinit var herpVolumeSeekBar: SeekBar
+    private lateinit var ohmVolumeSeekBar: SeekBar
+    private lateinit var trainVolumeSeekBar: SeekBar
+    private lateinit var catVolumeSeekBar: SeekBar
+    private lateinit var fireVolumeSeekBar: SeekBar
+    private lateinit var drumVolumeSeekBar: SeekBar
+
+
+    // Add more SeekBars if needed
+
     private var playerService: PlayerService? = null
 
 
+    companion object {
+        private var isKeyboardVisible = false
+        private var isRainVisible = false
+        private var isThunderVisible = false
+        private var isSeaVisible = false
+        private var isWindVisible = false
+        private var isMusicVisible = false
+        private var isPianoVisible = false
+        private var isFluteVisible = false
+        private var isGrassVisible = false
+        private var isBowlVisible = false
+        private var isBirdVisible = false
+        private var isHerpVisible = false
+        private var isOhmVisible = false
+        private var isTrainVisible = false
+        private var isCatVisible = false
+        private var isFireVisible = false
+        private var isDrumVisible = false
 
+
+        // Add more static variables for other SeekBars if needed
+    }
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceDisconnected(name: ComponentName?) {}
@@ -39,6 +82,8 @@ class CustomActivity : AppCompatActivity() {
 
     }
 
+
+
     private val playerChangeListener = {
         if (playerService?.isPlaying() == true) fab.show() else fab.hide()
     }
@@ -47,6 +92,49 @@ class CustomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom)
+
+        keyboardVolumeSeekBar = findViewById(R.id.keyboard_volume)
+        thunderVolumeSeekBar = findViewById(R.id.thunder_volume)
+        seaVolumeSeekBar = findViewById(R.id.ocean_volume)
+        windVolumeSeekBar = findViewById(R.id.wind_volume)
+        musicVolumeSeekBar = findViewById(R.id.music_volume)
+        pianoVolumeSeekBar = findViewById(R.id.piano_volume)
+        fluteVolumeSeekBar = findViewById(R.id.flute_volume)
+        grassVolumeSeekBar = findViewById(R.id.grass_volume)
+        bowlVolumeSeekBar = findViewById(R.id.bowl_volume)
+        birdVolumeSeekBar = findViewById(R.id.bird_volume)
+        herpVolumeSeekBar = findViewById(R.id.harp_volume)
+        ohmVolumeSeekBar = findViewById(R.id.om_volume)
+        trainVolumeSeekBar = findViewById(R.id.rail_volume)
+        catVolumeSeekBar = findViewById(R.id.cat_volume)
+        fireVolumeSeekBar = findViewById(R.id.fire_volume)
+        drumVolumeSeekBar = findViewById(R.id.tabla_volume)
+        rainVolumeSeekBar = findViewById(R.id.rain_volume)
+
+
+
+        // Initialize more SeekBars if needed
+
+        // Restore visibility state from static variables
+        keyboardVolumeSeekBar.visibility = if (isKeyboardVisible) View.VISIBLE else View.INVISIBLE
+        rainVolumeSeekBar.visibility = if (isRainVisible) View.VISIBLE else View.INVISIBLE
+        thunderVolumeSeekBar.visibility = if (isThunderVisible) View.VISIBLE else View.INVISIBLE
+        seaVolumeSeekBar.visibility = if (isSeaVisible) View.VISIBLE else View.INVISIBLE
+        windVolumeSeekBar.visibility = if (isWindVisible) View.VISIBLE else View.INVISIBLE
+        musicVolumeSeekBar.visibility = if (isMusicVisible) View.VISIBLE else View.INVISIBLE
+        pianoVolumeSeekBar.visibility = if (isPianoVisible) View.VISIBLE else View.INVISIBLE
+        fluteVolumeSeekBar.visibility = if (isFluteVisible) View.VISIBLE else View.INVISIBLE
+        grassVolumeSeekBar.visibility = if (isGrassVisible) View.VISIBLE else View.INVISIBLE
+        bowlVolumeSeekBar.visibility = if (isBowlVisible) View.VISIBLE else View.INVISIBLE
+        birdVolumeSeekBar.visibility = if (isBirdVisible) View.VISIBLE else View.INVISIBLE
+        herpVolumeSeekBar.visibility = if (isHerpVisible) View.VISIBLE else View.INVISIBLE
+        ohmVolumeSeekBar.visibility = if (isOhmVisible) View.VISIBLE else View.INVISIBLE
+        trainVolumeSeekBar.visibility = if (isTrainVisible) View.VISIBLE else View.INVISIBLE
+        catVolumeSeekBar.visibility = if (isCatVisible) View.VISIBLE else View.INVISIBLE
+        fireVolumeSeekBar.visibility = if (isFireVisible) View.VISIBLE else View.INVISIBLE
+        drumVolumeSeekBar.visibility = if (isDrumVisible) View.VISIBLE else View.INVISIBLE
+
+        // Set visibility for more SeekBars if needed
 
        createNotificationChannel()
        // val keyboardplay: ImageView = findViewById(R.id.icon_keyboard)
@@ -182,6 +270,7 @@ class CustomActivity : AppCompatActivity() {
             }
 
         }
+
     }
 
     private fun toggleProgressBar(progressBar: ProgressBar) {
@@ -214,6 +303,26 @@ class CustomActivity : AppCompatActivity() {
     override fun onStop() {
         unbindService(serviceConnection)
         super.onStop()
+
+        // Save visibility state to static variables
+        isKeyboardVisible = keyboardVolumeSeekBar.visibility == View.VISIBLE
+        isRainVisible = rainVolumeSeekBar.visibility == View.VISIBLE
+        isThunderVisible = thunderVolumeSeekBar.visibility == View.VISIBLE
+        isSeaVisible = seaVolumeSeekBar.visibility == View.VISIBLE
+        isWindVisible = windVolumeSeekBar.visibility == View.VISIBLE
+        isMusicVisible = musicVolumeSeekBar.visibility == View.VISIBLE
+        isPianoVisible = pianoVolumeSeekBar.visibility == View.VISIBLE
+        isFluteVisible = fluteVolumeSeekBar.visibility == View.VISIBLE
+        isGrassVisible = grassVolumeSeekBar.visibility == View.VISIBLE
+        isBowlVisible = bowlVolumeSeekBar.visibility == View.VISIBLE
+        isBirdVisible = birdVolumeSeekBar.visibility == View.VISIBLE
+        isHerpVisible = herpVolumeSeekBar.visibility == View.VISIBLE
+        isOhmVisible = ohmVolumeSeekBar.visibility == View.VISIBLE
+        isTrainVisible = trainVolumeSeekBar.visibility == View.VISIBLE
+        isCatVisible = catVolumeSeekBar.visibility == View.VISIBLE
+        isFireVisible = fireVolumeSeekBar.visibility == View.VISIBLE
+        isDrumVisible = drumVolumeSeekBar.visibility == View.VISIBLE
+        // Save visibility state for more SeekBars if needed
     }
 
     override fun onResume() {
