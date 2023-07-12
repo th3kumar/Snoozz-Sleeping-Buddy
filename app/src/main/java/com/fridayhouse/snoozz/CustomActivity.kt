@@ -3,6 +3,7 @@ package com.fridayhouse.snoozz
 import com.fridayhouse.snoozz.exoplayer.PlayerService
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.ProgressDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -12,6 +13,7 @@ import android.os.Bundle
 import android.os.IBinder
 import android.os.PersistableBundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
@@ -21,6 +23,7 @@ import kotlinx.android.synthetic.main.activity_custom.view.*
 
 
 class CustomActivity : AppCompatActivity() {
+
 
 
     private lateinit var keyboardVolumeSeekBar: SeekBar
@@ -65,9 +68,26 @@ class CustomActivity : AppCompatActivity() {
         private var isCatVisible = false
         private var isFireVisible = false
         private var isDrumVisible = false
-
-
         // Add more static variables for other SeekBars if needed
+
+
+        private var keyboardProgress = 100
+        private var thunderProgress = 100
+        private var seaProgress = 100
+        private var windProgress = 100
+        private var musicProgress = 100
+        private var pianoProgress = 100
+        private var fluteProgress = 100
+        private var grassProgress = 100
+        private var bowlProgress = 100
+        private var birdProgress = 100
+        private var herpProgress = 100
+        private var ohmProgress = 100
+        private var trainProgress = 100
+        private var catProgress = 100
+        private var fireProgress = 100
+        private var drumProgress = 100
+        private var rainProgress = 100
     }
 
     private val serviceConnection = object : ServiceConnection {
@@ -78,6 +98,8 @@ class CustomActivity : AppCompatActivity() {
             // update the FAB
             if (playerService?.isPlaying() == true) fab.show() else fab.hide()
             playerService?.playerChangeListener = playerChangeListener
+
+            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
 
     }
@@ -92,6 +114,8 @@ class CustomActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom)
+
+
 
         keyboardVolumeSeekBar = findViewById(R.id.keyboard_volume)
         thunderVolumeSeekBar = findViewById(R.id.thunder_volume)
@@ -110,9 +134,6 @@ class CustomActivity : AppCompatActivity() {
         fireVolumeSeekBar = findViewById(R.id.fire_volume)
         drumVolumeSeekBar = findViewById(R.id.tabla_volume)
         rainVolumeSeekBar = findViewById(R.id.rain_volume)
-
-
-
         // Initialize more SeekBars if needed
 
         // Restore visibility state from static variables
@@ -133,8 +154,26 @@ class CustomActivity : AppCompatActivity() {
         catVolumeSeekBar.visibility = if (isCatVisible) View.VISIBLE else View.INVISIBLE
         fireVolumeSeekBar.visibility = if (isFireVisible) View.VISIBLE else View.INVISIBLE
         drumVolumeSeekBar.visibility = if (isDrumVisible) View.VISIBLE else View.INVISIBLE
-
         // Set visibility for more SeekBars if needed
+
+        // Restore progress state from static variables
+        keyboardVolumeSeekBar.progress = keyboardProgress
+        thunderVolumeSeekBar.progress = thunderProgress
+        seaVolumeSeekBar.progress = seaProgress
+        windVolumeSeekBar.progress = windProgress
+        musicVolumeSeekBar.progress = musicProgress
+        pianoVolumeSeekBar.progress = pianoProgress
+        fluteVolumeSeekBar.progress = fluteProgress
+        grassVolumeSeekBar.progress = grassProgress
+        bowlVolumeSeekBar.progress = bowlProgress
+        birdVolumeSeekBar.progress = birdProgress
+        herpVolumeSeekBar.progress = herpProgress
+        ohmVolumeSeekBar.progress = ohmProgress
+        trainVolumeSeekBar.progress = trainProgress
+        catVolumeSeekBar.progress = catProgress
+        fireVolumeSeekBar.progress = fireProgress
+        drumVolumeSeekBar.progress = drumProgress
+        rainVolumeSeekBar.progress = rainProgress
 
        createNotificationChannel()
        // val keyboardplay: ImageView = findViewById(R.id.icon_keyboard)
@@ -323,6 +362,25 @@ class CustomActivity : AppCompatActivity() {
         isFireVisible = fireVolumeSeekBar.visibility == View.VISIBLE
         isDrumVisible = drumVolumeSeekBar.visibility == View.VISIBLE
         // Save visibility state for more SeekBars if needed
+
+        // Save progress state to static variables
+        keyboardProgress = keyboardVolumeSeekBar.progress
+        thunderProgress = thunderVolumeSeekBar.progress
+        seaProgress = seaVolumeSeekBar.progress
+        windProgress = windVolumeSeekBar.progress
+        musicProgress = musicVolumeSeekBar.progress
+        pianoProgress = pianoVolumeSeekBar.progress
+        fluteProgress = fluteVolumeSeekBar.progress
+        grassProgress = grassVolumeSeekBar.progress
+        bowlProgress = bowlVolumeSeekBar.progress
+        birdProgress = birdVolumeSeekBar.progress
+        herpProgress = herpVolumeSeekBar.progress
+        ohmProgress = ohmVolumeSeekBar.progress
+        trainProgress = trainVolumeSeekBar.progress
+        catProgress = catVolumeSeekBar.progress
+        fireProgress = fireVolumeSeekBar.progress
+        drumProgress = drumVolumeSeekBar.progress
+        rainProgress = rainVolumeSeekBar.progress
     }
 
     override fun onResume() {

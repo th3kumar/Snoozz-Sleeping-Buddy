@@ -1,9 +1,12 @@
 package com.fridayhouse.snoozz
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
@@ -27,6 +30,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+
+    private val REQUEST_CUSTOM_ACTIVITY = 1
+
+    private lateinit var progressBar: ProgressBar
+
     private val mainViewModel: MainViewModel by viewModels()
     @Inject
     lateinit var swipeSongAdapter: SwipeSongAdapter
@@ -44,6 +52,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         subscribeToObservers()
+
+
+
 
         snoozz_title_main.alpha = 0f
         snoozz_title_main.animate().setDuration(2000).alpha(1f).withEndAction{}
@@ -72,14 +83,17 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.playOrToggleSound(it, true)
             }
         }
+
+        progressBar = findViewById(R.id.loadingProgressBar)
         imageCustom.setOnClickListener {
-            val i = Intent(this, CustomActivity::class.java)
-            startActivity(i)
+            showLoadingAnimation()
+            val intent = Intent(this, CustomActivity::class.java)
+            startActivityForResult(intent, REQUEST_CUSTOM_ACTIVITY)
         }
+
         imageSetting.setOnClickListener {
             val i = Intent(this, SettingActivity::class.java)
             startActivity(i)
-
         }
            swipeSongAdapter.setItemClickListener {
                navHostFragment.findNavController().navigate(
@@ -96,6 +110,23 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CUSTOM_ACTIVITY) {
+            hideLoadingAnimation()
+            // Handle any result or additional logic if needed
+        }
+    }
+
+    private fun hideLoadingAnimation() {
+        progressBar.visibility = View.GONE
+    }
+
+    private fun showLoadingAnimation() {
+        progressBar.visibility = View.VISIBLE
     }
 
     private fun hideBottombar() {
@@ -150,7 +181,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.playbackState.observe(this) {
             playbackState = it
             ivPlayPause.setImageResource(
-                if (playbackState?.isPlaying == true) R.drawable.ic_pause else R.drawable.ic_play
+                if (playbackState?.isPlaying == true) R.drawable.ic_round_pause else R.drawable.ic_play_round
             )
         }
         mainViewModel.isConnected.observe(this){
