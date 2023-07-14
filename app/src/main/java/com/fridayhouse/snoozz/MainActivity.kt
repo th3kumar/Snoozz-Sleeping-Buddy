@@ -21,6 +21,12 @@ import com.fridayhouse.snoozz.exoplayer.toSong
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.ktx.isFlexibleUpdateAllowed
+import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash_screen.*
@@ -30,6 +36,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
+   private lateinit var appUpdateManager: AppUpdateManager
+   private val updateType = AppUpdateType.IMMEDIATE
 
     private val REQUEST_CUSTOM_ACTIVITY = 1
 
@@ -52,6 +60,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         subscribeToObservers()
+        appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
+        checkForAppUpdates()
 
 
 
@@ -112,12 +122,38 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun checkForAppUpdates() {
+        appUpdateManager.appUpdateInfo.addOnSuccessListener {info ->
+            val isUpdateAvailable = info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+            val isUpdateAllowed = when(updateType) {
+                AppUpdateType.FLEXIBLE -> info.isFlexibleUpdateAllowed
+                AppUpdateType.IMMEDIATE -> info.isImmediateUpdateAllowed
+                else -> false
+            }
+            if (isUpdateAvailable && isUpdateAllowed) {
+                appUpdateManager.startUpdateFlowForResult(
+                    info,
+                    updateType,
+                    this,
+                    123
+                )
+            }
+
+        }
+    }
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CUSTOM_ACTIVITY) {
             hideLoadingAnimation()
-            // Handle any result or additional logic if needed
+        }
+
+        if(requestCode == 123) {
+            if(resultCode != RESULT_OK) {
+                println("something went wrong updating...")
+            }
         }
     }
 
