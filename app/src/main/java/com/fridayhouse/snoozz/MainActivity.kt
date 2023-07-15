@@ -2,14 +2,19 @@ package com.fridayhouse.snoozz
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -20,6 +25,8 @@ import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.exoplayer.toSong
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -31,12 +38,19 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.fragment_song_custom.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-   private lateinit var appUpdateManager: AppUpdateManager
+    private lateinit var sharedPreferences: SharedPreferences
+
+    private val requestCustomActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+
+
+    private lateinit var appUpdateManager: AppUpdateManager
    private val updateType = AppUpdateType.IMMEDIATE
 
     private val REQUEST_CUSTOM_ACTIVITY = 1
@@ -62,9 +76,16 @@ class MainActivity : AppCompatActivity() {
         subscribeToObservers()
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         checkForAppUpdates()
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
+        val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
 
-
+        if(!isTapTargetShown) {
+            // Delay showing the TapTargetView by 2 seconds
+            Handler().postDelayed({
+                showTapTargetView()
+            }, 2000)
+        }
 
         snoozz_title_main.alpha = 0f
         snoozz_title_main.animate().setDuration(2000).alpha(1f).withEndAction{}
@@ -121,6 +142,43 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun showTapTargetView() {
+        val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
+
+        if (!isTapTargetShown) {
+            val tapTarget = TapTarget.forView(imageCustom, "Music Creation: Your Unique Sound", "Tap to create captivating music that's uniquely yours.")
+                .cancelable(true)
+                .outerCircleColor(R.color.target_view_outer)
+                .targetCircleColor(android.R.color.white)
+                .titleTextColor(android.R.color.white)
+                .descriptionTextColor(android.R.color.white)
+                .transparentTarget(true)
+
+            TapTargetSequence(this)
+                .targets(tapTarget)
+                .listener(object : TapTargetSequence.Listener {
+                    override fun onSequenceFinish() {
+                        // Update shared preferences when the sequence is finished
+                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
+
+                        // Launch the CustomActivity
+                        showLoadingAnimation()
+                        val intent = Intent(this@MainActivity, CustomActivity::class.java)
+                        startActivityForResult(intent, REQUEST_CUSTOM_ACTIVITY)
+                    }
+
+                    override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
+
+                    override fun onSequenceCanceled(lastTarget: TapTarget?) {
+                        // Update shared preferences if the sequence is canceled
+                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
+                    }
+                })
+                .start()
+        }
+    }
+
 
     private fun checkForAppUpdates() {
         appUpdateManager.appUpdateInfo.addOnSuccessListener {info ->

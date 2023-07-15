@@ -45,6 +45,8 @@
     <color name="torquiese">#36D9AE</color>
     <color name="torquiese_light">#B6F1F0</color>
     <color name="torquiese_dark">#36D9AE</color>
+    <color name="target_view_outer">#2E336D</color>
+    <color name="target_view_discription">#C5C5C5</color>
 
 
     <color name="orange">#ED4E12</color>

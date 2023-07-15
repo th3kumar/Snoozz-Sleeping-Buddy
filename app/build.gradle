@@ -141,4 +141,9 @@ dependencies {
 
     // For Kotlin users also import the Kotlin extensions library for Play In-App Update:
     implementation("com.google.android.play:app-update-ktx:2.1.0")
+
+    //tap -target - view
+    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
+
+
 }
