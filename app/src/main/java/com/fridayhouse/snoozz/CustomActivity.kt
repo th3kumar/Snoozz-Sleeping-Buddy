@@ -18,13 +18,15 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_custom.*
 import kotlinx.android.synthetic.main.activity_custom.view.*
 
 
 class CustomActivity : AppCompatActivity() {
 
-
+    // Declare icAtomAnim variable at the class level
+    private lateinit var icAtomAnim: LottieAnimationView
 
     private lateinit var keyboardVolumeSeekBar: SeekBar
     private lateinit var rainVolumeSeekBar: SeekBar
@@ -96,7 +98,10 @@ class CustomActivity : AppCompatActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             playerService = (service as PlayerService.PlayerBinder).getService()
             // update the FAB
-            if (playerService?.isPlaying() == true) fab.show() else fab.hide()
+            if (playerService?.isPlaying() == true) {
+                fab.show()
+                icAtomAnim.resumeAnimation()
+            } else fab.hide()
             playerService?.playerChangeListener = playerChangeListener
 
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
@@ -107,13 +112,27 @@ class CustomActivity : AppCompatActivity() {
 
 
     private val playerChangeListener = {
-        if (playerService?.isPlaying() == true) fab.show() else fab.hide()
+        if (playerService?.isPlaying() == true) {
+            fab.show()
+            //icAtomAnim.visibility = View.VISIBLE
+            icAtomAnim.resumeAnimation()
+        } else {
+            fab.hide()
+            //icAtomAnim.visibility = View.INVISIBLE
+            icAtomAnim.pauseAnimation()
+        }
     }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_custom)
+
+        // Initialize icAtomAnim and set its initial visibility
+        icAtomAnim = findViewById(R.id.ic_atom_anim)
+        icAtomAnim.pauseAnimation()
+        //icAtomAnim.visibility = View.INVISIBLE
+
 
 
 
@@ -301,6 +320,7 @@ class CustomActivity : AppCompatActivity() {
         fab.setOnClickListener {
             playerService?.stopPlaying()
             fab.hide()
+            icAtomAnim.pauseAnimation()
             //fab.visibility = View.INVISIBLE
             // hide all volume bars
             arrayOf(keyboard_volume, rain_volume,thunder_volume,ocean_volume,wind_volume,music_volume,piano_volume,flute_volume,
@@ -332,6 +352,14 @@ class CustomActivity : AppCompatActivity() {
         override fun onStopTrackingTouch(seekBar: SeekBar?) {}
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        if (playerService?.isPlaying() == true) {
+            icAtomAnim.resumeAnimation()
+        }
+    }
+
+
     override fun onStart() {
         super.onStart()
         val playerIntent = Intent(this, PlayerService::class.java)
@@ -342,6 +370,8 @@ class CustomActivity : AppCompatActivity() {
     override fun onStop() {
         unbindService(serviceConnection)
         super.onStop()
+        icAtomAnim.pauseAnimation()
+        //icAtomAnim.visibility = View.INVISIBLE
 
         // Save visibility state to static variables
         isKeyboardVisible = keyboardVolumeSeekBar.visibility == View.VISIBLE
@@ -386,11 +416,15 @@ class CustomActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         playerService?.stopForeground()
+        if (playerService?.isPlaying() == true) {
+            icAtomAnim.resumeAnimation()
+        }
     }
 
     override fun onPause() {
         playerService?.startForeground()
         super.onPause()
+        //icAtomAnim.pauseAnimation()
     }
 
     private fun createNotificationChannel() {
