@@ -39,6 +39,29 @@
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_115sdp</item>
     </style>
+    <style name="NeumorphismTimerShape">
+        <item name="neumorph_cornerSizeBottomLeft">@dimen/_115sdp</item>
+        <item name="neumorph_cornerSizeTopLeft">@dimen/_115sdp</item>
+    </style>
+    <style name="NeumorphismTimerOffShape">
+        <item name="neumorph_cornerSizeBottomRight">@dimen/_115sdp</item>
+        <item name="neumorph_cornerSizeTopRight">@dimen/_115sdp</item>
+    </style>
+
+    <style name="NeumorphismTimerView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+        <item name="shapeAppearance">@style/CustomShapeAppearanceOverlay</item>
+    </style>
+
+    <style name="CustomShapeAppearanceOverlay">
+        <item name="cornerFamilyTopRight">cut</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="android:shape">@drawable/timer_start_shape</item>
+    </style>
+
     <style name="NeumorphismImageOther">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_8sdp</item>

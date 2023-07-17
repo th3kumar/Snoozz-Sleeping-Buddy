@@ -1,5 +1,6 @@
 package com.fridayhouse.snoozz
 
+import android.app.AlertDialog
 import com.fridayhouse.snoozz.exoplayer.PlayerService
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,6 +11,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.IBinder
 import android.os.PersistableBundle
 import android.view.View
@@ -21,9 +23,26 @@ import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_custom.*
 import kotlinx.android.synthetic.main.activity_custom.view.*
+import java.util.Date
+import java.util.Locale
+import java.util.Timer
+import java.util.TimerTask
+import java.util.concurrent.TimeUnit
 
 
 class CustomActivity : AppCompatActivity() {
+
+    private var selectedTimerDuration: Long = 0
+
+    private val interval: Long = 1000
+
+    private var countdownTimer: CountDownTimer? = null
+
+    private var timer: Timer? = null;
+    // timer duration options
+    private var timerTimesHumanReadable: Array<String> = arrayOf("5 sec", "5 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "4 hours", "6 hours")
+    // and their corresponding durations in ms
+    private var timerTimesMilliseconds: Array<Long> = arrayOf(1*5*1000, 5*60*1000, 15*60*1000, 30*60*1000, 60*60*1000, 120*60*1000, 240*60*1000, 360*60*1000)
 
     // Declare icAtomAnim variable at the class level
     private lateinit var icAtomAnim: LottieAnimationView
@@ -135,7 +154,6 @@ class CustomActivity : AppCompatActivity() {
 
 
 
-
         keyboardVolumeSeekBar = findViewById(R.id.keyboard_volume)
         thunderVolumeSeekBar = findViewById(R.id.thunder_volume)
         seaVolumeSeekBar = findViewById(R.id.ocean_volume)
@@ -199,6 +217,7 @@ class CustomActivity : AppCompatActivity() {
         icon_keyboard.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.KEYBOARD)
             toggleProgressBar(keyboard_volume)
+            this.updateTimerState()
            // toggleImageView(icon_keyboard)
         }
 
@@ -206,96 +225,112 @@ class CustomActivity : AppCompatActivity() {
         icon_rain.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.RAIN)
             toggleProgressBar(rain_volume)
+            this.updateTimerState()
         }
 
         //val thunderplay: ImageView = findViewById(R.id.icon_thunder)
         icon_thunder.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.THUNDER)
             toggleProgressBar(thunder_volume)
+            this.updateTimerState()
         }
 
         //val oceanplay: ImageView = findViewById(R.id.icon_ocean)
         icon_ocean.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.OCEAN)
             toggleProgressBar(ocean_volume)
+            this.updateTimerState()
         }
 
        // val windplay: ImageView = findViewById(R.id.icon_wind)
         icon_wind.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.WIND)
             toggleProgressBar(wind_volume)
+            this.updateTimerState()
         }
 
        // val musicplay: ImageView = findViewById(R.id.icon_musical)
         icon_musical.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.MUSIC)
             toggleProgressBar(music_volume)
+            this.updateTimerState()
         }
 
         //val pianoplay: ImageView = findViewById(R.id.icon_piano)
         icon_piano.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.PIANO)
             toggleProgressBar(piano_volume)
+            this.updateTimerState()
         }
 
         //val fluteplay: ImageView = findViewById(R.id.icon_flute)
         icon_flute.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.FLUTE)
             toggleProgressBar(flute_volume)
+            this.updateTimerState()
         }
 
         //val bowlplay: ImageView = findViewById(R.id.icon_bowl)
         icon_bowl.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.BOWL)
             toggleProgressBar(bowl_volume)
+            this.updateTimerState()
         }
 
         //val grassplay: ImageView = findViewById(R.id.icon_grass)
         icon_grass.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.GRASS)
             toggleProgressBar(grass_volume)
+            this.updateTimerState()
         }
 
         //val birdplay: ImageView = findViewById(R.id.icon_birds)
         icon_birds.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.BIRD)
             toggleProgressBar(bird_volume)
+            this.updateTimerState()
         }
 
         //val harpplay: ImageView = findViewById(R.id.icon_harp)
         icon_harp.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.HARP)
             toggleProgressBar(harp_volume)
+            this.updateTimerState()
         }
 
         //val omplay: ImageView = findViewById(R.id.icon_om)
         icon_om.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.OM)
             toggleProgressBar(om_volume)
+            this.updateTimerState()
         }
 
         //val railplay: ImageView = findViewById(R.id.icon_railway)
         icon_railway.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.RAIL)
             toggleProgressBar(rail_volume)
+            this.updateTimerState()
         }
 
         //val catplay: ImageView = findViewById(R.id.icon_cat)
         icon_cat.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.CAT)
             toggleProgressBar(cat_volume)
+            this.updateTimerState()
         }
 
         //val fireplay: ImageView = findViewById(R.id.icon_fire)
         icon_fire.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.FIRE)
             toggleProgressBar(fire_volume)
+            this.updateTimerState()
         }
 
         //val tablaplay: ImageView = findViewById(R.id.icon_tabla)
         icon_tabla.setOnClickListener{
             playerService?.toggleSound(PlayerService.Sound.TABLA)
             toggleProgressBar(tabla_volume)
+            this.updateTimerState()
         }
 
         keyboard_volume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.KEYBOARD))
@@ -327,13 +362,126 @@ class CustomActivity : AppCompatActivity() {
                 grass_volume,bowl_volume,bird_volume,harp_volume,om_volume,rail_volume,cat_volume,fire_volume,tabla_volume,).forEach { bar ->
                 bar?.visibility = View.INVISIBLE
             }
+            this.stopPlaying()
+            this.cancelTimer()
+        }
 
+        start_timer.setOnClickListener {
+            this.startTimerClickHandler()
+        }
+
+        cancel_timer.setOnClickListener {
+            this.cancelTimer()
         }
 
     }
 
     private fun toggleProgressBar(progressBar: ProgressBar) {
         progressBar.visibility = if (progressBar.visibility == View.VISIBLE) View.INVISIBLE else View.VISIBLE
+    }
+
+    private fun stopPlaying() {
+        playerService?.stopPlaying()
+        fab.hide()
+        // hide all volume bars
+        arrayOf(keyboard_volume, rain_volume,thunder_volume,ocean_volume,wind_volume,music_volume,piano_volume,flute_volume,
+            grass_volume,bowl_volume,bird_volume,harp_volume,om_volume,rail_volume,cat_volume,fire_volume,tabla_volume,).forEach { bar ->
+            bar?.visibility = View.INVISIBLE
+        }
+    }
+
+    private fun updateTimerState() {
+        // update the timer state in response to the user enabling/disabling a specific soundtrack
+        // if no sound is playing, cancel the timer and update the button state
+        // if sound is playing, only update the button state
+        if (playerService == null || !(playerService!!.isPlaying()))
+            this.cancelTimer()
+        this.updateTimerButtonState()
+    }
+
+
+    private fun updateTimerButtonState() {
+        // if no sound is playing, both buttons should be invisible
+        if (playerService == null || !(playerService!!.isPlaying())) {
+            start_timer.visibility = View.INVISIBLE
+            cancel_timer.visibility = View.INVISIBLE
+            timer_countdown_text.visibility = View.INVISIBLE
+        } else {
+            // sound is playing
+            if (this.timer == null) {
+                // No timer is running, show the start button and hide the cancel button
+                start_timer.visibility = View.VISIBLE
+                cancel_timer.visibility = View.INVISIBLE
+                start_timer_icon.visibility = View.VISIBLE
+                timer_countdown_text.visibility = View.INVISIBLE
+            } else {
+                // Timer is running, hide the start button and show the timer countdown
+                //start_timer.visibility = View.INVISIBLE
+                cancel_timer.visibility = View.VISIBLE
+                timer_countdown_text.visibility = View.VISIBLE
+            }
+        }
+    }
+
+
+    private fun startTimerClickHandler() {
+        // pop up a dialog asking for amount of time, and if a choice is made start the timer
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setItems(timerTimesHumanReadable) { dialog, which -> startTimer(which) }
+        builder.show()
+
+    }
+
+    private fun startTimer(which: Int) {
+        selectedTimerDuration = timerTimesMilliseconds[which]
+        val timeMs: Long = timerTimesMilliseconds[which]
+
+        // Cancel the previous timer if it's running
+        countdownTimer?.cancel()
+
+        // Create a new countdown timer
+        countdownTimer = object : CountDownTimer(timeMs, interval) {
+            override fun onTick(millisUntilFinished: Long) {
+                val remainingTime = millisUntilFinished
+                val hours = TimeUnit.MILLISECONDS.toHours(remainingTime)
+                val minutes = TimeUnit.MILLISECONDS.toMinutes(remainingTime) % 60
+                val seconds = TimeUnit.MILLISECONDS.toSeconds(remainingTime) % 60
+                updateCountdownText(String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds))
+            }
+
+            override fun onFinish() {
+                updateCountdownText("00:00:00")
+                if (selectedTimerDuration > 0) {
+                    // The timer finished naturally, so stop the music
+                    stopPlaying()
+                }
+                cancelTimer()
+            }
+        }
+
+        countdownTimer?.start()
+
+        // Update the button state
+        updateTimerButtonState()
+        // Show the countdown text and hide the timer icon
+        cancel_timer.visibility = View.VISIBLE
+        timer_countdown_text.visibility = View.VISIBLE
+        start_timer_icon.visibility = View.INVISIBLE
+    }
+
+    private fun updateCountdownText(countdownText: String) {
+        timer_countdown_text.text = countdownText
+    }
+
+
+
+    private fun cancelTimer() {
+        this.timer?.cancel()
+        this.timer = null;
+        selectedTimerDuration = 0
+        timer_countdown_text.visibility = View.INVISIBLE
+       // playerService?.stopForeground()
+        this.updateTimerButtonState();
     }
 
     private fun toggleImageView(imageView: ImageView) {

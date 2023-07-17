@@ -27,57 +27,93 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:fontFamily="@font/alba"
                 android:text="Create"
                 android:textSize="@dimen/_26sdp" />
-    <ImageView
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_14sdp"
-        android:src="@drawable/beta"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/_13sdp"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:foregroundGravity="center_horizontal"/>
+
 
 </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:textStyle="bold"
-                android:text="Tap into a calm"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_14sdp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:textStyle="bold"
-                android:text="state of mind and"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_14sdp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:textStyle="bold"
-                android:text="relive the days when"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_14sdp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="you were cozy."
-                android:textStyle="bold"
-                android:layout_marginBottom="4dp"
-                android:textColor="@color/primary_text"
-                android:textSize="@dimen/_14sdp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp" >
+
+
+
+
+                <soup.neumorphism.NeumorphCardView
+                    android:id="@+id/start_timer"
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:clickable="true"
+                    android:padding="@dimen/_20sdp"
+                    app:neumorph_insetEnd="0.5dp"
+                    android:visibility="invisible"
+                    app:neumorph_shadowElevation="@dimen/_4sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                    app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                    app:neumorph_shapeAppearance="@style/NeumorphismTimerShape"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_strokeColor="@color/black"
+                    app:neumorph_strokeWidth="0.5dp">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:id="@+id/start_timer_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/timer_icon"
+                         />
+
+                    <TextView
+                        android:id="@+id/timer_countdown_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="invisible"
+                        android:text="@string/_04_39_11"
+                        android:textColor="@color/dark_shadow"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                         />
+
+
+
+                </soup.neumorphism.NeumorphCardView>
+
+
+                <soup.neumorphism.NeumorphImageView
+                    android:id="@+id/cancel_timer"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:clickable="true"
+                    android:padding="@dimen/_20sdp"
+                    android:visibility="invisible"
+                    app:neumorph_shadowElevation="@dimen/_4sdp"
+                    android:src="@drawable/timer_off_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                    app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                    app:neumorph_shapeAppearance="@style/NeumorphismTimerOffShape"
+                    app:neumorph_shapeType="flat"
+                    app:neumorph_insetStart="0.5dp"
+                    app:neumorph_strokeColor="@color/black"
+                    app:neumorph_strokeWidth="0.5dp" />
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -86,7 +122,7 @@
             android:layout_width="match_parent"
             android:layout_height="130dp"
             android:layout_gravity="right"
-            android:padding="@dimen/_4sdp"
+            android:padding="@dimen/_10sdp"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/hexgon_animation" />
@@ -784,17 +820,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <soup.neumorphism.NeumorphImageView
+            android:id="@+id/neumorphImageView"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:neumorph_shapeType="pressed"
-            app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
             app:neumorph_shadowColorDark="@color/dark_shadow_dark"
             app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
+            app:neumorph_shapeType="pressed" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -807,8 +845,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:tint="@color/torquiese"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 

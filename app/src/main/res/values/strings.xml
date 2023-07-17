@@ -7,6 +7,10 @@
     <string name="email_feedback">Email Address (Optional)</string>
     <string name="feedback">Feedback</string>
     <string name="send">Send</string>
-    <string name="topic_feedback">Subject...</string>
+    <string name="topic_feedback">Subject…</string>
+    <string name="start_timer">Start</string>
+    <string name="cancel_timer">Cancel</string>
+    <string name="_00_00_00">00:00:00</string>
+    <string name="_04_39_11">04:39:11</string>
 
 </resources>
