@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.fridayhouse.snoozz.adapters.SwipeSongAdapter
@@ -46,6 +47,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private lateinit var loadingAnimationView: LottieAnimationView
+
     private val requestCustomActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
 
@@ -73,6 +76,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        loadingAnimationView = findViewById(R.id.loadingAnimationView)
         subscribeToObservers()
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         checkForAppUpdates()
@@ -115,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        progressBar = findViewById(R.id.loadingProgressBar)
+
         imageCustom.setOnClickListener {
             showLoadingAnimation()
             val intent = Intent(this, CustomActivity::class.java)
@@ -139,7 +144,6 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
-
 
     }
 
@@ -216,11 +220,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideLoadingAnimation() {
-        progressBar.visibility = View.GONE
+        loadingAnimationView.visibility = View.GONE
+        //loadingAnimationView.pauseAnimation()
     }
 
     private fun showLoadingAnimation() {
-        progressBar.visibility = View.VISIBLE
+        loadingAnimationView.visibility = View.VISIBLE
+        //loadingAnimationView.playAnimation()
     }
 
     private fun hideBottombar() {

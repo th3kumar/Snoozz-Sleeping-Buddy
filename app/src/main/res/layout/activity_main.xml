@@ -90,12 +90,17 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph"/>
 
-        <ProgressBar
-            android:id="@+id/loadingProgressBar"
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingAnimationView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/leaf_loading_lottie"/>
+
 
     </FrameLayout>
 

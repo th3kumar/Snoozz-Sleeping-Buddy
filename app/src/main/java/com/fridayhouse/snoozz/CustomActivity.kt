@@ -9,17 +9,20 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.IBinder
 import android.os.PersistableBundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_custom.*
 import kotlinx.android.synthetic.main.activity_custom.view.*
@@ -38,12 +41,23 @@ class CustomActivity : AppCompatActivity() {
 
     private var countdownTimer: CountDownTimer? = null
 
+    private val TIMER_DURATION_KEY = "timer_duration"
+    private val TIMER_RUNNING_KEY = "timer_running"
+
+
+    private var startTime: Long = 0
+
+
+    private val sharedPreferences: SharedPreferences by lazy {
+        getSharedPreferences("TimerPrefs", Context.MODE_PRIVATE)
+    }
+
     private var timer: Timer? = null;
     // timer duration options
-    private var timerTimesHumanReadable: Array<String> = arrayOf("5 sec", "5 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "4 hours", "6 hours")
+    private var timerTimesHumanReadable: Array<String> = arrayOf("10 sec", "5 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "4 hours", "6 hours")
     // and their corresponding durations in ms
-    private var timerTimesMilliseconds: Array<Long> = arrayOf(1*5*1000, 5*60*1000, 15*60*1000, 30*60*1000, 60*60*1000, 120*60*1000, 240*60*1000, 360*60*1000)
-
+    // and their corresponding durations in ms
+    private var timerTimesMilliseconds: Array<Long> = arrayOf(1*10*1000, 15*60*1000, 30*60*1000, 60*60*1000, 120*60*1000, 240*60*1000, 360*60*1000)
     // Declare icAtomAnim variable at the class level
     private lateinit var icAtomAnim: LottieAnimationView
 
@@ -151,6 +165,53 @@ class CustomActivity : AppCompatActivity() {
         icAtomAnim = findViewById(R.id.ic_atom_anim)
         icAtomAnim.pauseAnimation()
         //icAtomAnim.visibility = View.INVISIBLE
+
+
+        Log.d("CustomActivity", "onCreate() called")
+        // Restore the timer state and time duration from SharedPreferences
+        val timerRunning = sharedPreferences.getBoolean("isTimerRunning", false)
+        selectedTimerDuration = sharedPreferences.getLong("selectedTimerDuration", 0)
+        startTime = sharedPreferences.getLong("startTime", 0)
+        Log.d("CustomActivity", "Restored selectedTimerDuration: $selectedTimerDuration")
+
+
+        Log.d("CustomActivity", "timerTimesMilliseconds: ${timerTimesMilliseconds.joinToString()}")
+        Log.d("CustomActivity", "selectedTimerDuration: $selectedTimerDuration")
+
+        // Verify if 'which' is a valid index for the timerTimesMilliseconds array
+        val which = if (selectedTimerDuration.toInt() in timerTimesMilliseconds.map { it.toInt() }) {
+            timerTimesMilliseconds.indexOf(selectedTimerDuration)
+        } else {
+            Log.e("CustomActivity", "Invalid timer option selected in onCreate: $selectedTimerDuration, using default duration.")
+            // Use the default index of 0 if the selected duration is not found in the array
+            0
+        }
+
+
+        Log.d("CustomActivity", "onCreate() - timerRunning: $timerRunning, selectedTimerDuration: $selectedTimerDuration, which: $which")
+
+        if (timerRunning && selectedTimerDuration > 0) {
+            // If a timer was running before, restart the timer
+            val timeMs: Long =   selectedTimerDuration - (System.currentTimeMillis() - startTime)
+            Log.d("CustomActivity", "Calling startTimer with timeMs: $timeMs")
+            Log.d("CustomActivity", " $timeMs  = selectedTimerDuration($selectedTimerDuration) -  systemTime(${System.currentTimeMillis()}) - startTime($startTime)  ")
+
+            startTimer(timeMs)
+        } else {
+            // Update the countdown text with the selected timer duration
+            val hours = TimeUnit.MILLISECONDS.toHours(selectedTimerDuration)
+            val minutes = TimeUnit.MILLISECONDS.toMinutes(selectedTimerDuration) % 60
+            val seconds = TimeUnit.MILLISECONDS.toSeconds(selectedTimerDuration) % 60
+            val formattedTime = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+            updateCountdownText(formattedTime)
+
+            // Update the button state and visibility
+            updateTimerButtonState()
+            start_timer.visibility = if (countdownTimer != null) View.VISIBLE else View.INVISIBLE
+            timer_countdown_text.visibility = if (countdownTimer != null) View.VISIBLE else View.INVISIBLE
+            start_timer_icon.visibility = if (countdownTimer == null) View.VISIBLE else View.INVISIBLE
+        }
+
 
 
 
@@ -402,21 +463,26 @@ class CustomActivity : AppCompatActivity() {
 
     private fun updateTimerButtonState() {
         // if no sound is playing, both buttons should be invisible
+        Log.d("CustomActivity", "updateTimerButtonState - isPlaying: ${playerService?.isPlaying()}")
         if (playerService == null || !(playerService!!.isPlaying())) {
             start_timer.visibility = View.INVISIBLE
             cancel_timer.visibility = View.INVISIBLE
             timer_countdown_text.visibility = View.INVISIBLE
         } else {
             // sound is playing
-            if (this.timer == null) {
+            if (this.countdownTimer == null) {
                 // No timer is running, show the start button and hide the cancel button
+
+                Log.d("CustomActivity", "Timer is not running")
                 start_timer.visibility = View.VISIBLE
                 cancel_timer.visibility = View.INVISIBLE
                 start_timer_icon.visibility = View.VISIBLE
                 timer_countdown_text.visibility = View.INVISIBLE
             } else {
                 // Timer is running, hide the start button and show the timer countdown
-                //start_timer.visibility = View.INVISIBLE
+                Log.d("CustomActivity", "Timer is running")
+
+                start_timer.visibility = View.VISIBLE
                 cancel_timer.visibility = View.VISIBLE
                 timer_countdown_text.visibility = View.VISIBLE
             }
@@ -425,22 +491,45 @@ class CustomActivity : AppCompatActivity() {
 
 
     private fun startTimerClickHandler() {
-        // pop up a dialog asking for amount of time, and if a choice is made start the timer
+        // pop up a dialog asking for the amount of time
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setItems(timerTimesHumanReadable) { dialog, which -> startTimer(which) }
+        builder.setItems(timerTimesHumanReadable) { dialog, which ->
+            if (which in timerTimesMilliseconds.indices) {
+                val timeMs = timerTimesMilliseconds[which]
+                startTimer(timeMs)
+            } else {
+                Log.e("CustomActivity", "Invalid timer option selected: $which")
+            }
+        }
         builder.show()
-
     }
 
-    private fun startTimer(which: Int) {
-        selectedTimerDuration = timerTimesMilliseconds[which]
-        val timeMs: Long = timerTimesMilliseconds[which]
+    private fun startTimer(timeMs: Long) {
+        // Ensure the 'timeMs' parameter is a valid positive value
+        if (timeMs <= 0) {
+            Log.e("CustomActivity", "Invalid timer duration passed to startTimer(): $timeMs")
+            return
+        }
+
+        // Calculate the new start time
+        startTime = System.currentTimeMillis()
+
+        // Calculate the remaining time in milliseconds
+        val remainingTimeMs = timeMs - (System.currentTimeMillis() - startTime)
 
         // Cancel the previous timer if it's running
         countdownTimer?.cancel()
 
+
+        // Save the timer state and time duration in SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putLong("selectedTimerDuration", timeMs)
+        editor.putLong("startTime", System.currentTimeMillis())
+        editor.putBoolean("isTimerRunning", true)
+        editor.apply()
+
         // Create a new countdown timer
-        countdownTimer = object : CountDownTimer(timeMs, interval) {
+        countdownTimer = object : CountDownTimer(remainingTimeMs, interval) {
             override fun onTick(millisUntilFinished: Long) {
                 val remainingTime = millisUntilFinished
                 val hours = TimeUnit.MILLISECONDS.toHours(remainingTime)
@@ -450,11 +539,14 @@ class CustomActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                Log.d("CustomActivity", "onFinish() Called and selectedTimerDuration is $selectedTimerDuration")
                 updateCountdownText("00:00:00")
-                if (selectedTimerDuration > 0) {
-                    // The timer finished naturally, so stop the music
-                    stopPlaying()
-                }
+
+//                if (selectedTimerDuration > 0) {
+//                    // The timer finished naturally, so stop the music
+//                    stopPlaying()
+//                }
+                stopPlaying()
                 cancelTimer()
             }
         }
@@ -463,11 +555,18 @@ class CustomActivity : AppCompatActivity() {
 
         // Update the button state
         updateTimerButtonState()
+
         // Show the countdown text and hide the timer icon
+        start_timer.visibility = View.VISIBLE
         cancel_timer.visibility = View.VISIBLE
         timer_countdown_text.visibility = View.VISIBLE
         start_timer_icon.visibility = View.INVISIBLE
+
+        // Log the final values of selectedTimerDuration and remainingTimeMs
+        Log.d("CustomActivity", "Timer started for duration=$timeMs ms, remainingTime=$remainingTimeMs ms")
     }
+
+
 
     private fun updateCountdownText(countdownText: String) {
         timer_countdown_text.text = countdownText
@@ -476,13 +575,29 @@ class CustomActivity : AppCompatActivity() {
 
 
     private fun cancelTimer() {
-        this.timer?.cancel()
-        this.timer = null;
-        selectedTimerDuration = 0
+        // Cancel the countdown timer if it's running
+        countdownTimer?.cancel()
+
+        // Clear the selected timer duration
+        selectedTimerDuration = 0L
+
+        // Hide the countdown text
         timer_countdown_text.visibility = View.INVISIBLE
-       // playerService?.stopForeground()
-        this.updateTimerButtonState();
+
+        // Set the countdown timer to null
+        countdownTimer = null
+
+        // Update the button state
+        updateTimerButtonState()
+        playerService?.stopForeground()
+
+        // Save the timer state and time duration in SharedPreferences
+        val editor = sharedPreferences.edit()
+        editor.putLong("selectedTimerDuration", selectedTimerDuration)
+        editor.putBoolean("isTimerRunning", false)
+        editor.apply()
     }
+
 
     private fun toggleImageView(imageView: ImageView) {
         imageView.isActivated = if(imageView.isActivated == true) false else true
@@ -505,6 +620,7 @@ class CustomActivity : AppCompatActivity() {
         if (playerService?.isPlaying() == true) {
             icAtomAnim.resumeAnimation()
         }
+        Log.d("CustomActivity", "onRestart() called")
     }
 
 
@@ -513,6 +629,8 @@ class CustomActivity : AppCompatActivity() {
         val playerIntent = Intent(this, PlayerService::class.java)
         startService(playerIntent)
         bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE)
+        Log.d("CustomActivity", "onStart() called")
+
     }
 
     override fun onStop() {
@@ -559,6 +677,7 @@ class CustomActivity : AppCompatActivity() {
         fireProgress = fireVolumeSeekBar.progress
         drumProgress = drumVolumeSeekBar.progress
         rainProgress = rainVolumeSeekBar.progress
+        Log.d("CustomActivity", "onStop() called")
     }
 
     override fun onResume() {
@@ -567,12 +686,16 @@ class CustomActivity : AppCompatActivity() {
         if (playerService?.isPlaying() == true) {
             icAtomAnim.resumeAnimation()
         }
+
+        Log.d("CustomActivity", "onResume() called")
     }
 
     override fun onPause() {
         playerService?.startForeground()
         super.onPause()
         //icAtomAnim.pauseAnimation()
+
+        Log.d("CustomActivity", "onPause() called")
     }
 
     private fun createNotificationChannel() {

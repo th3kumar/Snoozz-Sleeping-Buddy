@@ -43,14 +43,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         mainViewModel.mediaItems.observe(viewLifecycleOwner) { result ->
             when(result.status) {
                 Status.SUCCESS -> {
-                    allSongsProgressBar.isVisible = false
+                    loadingAnimationViewHome.isVisible = false
                     result.data?.let { sound ->
                         songAdapter.sounds = sound
 
                     }
                 }
                 Status.ERROR -> Unit
-                Status.LOADING -> allSongsProgressBar.isVisible = true
+                Status.LOADING -> loadingAnimationViewHome.isVisible = true
 
             }
 
