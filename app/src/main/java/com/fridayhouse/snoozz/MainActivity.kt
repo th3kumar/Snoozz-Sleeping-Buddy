@@ -230,12 +230,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideBottombar() {
+        iv_divider.isVisible = false
        ivCurSongImage.isVisible = false
     vpSong.isVisible = false
     ivPlayPause.isVisible = false
     }
 
     private fun showBottombar() {
+        iv_divider.isVisible = true
         ivCurSongImage.isVisible = true
         vpSong.isVisible = true
         ivPlayPause.isVisible = true

@@ -18,10 +18,13 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.*
 import androidx.core.content.edit
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.activity_custom.*
@@ -54,10 +57,10 @@ class CustomActivity : AppCompatActivity() {
 
     private var timer: Timer? = null;
     // timer duration options
-    private var timerTimesHumanReadable: Array<String> = arrayOf("10 sec", "5 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "4 hours", "6 hours")
+    private var timerTimesHumanReadable: Array<String> = arrayOf( "5 minutes", "15 minutes", "30 minutes", "1 hour", "2 hours", "4 hours", "6 hours")
     // and their corresponding durations in ms
     // and their corresponding durations in ms
-    private var timerTimesMilliseconds: Array<Long> = arrayOf(1*10*1000, 15*60*1000, 30*60*1000, 60*60*1000, 120*60*1000, 240*60*1000, 360*60*1000)
+    private var timerTimesMilliseconds: Array<Long> = arrayOf( 5*60*1000, 15*60*1000, 30*60*1000, 60*60*1000, 120*60*1000, 240*60*1000, 360*60*1000)
     // Declare icAtomAnim variable at the class level
     private lateinit var icAtomAnim: LottieAnimationView
 
@@ -443,6 +446,7 @@ class CustomActivity : AppCompatActivity() {
 
     private fun stopPlaying() {
         playerService?.stopPlaying()
+        icAtomAnim.pauseAnimation()
         fab.hide()
         // hide all volume bars
         arrayOf(keyboard_volume, rain_volume,thunder_volume,ocean_volume,wind_volume,music_volume,piano_volume,flute_volume,
@@ -491,9 +495,17 @@ class CustomActivity : AppCompatActivity() {
 
 
     private fun startTimerClickHandler() {
-        // pop up a dialog asking for the amount of time
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setItems(timerTimesHumanReadable) { dialog, which ->
+        // Create a list of items to show in the AlertDialog
+        val items = timerTimesHumanReadable
+
+        // Set the custom style for the AlertDialog
+        val alertDialog = AlertDialog.Builder(this, R.style.RoundedAlertDialog)
+
+        // Set the title for the AlertDialog
+        alertDialog.setTitle("Set timer duration")
+        // Use the custom layout for the list items
+        val customAdapter = ArrayAdapter<String>(this, R.layout.custom_list_item, items)
+        alertDialog.setAdapter(customAdapter) { _, which ->
             if (which in timerTimesMilliseconds.indices) {
                 val timeMs = timerTimesMilliseconds[which]
                 startTimer(timeMs)
@@ -501,8 +513,11 @@ class CustomActivity : AppCompatActivity() {
                 Log.e("CustomActivity", "Invalid timer option selected: $which")
             }
         }
-        builder.show()
+
+        alertDialog.show()
     }
+
+
 
     private fun startTimer(timeMs: Long) {
         // Ensure the 'timeMs' parameter is a valid positive value

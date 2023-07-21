@@ -24,7 +24,7 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:padding="@dimen/_14sdp"
+            android:padding="@dimen/_16sdp"
             app:neumorph_strokeWidth="1dp"
             app:neumorph_strokeColor="@color/black"
             android:src="@drawable/ic_setting"
@@ -40,7 +40,7 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:layout_marginEnd="@dimen/_12sdp"
-            android:padding="@dimen/_14sdp"
+            android:padding="@dimen/_16sdp"
             android:src="@drawable/ic_eco"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -65,6 +65,16 @@
             app:layout_constraintEnd_toStartOf="@id/imageCustom"
             app:layout_constraintStart_toEndOf="@id/imageSetting"
             app:layout_constraintTop_toTopOf="@id/imageSetting" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            android:background="@drawable/gradient_bottom_line"
+            app:layout_constraintBottom_toBottomOf="@+id/snoozz_title_main"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -97,12 +107,29 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:visibility="gone"
+            app:lottie_speed="2.0"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/leaf_loading_lottie"/>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:visibility="gone"
+            android:layout_gravity="bottom"
+            android:background="@drawable/gradient_bottom_line"/>
+
     </FrameLayout>
+
+
+    <View
+        android:id="@+id/iv_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintBottom_toTopOf="@id/ivCurSongImage"
+        android:layout_gravity="bottom"
+        android:background="@drawable/gradient_bottom_line"/>
 
     <ImageView
         android:id="@+id/ivCurSongImage"

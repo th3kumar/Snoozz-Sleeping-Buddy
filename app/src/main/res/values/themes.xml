@@ -48,6 +48,16 @@
         <item name="neumorph_cornerSizeTopRight">@dimen/_115sdp</item>
     </style>
 
+    <style name="RoundedAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:windowBackground">@drawable/rounded_corners</item>
+    </style>
+
+    <style name="RoundedAlertDialogItem" parent="@android:style/TextAppearance">
+        <!-- Customize the text color for the list items -->
+        <item name="android:textColor">@color/teal_700</item>
+    </style>
+
+
     <style name="NeumorphismTimerView">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>

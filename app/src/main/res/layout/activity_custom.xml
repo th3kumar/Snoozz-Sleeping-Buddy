@@ -8,108 +8,151 @@
     android:backgroundTint="@color/darkBackground"
     tools:context=".CustomActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout_top"
+    <FrameLayout
+        android:id="@+id/frameLayout_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/gradient_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+
+            android:id="@+id/linearLayout_top"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_29sdp"
-            android:orientation="vertical">
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:fontFamily="@font/alba"
-                android:text="Create"
-                android:textSize="@dimen/_26sdp" />
-
-
-</LinearLayout>
+            android:background="@drawable/gradient_title"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp" >
+                android:layout_marginLeft="@dimen/_29sdp"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-
-
-                <soup.neumorphism.NeumorphCardView
-                    android:id="@+id/start_timer"
-                    android:layout_width="@dimen/_100sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:clickable="true"
-                    android:padding="@dimen/_20sdp"
-                    app:neumorph_insetEnd="0.5dp"
-                    android:visibility="invisible"
-                    app:neumorph_shadowElevation="@dimen/_4sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-                    app:neumorph_shadowColorLight="@color/light_shadow_dark"
-                    app:neumorph_shapeAppearance="@style/NeumorphismTimerShape"
-                    app:neumorph_shapeType="flat"
-                    app:neumorph_strokeColor="@color/black"
-                    app:neumorph_strokeWidth="0.5dp">
-
-                    <ImageView
-                        android:layout_gravity="center"
-                        android:id="@+id/start_timer_icon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/timer_icon"
-                         />
 
                     <TextView
-                        android:id="@+id/timer_countdown_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="start"
+                        android:fontFamily="@font/alba"
+                        android:text="Create"
+                        android:textSize="@dimen/_24sdp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="Your Musical Oasis Awaits"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="Explore, Mix, and Relax!"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+
+                    <soup.neumorphism.NeumorphCardView
+                        android:id="@+id/start_timer"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:clickable="true"
+                        android:padding="@dimen/_20sdp"
                         android:visibility="invisible"
-                        android:text="@string/_04_39_11"
-                        android:textColor="@color/dark_shadow"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                         />
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:neumorph_insetEnd="0.5dp"
+                        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                        app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                        app:neumorph_shadowElevation="@dimen/_4sdp"
+                        app:neumorph_shapeAppearance="@style/NeumorphismTimerShape"
+                        app:neumorph_shapeType="flat"
+                        app:neumorph_strokeColor="@color/black"
+                        app:neumorph_strokeWidth="0.5dp">
+
+                        <ImageView
+                            android:id="@+id/start_timer_icon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/timer_icon" />
+
+                        <TextView
+                            android:id="@+id/timer_countdown_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/_04_39_11"
+                            android:textColor="@color/dark_shadow"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:visibility="invisible" />
 
 
+                    </soup.neumorphism.NeumorphCardView>
 
-                </soup.neumorphism.NeumorphCardView>
+
+                    <soup.neumorphism.NeumorphImageView
+                        android:id="@+id/cancel_timer"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:clickable="true"
+                        android:padding="@dimen/_20sdp"
+                        android:src="@drawable/timer_off_icon"
+                        android:visibility="invisible"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:neumorph_insetStart="0.5dp"
+                        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                        app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                        app:neumorph_shadowElevation="@dimen/_4sdp"
+                        app:neumorph_shapeAppearance="@style/NeumorphismTimerOffShape"
+                        app:neumorph_shapeType="flat"
+                        app:neumorph_strokeColor="@color/black"
+                        app:neumorph_strokeWidth="0.5dp" />
 
 
-                <soup.neumorphism.NeumorphImageView
-                    android:id="@+id/cancel_timer"
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:clickable="true"
-                    android:padding="@dimen/_20sdp"
-                    android:visibility="invisible"
-                    app:neumorph_shadowElevation="@dimen/_4sdp"
-                    android:src="@drawable/timer_off_icon"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-                    app:neumorph_shadowColorLight="@color/light_shadow_dark"
-                    app:neumorph_shapeAppearance="@style/NeumorphismTimerOffShape"
-                    app:neumorph_shapeType="flat"
-                    app:neumorph_insetStart="0.5dp"
-                    app:neumorph_strokeColor="@color/black"
-                    app:neumorph_strokeWidth="0.5dp" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:orientation="vertical">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/ic_atom_anim"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:padding="@dimen/_10sdp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/hexgon_animation" />
+
+
 
 
             </LinearLayout>
@@ -117,17 +160,14 @@
 
         </LinearLayout>
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/ic_atom_anim"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_gravity="right"
-            android:padding="@dimen/_10sdp"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/hexgon_animation" />
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/gradient_bottom_line"/>
 
-    </LinearLayout>
+    </FrameLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -137,12 +177,13 @@
         android:fadingEdgeLength="80dp"
         android:scrollbars="none"
         android:requiresFadingEdge="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout_top">
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout_top">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
 
 
             <LinearLayout
