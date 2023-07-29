@@ -15,8 +15,8 @@ android {
         applicationId "com.fridayhouse.snoozz"
         minSdk 25
         targetSdk 32
-        versionCode 6
-        versionName "2.103"
+        versionCode 7
+        versionName "2.105"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

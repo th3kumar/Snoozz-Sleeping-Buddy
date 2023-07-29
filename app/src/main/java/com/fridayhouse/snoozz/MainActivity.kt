@@ -9,6 +9,8 @@ import android.os.Handler
 import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
+import android.widget.Button
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,6 +30,7 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -47,7 +50,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var sharedPreferences: SharedPreferences
 
+    private var isAnimationPlaying = false
+
     private lateinit var loadingAnimationView: LottieAnimationView
+
 
     private val requestCustomActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
@@ -78,6 +84,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         loadingAnimationView = findViewById(R.id.loadingAnimationView)
+
         subscribeToObservers()
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         checkForAppUpdates()
@@ -121,6 +128,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        // Set click listener for the "Breathe" button to open the bottom sheet
+        breatheButton.setOnClickListener {
+            showBreatheBottomSheet()
+        }
+
+
         imageCustom.setOnClickListener {
             showLoadingAnimation()
             val intent = Intent(this, CustomActivity::class.java)
@@ -145,6 +158,43 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    private fun showBreatheBottomSheet() {
+        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_breathe, null)
+        val dialog = BottomSheetDialog(this)
+        dialog.setContentView(bottomSheetView)
+
+        // Find the close icon by its ID and set click listener
+        val closeIcon = bottomSheetView.findViewById<ImageView>(R.id.closeIcon)
+        closeIcon.setOnClickListener {
+            dialog.dismiss() // Dismiss the bottom sheet when the close icon is clicked
+        }
+
+        // Find the "Start" button by its ID
+        val startButton = bottomSheetView.findViewById<Button>(R.id.startButton)
+
+        // Find the LottieAnimationView by its ID
+        val breatheLottieAnimation = bottomSheetView.findViewById<LottieAnimationView>(R.id.breathe_animation)
+
+
+
+        // Set click listener for the "Start" button
+        startButton.setOnClickListener {
+            if (isAnimationPlaying) {
+                // Stop the animation
+                breatheLottieAnimation.pauseAnimation()
+                isAnimationPlaying = false
+                startButton.text = "Start"
+            } else {
+                // Start the animation
+                breatheLottieAnimation.playAnimation()
+                isAnimationPlaying = true
+                startButton.text = "Stop"
+            }
+        }
+
+        dialog.show()
     }
 
     private fun showTapTargetView() {

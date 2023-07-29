@@ -170,34 +170,34 @@ class CustomActivity : AppCompatActivity() {
         //icAtomAnim.visibility = View.INVISIBLE
 
 
-        Log.d("CustomActivity", "onCreate() called")
+       // Log.d("CustomActivity", "onCreate() called")
         // Restore the timer state and time duration from SharedPreferences
         val timerRunning = sharedPreferences.getBoolean("isTimerRunning", false)
         selectedTimerDuration = sharedPreferences.getLong("selectedTimerDuration", 0)
         startTime = sharedPreferences.getLong("startTime", 0)
-        Log.d("CustomActivity", "Restored selectedTimerDuration: $selectedTimerDuration")
-
-
-        Log.d("CustomActivity", "timerTimesMilliseconds: ${timerTimesMilliseconds.joinToString()}")
-        Log.d("CustomActivity", "selectedTimerDuration: $selectedTimerDuration")
+//        Log.d("CustomActivity", "Restored selectedTimerDuration: $selectedTimerDuration")
+//
+//
+//        Log.d("CustomActivity", "timerTimesMilliseconds: ${timerTimesMilliseconds.joinToString()}")
+//        Log.d("CustomActivity", "selectedTimerDuration: $selectedTimerDuration")
 
         // Verify if 'which' is a valid index for the timerTimesMilliseconds array
         val which = if (selectedTimerDuration.toInt() in timerTimesMilliseconds.map { it.toInt() }) {
             timerTimesMilliseconds.indexOf(selectedTimerDuration)
         } else {
-            Log.e("CustomActivity", "Invalid timer option selected in onCreate: $selectedTimerDuration, using default duration.")
+         //   Log.e("CustomActivity", "Invalid timer option selected in onCreate: $selectedTimerDuration, using default duration.")
             // Use the default index of 0 if the selected duration is not found in the array
             0
         }
 
 
-        Log.d("CustomActivity", "onCreate() - timerRunning: $timerRunning, selectedTimerDuration: $selectedTimerDuration, which: $which")
+      //  Log.d("CustomActivity", "onCreate() - timerRunning: $timerRunning, selectedTimerDuration: $selectedTimerDuration, which: $which")
 
         if (timerRunning && selectedTimerDuration > 0) {
             // If a timer was running before, restart the timer
             val timeMs: Long =   selectedTimerDuration - (System.currentTimeMillis() - startTime)
-            Log.d("CustomActivity", "Calling startTimer with timeMs: $timeMs")
-            Log.d("CustomActivity", " $timeMs  = selectedTimerDuration($selectedTimerDuration) -  systemTime(${System.currentTimeMillis()}) - startTime($startTime)  ")
+           // Log.d("CustomActivity", "Calling startTimer with timeMs: $timeMs")
+          //  Log.d("CustomActivity", " $timeMs  = selectedTimerDuration($selectedTimerDuration) -  systemTime(${System.currentTimeMillis()}) - startTime($startTime)  ")
 
             startTimer(timeMs)
         } else {
@@ -467,7 +467,7 @@ class CustomActivity : AppCompatActivity() {
 
     private fun updateTimerButtonState() {
         // if no sound is playing, both buttons should be invisible
-        Log.d("CustomActivity", "updateTimerButtonState - isPlaying: ${playerService?.isPlaying()}")
+       // Log.d("CustomActivity", "updateTimerButtonState - isPlaying: ${playerService?.isPlaying()}")
         if (playerService == null || !(playerService!!.isPlaying())) {
             start_timer.visibility = View.INVISIBLE
             cancel_timer.visibility = View.INVISIBLE
@@ -477,14 +477,14 @@ class CustomActivity : AppCompatActivity() {
             if (this.countdownTimer == null) {
                 // No timer is running, show the start button and hide the cancel button
 
-                Log.d("CustomActivity", "Timer is not running")
+               // Log.d("CustomActivity", "Timer is not running")
                 start_timer.visibility = View.VISIBLE
                 cancel_timer.visibility = View.INVISIBLE
                 start_timer_icon.visibility = View.VISIBLE
                 timer_countdown_text.visibility = View.INVISIBLE
             } else {
                 // Timer is running, hide the start button and show the timer countdown
-                Log.d("CustomActivity", "Timer is running")
+               // Log.d("CustomActivity", "Timer is running")
 
                 start_timer.visibility = View.VISIBLE
                 cancel_timer.visibility = View.VISIBLE
@@ -510,7 +510,7 @@ class CustomActivity : AppCompatActivity() {
                 val timeMs = timerTimesMilliseconds[which]
                 startTimer(timeMs)
             } else {
-                Log.e("CustomActivity", "Invalid timer option selected: $which")
+               // Log.e("CustomActivity", "Invalid timer option selected: $which")
             }
         }
 
@@ -522,7 +522,7 @@ class CustomActivity : AppCompatActivity() {
     private fun startTimer(timeMs: Long) {
         // Ensure the 'timeMs' parameter is a valid positive value
         if (timeMs <= 0) {
-            Log.e("CustomActivity", "Invalid timer duration passed to startTimer(): $timeMs")
+          //  Log.e("CustomActivity", "Invalid timer duration passed to startTimer(): $timeMs")
             return
         }
 
@@ -554,7 +554,7 @@ class CustomActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                Log.d("CustomActivity", "onFinish() Called and selectedTimerDuration is $selectedTimerDuration")
+              //  Log.d("CustomActivity", "onFinish() Called and selectedTimerDuration is $selectedTimerDuration")
                 updateCountdownText("00:00:00")
 
 //                if (selectedTimerDuration > 0) {
@@ -578,7 +578,7 @@ class CustomActivity : AppCompatActivity() {
         start_timer_icon.visibility = View.INVISIBLE
 
         // Log the final values of selectedTimerDuration and remainingTimeMs
-        Log.d("CustomActivity", "Timer started for duration=$timeMs ms, remainingTime=$remainingTimeMs ms")
+       // Log.d("CustomActivity", "Timer started for duration=$timeMs ms, remainingTime=$remainingTimeMs ms")
     }
 
 
@@ -635,7 +635,7 @@ class CustomActivity : AppCompatActivity() {
         if (playerService?.isPlaying() == true) {
             icAtomAnim.resumeAnimation()
         }
-        Log.d("CustomActivity", "onRestart() called")
+       // Log.d("CustomActivity", "onRestart() called")
     }
 
 
@@ -644,7 +644,7 @@ class CustomActivity : AppCompatActivity() {
         val playerIntent = Intent(this, PlayerService::class.java)
         startService(playerIntent)
         bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE)
-        Log.d("CustomActivity", "onStart() called")
+       // Log.d("CustomActivity", "onStart() called")
 
     }
 
@@ -702,7 +702,7 @@ class CustomActivity : AppCompatActivity() {
             icAtomAnim.resumeAnimation()
         }
 
-        Log.d("CustomActivity", "onResume() called")
+       // Log.d("CustomActivity", "onResume() called")
     }
 
     override fun onPause() {
@@ -710,7 +710,7 @@ class CustomActivity : AppCompatActivity() {
         super.onPause()
         //icAtomAnim.pauseAnimation()
 
-        Log.d("CustomActivity", "onPause() called")
+       // Log.d("CustomActivity", "onPause() called")
     }
 
     private fun createNotificationChannel() {

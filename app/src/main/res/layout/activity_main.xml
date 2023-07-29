@@ -36,6 +36,22 @@
             app:tint="@color/secondary_text_dark" />
 
         <soup.neumorphism.NeumorphImageView
+            android:id="@+id/breatheButton"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/_62sdp"
+            android:padding="@dimen/_16sdp"
+            app:neumorph_strokeWidth="1dp"
+            app:neumorph_strokeColor="@color/black"
+            android:src="@drawable/breathe_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+            app:neumorph_shadowColorLight="@color/light_shadow_dark"
+            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+            app:tint="@color/secondary_text_dark" />
+
+        <soup.neumorphism.NeumorphImageView
             android:id="@+id/imageCustom"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
