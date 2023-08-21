@@ -41,13 +41,13 @@
 
 
             <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/breathe_animation"
+                android:id="@+id/itemAnimationView"
                 android:layout_width="@dimen/_230sdp"
                 android:layout_height="@dimen/_230sdp"
                 android:layout_gravity="center_horizontal"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="true"
-                app:lottie_rawRes="@raw/breathe_lottie_animation" />
+                app:lottie_rawRes="@raw/awake_breathe_anim" />
 
 
 

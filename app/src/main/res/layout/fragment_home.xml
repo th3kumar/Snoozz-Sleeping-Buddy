@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
     <ProgressBar
@@ -17,33 +17,199 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/loadingAnimationViewHome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        app:lottie_speed="2.0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/rvAllSongs"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/leaf_loading_lottie" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvAllSongs"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:fadeScrollbars="true"
-        android:fadingEdgeLength="50dp"
-        android:overScrollMode="never"
-        android:requiresFadingEdge="vertical"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fadingEdgeLength="80dp"
+        android:scrollbars="none"
+        android:requiresFadingEdge="horizontal|vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintUnderScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+
+
+            <LinearLayout
+                android:id="@+id/linearView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/linearViewAnim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/animTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:rotation="0"
+                        android:text="Redefining Rest for Mind, Body, and Soul"
+                        android:textColor="@color/primary_text"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <soup.neumorphism.NeumorphCardView
+                        android:layout_gravity="center"
+                        android:layout_width="@dimen/_230sdp"
+                        android:layout_height="@dimen/_230sdp"
+                        app:neumorph_strokeColor="#060606"
+                        app:neumorph_strokeWidth="@dimen/_2sdp"
+                        app:neumorph_shapeType="pressed"
+                        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                        app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                        app:neumorph_shapeAppearance="@style/NeumorphismCardImage">
+
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/homePageAnimation"
+                        android:layout_width="239dp"
+                        android:layout_height="239dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_14sdp"
+                        app:lottie_autoPlay="true"
+                        app:lottie_speed="0.5"
+                        app:lottie_rawRes="@raw/animation_leaf_homepage" />
+
+                    </soup.neumorphism.NeumorphCardView>
+
+
+
+                    <TextView
+                        android:id="@+id/instructionTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:rotation="0"
+                        android:text="To halt the animation, simply click on it."
+                        android:textColor="@color/primary_text"
+                        android:visibility="invisible"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/itemTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:rotation="0"
+                        android:text="Breathing"
+                        android:textColor="@color/primary_text_dark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/item2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:rotation="0"
+                        android:text="Exercises"
+                        android:textColor="@color/primary_text"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAllBreathe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:fadeScrollbars="true"
+                    android:fadingEdgeLength="30dp"
+                    android:requiresFadingEdge="horizontal|vertical"
+                    android:scrollbars="horizontal" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/itemSound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:rotation="0"
+                        android:text="Relaxing"
+                        android:textColor="@color/primary_text_dark"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/item2Sound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:rotation="0"
+                        android:text="Sounds"
+                        android:textColor="@color/primary_text"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/loadingAnimationViewHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/shimmer_animation_blank"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAllSongs"
+                    android:layout_width="match_parent"
+                    android:layout_height="800dp"
+                    android:fadeScrollbars="true"
+                    android:fadingEdgeLength="50dp"
+                    android:requiresFadingEdge="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity() {
         val startButton = bottomSheetView.findViewById<Button>(R.id.startButton)
 
         // Find the LottieAnimationView by its ID
-        val breatheLottieAnimation = bottomSheetView.findViewById<LottieAnimationView>(R.id.breathe_animation)
+        val breatheLottieAnimation = bottomSheetView.findViewById<LottieAnimationView>(R.id.itemAnimationView)
 
 
 

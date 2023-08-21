@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.Toast
 import com.google.android.play.core.review.ReviewManagerFactory
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,7 +22,7 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
-        val openUrl: Button = findViewById(R.id.buy_me_btn)
+        val openUrl: RelativeLayout = findViewById(R.id.buy_me_btn)
         openUrl.setOnClickListener{
           val openUrl = Intent(android.content.Intent.ACTION_VIEW)
             //here we will pass an URL to be opened

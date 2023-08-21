@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardElevation="5dp"
+            android:padding="1dp"
+            app:neumorph_strokeColor="#060606"
+            app:neumorph_strokeWidth="2dp"
+            app:neumorph_shapeType="flat"
+            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+            app:neumorph_shadowColorLight="@color/light_shadow_dark"
+            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+            app:cardCornerRadius="6dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient1"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:orientation="vertical"
+                android:padding="6dp">
+
+
+                <ImageView
+                    android:id="@+id/itemIcon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:src="@drawable/bee_icon"
+                    android:padding="@dimen/_18sdp"
+                     />
+
+                <TextView
+                    android:id="@+id/itemTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sample"
+                    android:layout_gravity="center"
+                    android:textColor="@color/primary_text_dark"
+                    android:textSize="14sp"
+                    android:padding="@dimen/_4sdp"
+                    android:textStyle="bold" />
+
+
+
+
+
+
+
+            </LinearLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

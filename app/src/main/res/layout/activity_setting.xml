@@ -7,147 +7,318 @@
 
     tools:context=".SettingActivity">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_150sdp"
-        android:layout_marginLeft="@dimen/_20sdp"
-        android:layout_marginRight="@dimen/_20sdp"
-        android:orientation="vertical"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/ic_atom_anim"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_gravity="right"
-            android:padding="@dimen/_4sdp"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/coffee_anim" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/rating_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_46sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
-            app:strokeColor="@color/secondary_text_dark"
-            android:padding="@dimen/_5sdp"
-            android:text="Rate Us"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textSize="@dimen/_15sdp"
-            android:fontFamily="@font/wiggly"
-            app:icon="@drawable/ic_star_rate"
-            app:iconGravity="textStart"
-            app:iconSize="@dimen/_24sdp"
-            app:iconTint="@color/yellow"
-            app:strokeWidth="1dp"
-            android:backgroundTint="@color/red"
-            app:cornerRadius="@dimen/_20sdp"
-            android:elevation="@dimen/_10sdp"
-            />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/feedback_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_46sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
-            app:strokeColor="@color/secondary_text_dark"
-            android:text="Feedback"
-            android:textColor="@color/secondary_text_dark"
-            android:textStyle="bold"
-            android:textSize="@dimen/_15sdp"
-            android:fontFamily="@font/wiggly"
-            app:icon="@drawable/ic_round_feedback"
-            app:iconGravity="textStart"
-            app:iconSize="@dimen/_20sdp"
-            app:iconTint="@color/secondary_text_dark"
-            android:padding="@dimen/_5sdp"
-            app:strokeWidth="1dp"
-            app:cornerRadius="@dimen/_20sdp"
-            android:elevation="@dimen/_10sdp"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buy_me_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_48sdp"
-            android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_marginRight="@dimen/_15sdp"
-            app:strokeColor="@color/secondary_text_dark"
-            android:padding="@dimen/_5sdp"
-            app:strokeWidth="2dp"
-            android:text="@string/buy_me_a_coffee"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_15sdp"
-            android:fontFamily="@font/buyme"
-            android:textAllCaps="false"
-            app:icon="@drawable/coffee_cup"
-            app:iconGravity="textStart"
-           app:iconSize="@dimen/_24sdp"
-            app:iconTint="@null"
-            app:background="@color/yellow"
-            android:backgroundTint="@color/yellow"
-            app:cornerRadius="@dimen/_20sdp"
-            android:elevation="@dimen/_10sdp"
-            />
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Version: 2.105"
-            android:gravity="center_horizontal"
-            android:textSize="@dimen/_12ssp"
-            android:textColor="@color/secondary_text_dark"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
 
-    </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:gravity="bottom"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Made in India"
-            android:gravity="center_horizontal"
-            android:textStyle="bold|italic"
-            android:textSize="@dimen/_12ssp"
-            android:textColor="@color/secondary_text_dark"
-            android:layout_gravity="center_horizontal"/>
-
-        <soup.neumorphism.NeumorphCardView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_margin="8dp"
-            android:padding="1dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="5dp"
-            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-            app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
-            app:neumorph_shapeType="flat" />
 
 
-    </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/feedback_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_46sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
+                android:elevation="@dimen/_10sdp"
+                android:fontFamily="@font/wiggly"
+                android:visibility="gone"
+                android:padding="@dimen/_5sdp"
+                android:text="Feedback"
+                android:textColor="@color/secondary_text_dark"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/_20sdp"
+                app:icon="@drawable/ic_round_feedback"
+                app:iconGravity="textStart"
+                app:iconSize="@dimen/_20sdp"
+                app:iconTint="@color/secondary_text_dark"
+                app:strokeColor="@color/secondary_text_dark"
+                app:strokeWidth="1dp" />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginVertical="@dimen/_5sdp"
+                android:gravity="center_horizontal"
+                android:text="Version: 2.20"
+                android:textColor="@color/secondary_text_dark"
+                android:textSize="@dimen/_12ssp" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/ic_atom_anim2"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_gravity="right"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:padding="@dimen/_4sdp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/coffee_anim" />
+
+
+
+                <soup.neumorphism.NeumorphCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="5dp"
+                    android:padding="1dp"
+                    app:neumorph_strokeColor="#060606"
+                    app:neumorph_strokeWidth="2dp"
+                    app:neumorph_shapeType="pressed"
+                    app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                    app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                    app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+                    app:cardCornerRadius="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+
+
+
+                    <!--                 Notification-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:id="@+id/notification_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/notification_blue"
+                            android:padding="10dp" />
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Notifications"
+                            android:fontFamily="@font/core_sans_medium"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/notification_icon"/>
+
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:switchMinWidth="50dp"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <!--           Review-->
+                    <RelativeLayout
+                        android:id="@+id/rating_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:id="@+id/faqs_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/review_yellow"
+                            android:padding="10dp" />
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Review"
+                            android:fontFamily="@font/core_sans_medium"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/faqs_icon"/>
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:tint="@color/primary_text"
+                            android:src="@drawable/round_right"/>
+
+
+                    </RelativeLayout>
+
+                    <!--           About us-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:id="@+id/about_us_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/about_us_orange"
+                            android:padding="10dp" />
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="About Us"
+                            android:fontFamily="@font/core_sans_medium"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/about_us_icon"/>
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:tint="@color/primary_text"
+                            android:src="@drawable/round_right"/>
+
+
+                    </RelativeLayout>
+
+                    <!--           buy me a coffee-->
+                    <RelativeLayout
+                        android:id="@+id/buy_me_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:id="@+id/log_out_icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/coffee_grey"
+                            android:padding="10dp" />
+
+                        <TextView
+                            android:layout_marginStart="20dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="Buy me a Coffee"
+                            android:fontFamily="@font/buyme"
+                            android:textStyle="bold"
+                            android:layout_toEndOf="@+id/log_out_icon"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:tint="@color/primary_text"
+                            android:src="@drawable/round_link"/>
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                </soup.neumorphism.NeumorphCardView>
+
+
+
+
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:visibility="invisible"
+                    android:layout_gravity="center"
+                    />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:gravity="bottom"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Made in India"
+                    android:gravity="center_horizontal"
+                    android:textStyle="bold|italic"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/secondary_text_dark"
+                    android:layout_gravity="center_horizontal"/>
+
+                <soup.neumorphism.NeumorphCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="8dp"
+                    android:padding="1dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
+                    app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                    app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                    app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+                    app:neumorph_shapeType="flat" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
