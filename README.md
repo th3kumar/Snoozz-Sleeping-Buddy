@@ -1,7 +1,9 @@
 #                           Snoozz-Sleeping Buddy
 
 
-![clay_device_mockup_108](https://user-images.githubusercontent.com/72141924/211245705-99366731-7535-49c4-ab31-2e5a12427ee6.png)
+
+![4534535dfads](https://github.com/th3kumar/Snoozz-Sleeping-Buddy/assets/72141924/12d037c2-0068-4bbf-aa1d-8cd62f1dc71e)
+
 
 https://youtu.be/Uw_7rAUW0rU
 
