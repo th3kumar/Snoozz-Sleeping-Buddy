@@ -2,6 +2,7 @@ package com.fridayhouse.snoozz.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -26,6 +27,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     @Inject
     lateinit var  songAdapter: SongAdapter
+    private lateinit var scrollView: ScrollView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +36,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         subscribeToObservers()
 
         val rvHorizontal: RecyclerView = view.findViewById(R.id.rvAllBreathe)
+        scrollView = view.findViewById(R.id.scrollViewHome)
 
         // Set up the LinearLayoutManager with horizontal orientation
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -51,6 +54,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val selectedAnimationResource = horizontalItems[position].animationResource
             // Handle the item click, e.g., show the corresponding Lottie animation
             showLottieAnimation(selectedAnimationResource)
+            scrollToTop()
         }
         rvHorizontal.adapter = horizontalAdapter
 
@@ -68,6 +72,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         songAdapter.setItemClickListener {
             mainViewModel.playOrToggleSound(it)
         }
+    }
+
+    private fun scrollToTop() {
+        scrollView.smoothScrollTo(0, 0)
     }
 
     private fun showLottieAnimation(animationResource: Int) {
