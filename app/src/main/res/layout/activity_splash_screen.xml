@@ -22,83 +22,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="220dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-         <soup.neumorphism.NeumorphImageView
-             android:layout_width="@dimen/_80sdp"
-             android:layout_height="@dimen/_80sdp"
-             android:padding="@dimen/_12sdp"
-             app:neumorph_strokeColor="@color/black"
-             app:neumorph_strokeWidth="2dp"
-             android:layout_gravity="center_horizontal"
-             app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-             app:neumorph_shadowColorLight="@color/light_shadow_dark"
-             android:src="@drawable/friday_house_logo_final"
-             app:neumorph_shapeAppearance="@style/NeumorphismCardImage"/>
 
-
-    <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FRIDAY HOUSE"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:textColor="@color/primary_text_dark"
-            android:textStyle="bold"
-            android:textSize="@dimen/_16ssp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="presents"
-            android:textColor="@color/primary_text"
-            android:layout_gravity="center_horizontal"
-            android:textStyle="italic"/>
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
 
+            <soup.neumorphism.NeumorphImageView
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_70sdp"
+                android:layout_gravity="center_horizontal"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/friday_house_logo_final"
+                app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                app:neumorph_shadowColorLight="@color/light_shadow_dark"
+                app:neumorph_shapeAppearance="@style/NeumorphismCardImage"
+                app:neumorph_strokeColor="@color/black"
+                app:neumorph_strokeWidth="2dp" />
 
 
+            <soup.neumorphism.NeumorphTextView
+                android:id="@+id/snoozzTitle"
+                android:layout_width="@dimen/_165sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/alba"
+                android:text="SNOOZZ"
+                android:textColor="@color/darkBackground"
+                android:textSize="@dimen/_45ssp"
+                android:textStyle="bold"
+                app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+                app:neumorph_shadowColorLight="@color/light_shadow_dark" />
+
+
+        </LinearLayout>
 
 
     </LinearLayout>
 
 
 
-
-
-
-    <LinearLayout
-
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="375dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/darkBackground"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-
-        <soup.neumorphism.NeumorphTextView
-            android:id="@+id/snoozzTitle"
-            android:layout_width="@dimen/_165sdp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="SNOOZZ"
-            android:textSize="@dimen/_45ssp"
-            android:fontFamily="@font/alba"
-            android:textColor="@color/darkBackground"
-            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-            app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            android:textStyle="bold"/>
-
-
-
-
-
-    </LinearLayout>
 
 
 

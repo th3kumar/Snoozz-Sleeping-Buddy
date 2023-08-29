@@ -128,12 +128,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Set click listener for the "Breathe" button to open the bottom sheet
-        breatheButton.setOnClickListener {
-            showBreatheBottomSheet()
-        }
-
-
         imageCustom.setOnClickListener {
             showLoadingAnimation()
             val intent = Intent(this, CustomActivity::class.java)
@@ -160,43 +154,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun showBreatheBottomSheet() {
-        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_breathe, null)
-        val dialog = BottomSheetDialog(this)
-        dialog.setContentView(bottomSheetView)
-
-        // Find the close icon by its ID and set click listener
-        val closeIcon = bottomSheetView.findViewById<ImageView>(R.id.closeIcon)
-        closeIcon.setOnClickListener {
-            dialog.dismiss() // Dismiss the bottom sheet when the close icon is clicked
-        }
-
-        // Find the "Start" button by its ID
-        val startButton = bottomSheetView.findViewById<Button>(R.id.startButton)
-
-        // Find the LottieAnimationView by its ID
-        val breatheLottieAnimation = bottomSheetView.findViewById<LottieAnimationView>(R.id.itemAnimationView)
-
-
-
-        // Set click listener for the "Start" button
-        startButton.setOnClickListener {
-            if (isAnimationPlaying) {
-                // Stop the animation
-                breatheLottieAnimation.pauseAnimation()
-                isAnimationPlaying = false
-                startButton.text = "Start"
-            } else {
-                // Start the animation
-                breatheLottieAnimation.playAnimation()
-                isAnimationPlaying = true
-                startButton.text = "Stop"
-            }
-        }
-
-        dialog.show()
-    }
-
     private fun showTapTargetView() {
         val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
 
@@ -216,10 +173,10 @@ class MainActivity : AppCompatActivity() {
                         // Update shared preferences when the sequence is finished
                         sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
 
-                        // Launch the CustomActivity
-                        showLoadingAnimation()
-                        val intent = Intent(this@MainActivity, CustomActivity::class.java)
-                        startActivityForResult(intent, REQUEST_CUSTOM_ACTIVITY)
+//                        // Launch the CustomActivity
+//                        showLoadingAnimation()
+//                        val intent = Intent(this@MainActivity, CustomActivity::class.java)
+//                        startActivityForResult(intent, REQUEST_CUSTOM_ACTIVITY)
                     }
 
                     override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}

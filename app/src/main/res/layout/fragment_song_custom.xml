@@ -24,6 +24,7 @@
         android:padding="@dimen/_14sdp"
         android:src="@drawable/ic_shuffle"
         android:clickable="true"
+        android:visibility="invisible"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismImageSmall"
@@ -73,6 +74,7 @@
         android:layout_height="@dimen/_42sdp"
         android:padding="@dimen/_14sdp"
         android:src="@drawable/ic_loop"
+        android:visibility="invisible"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismImageSmall"
@@ -118,6 +120,7 @@
         android:textSize="@dimen/_10ssp"
         app:layout_constraintBottom_toTopOf="@id/cardSeekbar"
         app:layout_constraintStart_toStartOf="@id/cardSeekbar" />
+
     <TextView
         android:id="@+id/tvSongDuration"
         android:layout_width="wrap_content"
@@ -136,7 +139,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_20sdp"
         android:gravity="center"
-        android:text=""
+        android:text="Dan Brown"
+        android:visibility="invisible"
         android:textColor="@color/primary"
         android:textSize="@dimen/_15ssp"
         app:layout_constraintBottom_toTopOf="@id/tvCurTime"/>
@@ -149,7 +153,7 @@
         android:gravity="center"
         android:text="Concide with me"
         android:textColor="@color/primary_text"
-        android:textSize="@dimen/_22ssp"
+        android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/tvCurTime"/>
 
@@ -192,7 +196,7 @@
         android:gravity="center"
         android:text="Now Playing"
         android:textColor="@color/primary_text"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toBottomOf="@id/imageMenu"
         app:layout_constraintEnd_toStartOf="@id/imageSearch"
         app:layout_constraintStart_toEndOf="@id/imageMenu"

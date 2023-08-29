@@ -11,14 +11,14 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
 
         fridayHouse.alpha = 0f
-        fridayHouse.animate().setDuration(2500).alpha(1f).withEndAction {
+        fridayHouse.animate().setDuration(2000).alpha(1f).withEndAction {
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
             overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
             finish()
         }
             snoozzTitle.alpha = 0f
-        snoozzTitle.animate().setDuration(2500).alpha(1f).withEndAction {
+        snoozzTitle.animate().setDuration(2000).alpha(1f).withEndAction {
 
         }
 

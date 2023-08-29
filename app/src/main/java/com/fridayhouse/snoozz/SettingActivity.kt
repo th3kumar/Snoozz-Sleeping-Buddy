@@ -34,6 +34,11 @@ class SettingActivity : AppCompatActivity() {
             inAppReview()
         }
 
+        aboutUs_btn.setOnClickListener{
+            val i = Intent(this, AboutActivity::class.java)
+            startActivity(i)
+        }
+
         feedback_btn.setOnClickListener {
             val i = Intent(this, FeedbackActivity::class.java)
             startActivity(i)

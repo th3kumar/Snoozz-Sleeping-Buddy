@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.data.HorizontalItem
+import soup.neumorphism.NeumorphCardView
 
 class HorizontalAdapter(private val items: List<HorizontalItem>, private val onItemClick: (Int) -> Unit) :
     RecyclerView.Adapter<HorizontalAdapter.ViewHolder>() {
@@ -24,6 +25,7 @@ class HorizontalAdapter(private val items: List<HorizontalItem>, private val onI
         Log.d("Adapter", "Binding position $position")
         val item = items[position]
         holder.bind(item)
+
     }
 
     override fun getItemCount(): Int {
