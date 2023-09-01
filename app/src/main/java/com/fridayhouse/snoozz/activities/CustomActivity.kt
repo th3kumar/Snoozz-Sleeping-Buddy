@@ -1,10 +1,9 @@
-package com.fridayhouse.snoozz
+package com.fridayhouse.snoozz.activities
 
 import android.app.AlertDialog
 import com.fridayhouse.snoozz.exoplayer.PlayerService
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.ProgressDialog
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -14,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.IBinder
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -23,16 +21,11 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.*
-import androidx.core.content.edit
 import com.airbnb.lottie.LottieAnimationView
+import com.fridayhouse.snoozz.R
 import kotlinx.android.synthetic.main.activity_custom.*
-import kotlinx.android.synthetic.main.activity_custom.view.*
-import java.util.Date
 import java.util.Locale
 import java.util.Timer
-import java.util.TimerTask
 import java.util.concurrent.TimeUnit
 
 

@@ -1,4 +1,4 @@
-package com.fridayhouse.snoozz
+package com.fridayhouse.snoozz.activities
 
 import android.content.Context
 import android.net.ConnectivityManager
