@@ -28,3 +28,12 @@ https://youtu.be/Uw_7rAUW0rU
 
 
 ![sNoozz sleeping buddy](https://user-images.githubusercontent.com/72141924/183751573-301b8bb0-27a2-4183-9452-96bcef00eb51.gif)
+
+
+#                           How to contribute?
+
+•	Create a branch named feature/SSB-'#unique_branch_number' if it's a new feature.
+•	Create a branch named fix/SSB-'#unique_branch_number' if it's a new fix.
+•	Create a branch named improvement/SSB-'#unique_branch_number' if it's a improvement in existing feature.
+•	Make sure you provide proper commit message and more or less be clear about what you are contributing.
+•	It will be great if you provide a screenshot/screen-recording of changes you made for context.
