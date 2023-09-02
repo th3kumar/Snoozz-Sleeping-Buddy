@@ -20,9 +20,15 @@ android {
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [crashlyticsCollectionEnabled:"false"]
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
         }
     }
 
@@ -102,7 +108,7 @@ dependencies {
     //Rounded image view
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    // Firebase Firestore
+    // Firebase FireStore
     implementation 'com.google.firebase:firebase-firestore:24.7.1'
 
     // Firebase Storage KTX
@@ -110,6 +116,9 @@ dependencies {
 
     // Firebase Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+
+    // Firebase Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.4.1'
 
     // ExoPlayer
     api "com.google.android.exoplayer:exoplayer-core:2.19.1"
