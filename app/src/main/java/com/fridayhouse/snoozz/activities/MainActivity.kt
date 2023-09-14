@@ -1,6 +1,5 @@
-package com.fridayhouse.snoozz
+package com.fridayhouse.snoozz.activities
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -9,19 +8,15 @@ import android.os.Handler
 import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.lottie.LottieAnimationView
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
+import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.adapters.SwipeSongAdapter
 import com.fridayhouse.snoozz.data.entities.sound
 import com.fridayhouse.snoozz.exoplayer.isPlaying
@@ -30,7 +25,6 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -40,9 +34,6 @@ import com.google.android.play.core.ktx.isFlexibleUpdateAllowed
 import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_splash_screen.*
-import kotlinx.android.synthetic.main.fragment_song_custom.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint

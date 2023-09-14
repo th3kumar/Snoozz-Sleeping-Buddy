@@ -8,7 +8,7 @@ import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.fridayhouse.snoozz.CustomActivity
+import com.fridayhouse.snoozz.activities.CustomActivity
 import com.fridayhouse.snoozz.R
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem

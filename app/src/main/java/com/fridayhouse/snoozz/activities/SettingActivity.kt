@@ -1,15 +1,14 @@
-package com.fridayhouse.snoozz
+package com.fridayhouse.snoozz.activities
 
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.Toast
+import com.fridayhouse.snoozz.R
 import com.google.android.play.core.review.ReviewManagerFactory
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {

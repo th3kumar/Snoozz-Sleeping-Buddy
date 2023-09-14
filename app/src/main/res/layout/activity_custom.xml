@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/darkBackground"
     android:backgroundTint="@color/darkBackground"
-    tools:context=".CustomActivity">
+    tools:context=".activities.CustomActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout_top"
