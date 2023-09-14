@@ -19,12 +19,11 @@ android {
         versionName "2.20"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
     buildTypes {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [crashlyticsCollectionEnabled:"false"]
+            manifestPlaceholders = [crashlyticsCollectionEnabled: "false"]
         }
         release {
             minifyEnabled false
@@ -32,12 +31,6 @@ android {
             manifestPlaceholders = [crashlyticsCollectionEnabled: "true"]
         }
     }
-
-    buildFeatures {
-        dataBinding = true
-        viewBinding = true
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,15 +38,21 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
 }
+// Remove this to see available updates of dependencies.
+// Update at your own risk. Newer versions might cause crash.
+// If you update them then please test the app properly.
 kapt {
     correctErrorTypes = true
 }
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0" //Not needed
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
@@ -64,36 +63,36 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0-alpha02'
 
     // Architectural Components
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
 
     // Lifecycle
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
 
     // Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
 
     // Navigation Component
-    implementation "androidx.navigation:navigation-fragment-ktx:2.7.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.7.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.7.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.7.2"
 
     // Glide
-    implementation 'com.github.bumptech.glide:glide:4.14.2'
-    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.1'
+    kapt 'com.github.bumptech.glide:compiler:4.14.2'
 
     // Activity KTX for viewModels()
     implementation "androidx.activity:activity-ktx:1.7.2"
 
     //Dagger - Hilt
-    implementation("com.google.dagger:hilt-android:2.42")
-    kapt("com.google.dagger:hilt-android-compiler:2.42")
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
     // Timber
@@ -116,7 +115,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx:20.2.1'
 
     // Firebase Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3'
 
     // Firebase Crashlytics
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.4.1'
@@ -126,14 +125,14 @@ dependencies {
     api "com.google.android.exoplayer:exoplayer-ui:2.19.1"
     api "com.google.android.exoplayer:extension-mediasession:2.19.1"
 
-    //lottie
+    // Lottie
     implementation 'com.airbnb.android:lottie:5.2.0'
 
-    //sending mail
+    // Sending mail
     implementation 'com.sun.mail:android-mail:1.6.2'
     implementation 'com.sun.mail:android-activation:1.6.2'
 
-    //inApp Review
+    // InApp Review
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
     implementation("com.google.android.play:review:2.0.1")
@@ -149,6 +148,6 @@ dependencies {
     // For Kotlin users also import the Kotlin extensions library for Play In-App Update:
     implementation("com.google.android.play:app-update-ktx:2.1.0")
 
-    //tap -target - view
+    // Tap-targetView
     implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
 }
