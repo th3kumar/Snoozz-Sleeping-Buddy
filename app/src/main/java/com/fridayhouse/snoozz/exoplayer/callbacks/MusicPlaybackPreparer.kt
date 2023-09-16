@@ -12,7 +12,7 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 class MusicPlaybackPreparer(
     private val firebaseMusicSource: FirebaseMusicSource,
     private val playerPrepared: (MediaMetadataCompat?) -> Unit
-) : MediaSessionConnector.PlaybackPreparer{
+) : MediaSessionConnector.PlaybackPreparer {
     override fun onCommand(
         player: Player,
         command: String,
@@ -25,7 +25,7 @@ class MusicPlaybackPreparer(
                 PlaybackStateCompat.ACTION_PLAY_FROM_MEDIA_ID
     }
 
-    override fun onPrepare(playWhenReady: Boolean)  = Unit
+    override fun onPrepare(playWhenReady: Boolean) = Unit
 
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
         firebaseMusicSource.whenReady {
@@ -38,11 +38,3 @@ class MusicPlaybackPreparer(
 
     override fun onPrepareFromUri(uri: Uri, playWhenReady: Boolean, extras: Bundle?) = Unit
 }
-
-
-
-
-
-
-
-

@@ -2,47 +2,35 @@ package com.fridayhouse.snoozz.activities
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.RelativeLayout
 import android.widget.Toast
-import com.fridayhouse.snoozz.R
+import androidx.appcompat.app.AppCompatActivity
+import com.fridayhouse.snoozz.databinding.ActivitySettingBinding
 import com.google.android.play.core.review.ReviewManagerFactory
-import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivitySettingBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val openUrl: RelativeLayout = findViewById(R.id.buy_me_btn)
-        openUrl.setOnClickListener{
-          val openUrl = Intent(android.content.Intent.ACTION_VIEW)
-            //here we will pass an URL to be opened
-            openUrl.data = Uri.parse("https://www.buymeacoffee.com/mantukumar")
-            startActivity(openUrl)
+        binding.apply {
+            buyMeBtn.setOnClickListener {
+                val openUrl = Intent(Intent.ACTION_VIEW)
+                //here we will pass an URL to be opened
+                openUrl.data = Uri.parse("https://www.buymeacoffee.com/mantukumar")
+                startActivity(openUrl)
+            }
+            ratingBtn.setOnClickListener {
+                inAppReview()
+            }
+            aboutUsBtn.setOnClickListener {
+                val i = Intent(this@SettingActivity, AboutActivity::class.java)
+                startActivity(i)
+            }
         }
-
-        rating_btn.setOnClickListener{
-            inAppReview()
-        }
-
-        aboutUs_btn.setOnClickListener{
-            val i = Intent(this, AboutActivity::class.java)
-            startActivity(i)
-        }
-
-        feedback_btn.setOnClickListener {
-            val i = Intent(this, FeedbackActivity::class.java)
-            startActivity(i)
-        }
-
     }
 
     private fun inAppReview() {
@@ -63,10 +51,8 @@ class SettingActivity : AppCompatActivity() {
                     toast.show()
                 }
             } else {
-                Log.d("Error: ", request.exception.toString())
-                // There was some problem, continue regardless of the result.
+                // no-op
             }
         }
-
     }
 }

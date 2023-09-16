@@ -1,8 +1,5 @@
 package com.fridayhouse.snoozz.di
 
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.internal.managers.ApplicationComponentManager
 import android.content.Context
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -10,7 +7,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.adapters.SwipeSongAdapter
 import com.fridayhouse.snoozz.exoplayer.MusicServiceConnection
+import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton

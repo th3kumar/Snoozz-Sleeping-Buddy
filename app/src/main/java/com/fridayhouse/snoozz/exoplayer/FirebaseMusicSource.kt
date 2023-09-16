@@ -1,13 +1,24 @@
 package com.fridayhouse.snoozz.exoplayer
 
-import android.media.MediaMetadata.*
+import android.media.MediaMetadata.METADATA_KEY_ALBUM_ART_URI
+import android.media.MediaMetadata.METADATA_KEY_ARTIST
+import android.media.MediaMetadata.METADATA_KEY_DISPLAY_DESCRIPTION
+import android.media.MediaMetadata.METADATA_KEY_DISPLAY_ICON_URI
+import android.media.MediaMetadata.METADATA_KEY_DISPLAY_SUBTITLE
+import android.media.MediaMetadata.METADATA_KEY_DISPLAY_TITLE
+import android.media.MediaMetadata.METADATA_KEY_MEDIA_ID
+import android.media.MediaMetadata.METADATA_KEY_MEDIA_URI
+import android.media.MediaMetadata.METADATA_KEY_TITLE
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import androidx.core.net.toUri
 import com.fridayhouse.snoozz.data.remote.MusicDatabase
-import com.fridayhouse.snoozz.exoplayer.State.*
+import com.fridayhouse.snoozz.exoplayer.State.STATE_CREATED
+import com.fridayhouse.snoozz.exoplayer.State.STATE_ERROR
+import com.fridayhouse.snoozz.exoplayer.State.STATE_INITIALIZED
+import com.fridayhouse.snoozz.exoplayer.State.STATE_INITIALIZING
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -16,19 +27,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class FirebaseMusicSource  @Inject constructor(
+class FirebaseMusicSource @Inject constructor(
     private var musicDatabase: MusicDatabase
-){
+) {
 
     var sounds = emptyList<MediaMetadataCompat>()
 
     suspend fun fetchMediaData() {
-      state = STATE_INITIALIZING
+        state = STATE_INITIALIZING
         getAllSounds()
         state = STATE_INITIALIZED
     }
 
-    suspend fun getAllSounds()  = withContext(Dispatchers.IO){
+    suspend fun getAllSounds() = withContext(Dispatchers.IO) {
         val allSounds = musicDatabase.getAllSounds()
         sounds = allSounds.map { sound ->
             MediaMetadataCompat.Builder()
@@ -37,33 +48,29 @@ class FirebaseMusicSource  @Inject constructor(
                 .putString(METADATA_KEY_TITLE, sound.title)
                 .putString(METADATA_KEY_DISPLAY_TITLE, sound.title)
                 .putString(METADATA_KEY_DISPLAY_ICON_URI, sound.imageUrl)
-                .putString(METADATA_KEY_MEDIA_URI,sound.audioUrl)
+                .putString(METADATA_KEY_MEDIA_URI, sound.audioUrl)
                 .putString(METADATA_KEY_ALBUM_ART_URI, sound.imageUrl)
                 .putString(METADATA_KEY_DISPLAY_SUBTITLE, sound.subtitle)
-                .putString(METADATA_KEY_DISPLAY_DESCRIPTION,sound.subtitle)
+                .putString(METADATA_KEY_DISPLAY_DESCRIPTION, sound.subtitle)
                 .build()
-
-
-
-
         }
     }
 
-    fun asMediaSource(dataSourceFactory: DefaultDataSourceFactory) : ConcatenatingMediaSource{
-       val concatenatingMediaSource = ConcatenatingMediaSource()
-        sounds.forEach { sound->
+    fun asMediaSource(dataSourceFactory: DefaultDataSourceFactory): ConcatenatingMediaSource {
+        val concatenatingMediaSource = ConcatenatingMediaSource()
+        sounds.forEach { sound ->
             val mediaSource = ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(
                     MediaItem.fromUri(
                         sound.getString(METADATA_KEY_MEDIA_URI).toUri()
                     )
                 )
-                concatenatingMediaSource.addMediaSource(mediaSource)
+            concatenatingMediaSource.addMediaSource(mediaSource)
         }
         return concatenatingMediaSource
     }
 
-    fun asMediaItems() = sounds.map { sound->
+    fun asMediaItems() = sounds.map { sound ->
         val desc = MediaDescriptionCompat.Builder()
             .setMediaUri(sound.getString(METADATA_KEY_MEDIA_URI).toUri())
             .setTitle(sound.description.title)
@@ -79,22 +86,21 @@ class FirebaseMusicSource  @Inject constructor(
     private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
 
     private var state: State = STATE_CREATED
-
-    set(value){
-        if(value == STATE_INITIALIZED || value == STATE_ERROR){
-            synchronized(onReadyListeners) {
-                field = value
-                onReadyListeners.forEach { listener ->
-                    listener(state == STATE_INITIALIZED)
+        set(value) {
+            if (value == STATE_INITIALIZED || value == STATE_ERROR) {
+                synchronized(onReadyListeners) {
+                    field = value
+                    onReadyListeners.forEach { listener ->
+                        listener(state == STATE_INITIALIZED)
+                    }
                 }
+            } else {
+                field = value
             }
-        } else {
-            field = value
         }
-    }
 
     fun whenReady(action: (Boolean) -> Unit): Boolean {
-        if(state == STATE_CREATED || state == STATE_INITIALIZING) {
+        if (state == STATE_CREATED || state == STATE_INITIALIZING) {
             onReadyListeners += action
             return false
         } else {
@@ -104,11 +110,7 @@ class FirebaseMusicSource  @Inject constructor(
     }
 }
 
-//private fun ProgressiveMediaSource.Factory.createMediaSource(toUri: Uri): ProgressiveMediaSource {
-//
-//}
-
-enum class State{
+enum class State {
     STATE_CREATED,
     STATE_INITIALIZING,
     STATE_INITIALIZED,

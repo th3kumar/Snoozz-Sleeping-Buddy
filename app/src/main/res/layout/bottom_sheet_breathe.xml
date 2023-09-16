@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,63 +18,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Add any additional views or elements here -->
-
-            <!-- Close icon -->
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/closeIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="10dp"
-            android:layout_centerVertical="true"
-            app:tint="@color/secondary_text_dark"
-            android:clickable="true"
-            android:onClick="onCloseIconClick"
-            android:src="@drawable/ic_close" />
-
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:clickable="true"
+                android:onClick="onCloseIconClick"
+                app:srcCompat="@drawable/ic_close"
+                app:tint="@color/secondary_text_dark" />
         </RelativeLayout>
 
-
-        <!-- Your Lottie animation view -->
-
-
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/itemAnimationView"
-                android:layout_width="@dimen/_230sdp"
-                android:layout_height="@dimen/_230sdp"
-                android:layout_gravity="center_horizontal"
-                app:lottie_autoPlay="false"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/awake_breathe_anim" />
-
-
-
-        <!-- Start button -->
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/itemAnimationView"
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_230sdp"
+            android:layout_gravity="center_horizontal"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/awake_breathe_anim" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/startButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_30sdp"
-            android:layout_marginBottom="@dimen/_4sdp"
             android:layout_marginTop="@dimen/_4sdp"
-            app:strokeColor="@color/secondary_text_dark"
-            android:text="START"
-            android:textColor="@color/secondary_text_dark"
-            android:textStyle="bold"
-            android:textSize="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:elevation="@dimen/_10sdp"
             android:fontFamily="@font/wiggly"
             android:padding="@dimen/_5sdp"
-            app:strokeWidth="1dp"
+            android:text="START"
+            android:textColor="@color/secondary_text_dark"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold"
             app:cornerRadius="@dimen/_20sdp"
-            android:elevation="@dimen/_10sdp"
-            />
-
-        <!-- Add any additional elements as needed -->
-
+            app:strokeColor="@color/secondary_text_dark"
+            app:strokeWidth="1dp" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.fridayhouse.snoozz.data.entities.sound
 
-abstract class BaseSongAdapter (
+abstract class BaseSongAdapter(
     private val layoutId: Int
-    ) : RecyclerView.Adapter<BaseSongAdapter.SongViewHolder>() {
+) : RecyclerView.Adapter<BaseSongAdapter.SongViewHolder>() {
     class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    protected val diffCallback = object : DiffUtil.ItemCallback<sound>(){
+    protected val diffCallback = object : DiffUtil.ItemCallback<sound>() {
         override fun areItemsTheSame(oldItem: sound, newItem: sound): Boolean {
             return oldItem.mediaId == newItem.mediaId
         }
@@ -23,7 +23,7 @@ abstract class BaseSongAdapter (
         }
     }
 
-     protected abstract var differ: AsyncListDiffer<sound>
+    protected abstract var differ: AsyncListDiffer<sound>
 
     var sounds: List<sound>
         get() = differ.currentList
@@ -38,8 +38,6 @@ abstract class BaseSongAdapter (
             )
         )
     }
-
-
 
     protected var onItemClickListener: ((sound) -> Unit)? = null
     fun setItemClickListener(listener: (sound) -> Unit) {

@@ -12,7 +12,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.others.Constants.NOTIFICATION_CHANNEL_ID
 import com.fridayhouse.snoozz.others.Constants.NOTIFICATION_ID
-import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
@@ -24,14 +23,15 @@ class MusicNotificationManager(
     private val newSongCallback: () -> Unit
 ) {
     private val notificationManager: PlayerNotificationManager
-   // Use Builder
+
+    // Use Builder
     init {
         val mediaController = MediaControllerCompat(context, sessionToken)
         notificationManager = PlayerNotificationManager.Builder(
             context,
             NOTIFICATION_ID,
             NOTIFICATION_CHANNEL_ID
-            )
+        )
             .setChannelNameResourceId(R.string.notification_channel_name)
             .setChannelDescriptionResourceId(R.string.notification_channel_description)
             .setMediaDescriptionAdapter(DescriptionAdapter(mediaController))
@@ -40,13 +40,13 @@ class MusicNotificationManager(
 
     }
 
-    fun showNotification(player: Player){
+    fun showNotification(player: Player) {
         notificationManager.setPlayer(player)
     }
 
     private inner class DescriptionAdapter(
         private val mediaController: MediaControllerCompat
-    ) : PlayerNotificationManager.MediaDescriptionAdapter{
+    ) : PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): CharSequence {
 
@@ -68,7 +68,7 @@ class MusicNotificationManager(
         ): Bitmap? {
             Glide.with(context).asBitmap()
                 .load(mediaController.metadata?.description?.iconUri)
-                .into(object : CustomTarget<Bitmap>(){
+                .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
@@ -77,14 +77,8 @@ class MusicNotificationManager(
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) = Unit
-
                 })
             return null
         }
-
     }
-
-
-
-
 }
