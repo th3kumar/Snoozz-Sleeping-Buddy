@@ -12,5 +12,20 @@
     <string name="cancel_timer">Cancel</string>
     <string name="_00_00_00">00:00:00</string>
     <string name="_04_39_11">04:39:11</string>
-
+    <string name="what_sets_us_apart_title">What Sets Us Apart:</string>
+    <string name="what_sets_us_apart_description">Snoozz. stands out from the crowd with our commitment to delivering an entirely ad-free experience to our users. We understand the value of uninterrupted tranquility and have diligently crafted a platform that ensures our users can immerse themselves in a world of calming melodies without any distractions.\n\nAdditionally, our team of expert sound engineers and meditation specialists work tirelessly to curate a diverse collection of high-quality sounds, encompassing everything from nature-inspired melodies to mindfulness-inducing compositions. This dedication to excellence ensures that Snoozz. remains at the forefront of relaxation technology.</string>
+    <string name="our_vision_title">Our Vision:</string>
+    <string name="our_vision_description">Driven by our passion for enhancing the overall well-being of our users, we envision a world where every person can effortlessly access a sanctuary of peace through our cutting-edge relaxation solutions. We aim to be the go-to destination for anyone seeking respite from stress and anxiety, delivering an unparalleled auditory experience that touches the soul.</string>
+    <string name="our_mission_title">Our Mission:</string>
+    <string name="our_mission_description">At Snoozz, our mission is to empower individuals to achieve mental wellness and rejuvenation by providing them with a seamless and ad-free platform that offers an extensive array of soothing sounds and calming melodies. We strive to promote a healthier and happier lifestyle by encouraging users to disconnect from the world\'s chaos and find serenity within themselves.</string>
+    <string name="about_snoozz_title">About Snoozz</string>
+    <string name="about_snoozz_subtitle">Snoozz. is a leading tech company dedicated to creating innovative and immersive relaxation experiences for users seeking tranquility and inner peace. Established with a vision to revolutionize the way people unwind and find solace in their busy lives, Snoozz. has become synonymous with the art of relaxation.</string>
+    <string name="feedback_title">Feedback</string>
+    <string name="custom_createTitle">Create</string>
+    <string name="custom_createSubTitle">Your Musical Oasis Awaits. Explore, Mix, and Relax!</string>
+    <string name="made_in_india_text">Made in India</string>
+    <string name="buy_me_a_coffee_text">Buy me a Coffee</string>
+    <string name="about_us_text">About Us</string>
+    <string name="review_text">Review</string>
+    <string name="notifications_text">Notifications</string>
 </resources>

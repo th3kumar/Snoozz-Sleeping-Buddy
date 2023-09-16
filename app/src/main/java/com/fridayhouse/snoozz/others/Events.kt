@@ -1,18 +1,18 @@
 package com.fridayhouse.snoozz.others
 
-open class Events<out T>(private  val data : T) {
+open class Events<out T>(private val data: T) {
 
     var hasBeenHandled = false
-    private set
-
+        private set
 
     fun getContentIfNotHandled(): T? {
-        return if(hasBeenHandled) {
+        return if (hasBeenHandled) {
             null
         } else {
             hasBeenHandled = true
             data
         }
     }
-    fun peekContent() =  data
+
+    fun peekContent() = data
 }

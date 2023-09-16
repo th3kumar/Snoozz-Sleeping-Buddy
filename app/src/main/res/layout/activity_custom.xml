@@ -8,183 +8,68 @@
     android:backgroundTint="@color/darkBackground"
     tools:context=".activities.CustomActivity">
 
-    <FrameLayout
-        android:id="@+id/frameLayout_top"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/ic_atom_anim"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha=".2"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/hexgon_animation" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_customActivity_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fontFamily="@font/alba"
+        android:text="@string/custom_createTitle"
+        android:textSize="@dimen/_24ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textview_customActivity_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/custom_createSubTitle"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_customActivity_title" />
 
-            android:id="@+id/linearLayout_top"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/gradient_title"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_29sdp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:fontFamily="@font/alba"
-                        android:text="Create"
-                        android:textSize="@dimen/_24sdp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="Your Musical Oasis Awaits"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="Explore, Mix, and Relax!"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-
-                    <soup.neumorphism.NeumorphCardView
-                        android:id="@+id/start_timer"
-                        android:layout_width="@dimen/_100sdp"
-                        android:layout_height="@dimen/_60sdp"
-                        android:clickable="true"
-                        android:padding="@dimen/_20sdp"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:neumorph_insetEnd="0.5dp"
-                        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-                        app:neumorph_shadowColorLight="@color/light_shadow_dark"
-                        app:neumorph_shadowElevation="@dimen/_4sdp"
-                        app:neumorph_shapeAppearance="@style/NeumorphismTimerShape"
-                        app:neumorph_shapeType="flat"
-                        app:neumorph_strokeColor="@color/black"
-                        app:neumorph_strokeWidth="0.5dp">
-
-                        <ImageView
-                            android:id="@+id/start_timer_icon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@drawable/timer_icon" />
-
-                        <TextView
-                            android:id="@+id/timer_countdown_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/_04_39_11"
-                            android:textColor="@color/dark_shadow"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:visibility="invisible" />
-
-
-                    </soup.neumorphism.NeumorphCardView>
-
-
-                    <soup.neumorphism.NeumorphImageView
-                        android:id="@+id/cancel_timer"
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="@dimen/_60sdp"
-                        android:clickable="true"
-                        android:padding="@dimen/_20sdp"
-                        android:src="@drawable/timer_off_icon"
-                        android:visibility="invisible"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:neumorph_insetStart="0.5dp"
-                        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-                        app:neumorph_shadowColorLight="@color/light_shadow_dark"
-                        app:neumorph_shadowElevation="@dimen/_4sdp"
-                        app:neumorph_shapeAppearance="@style/NeumorphismTimerOffShape"
-                        app:neumorph_shapeType="flat"
-                        app:neumorph_strokeColor="@color/black"
-                        app:neumorph_strokeWidth="0.5dp" />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:orientation="vertical">
-
-            <com.airbnb.lottie.LottieAnimationView
-                android:id="@+id/ic_atom_anim"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="right"
-                android:padding="@dimen/_10sdp"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/hexgon_animation" />
-
-
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/gradient_bottom_line"/>
-
-    </FrameLayout>
-
+    <View
+        android:id="@+id/dividerOne"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/gradient_bottom_line"
+        app:layout_constraintBottom_toTopOf="@+id/scrollview_customActivity"
+        app:layout_constraintTop_toBottomOf="@+id/textview_customActivity_subtitle" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="490dp"
-        android:orientation="vertical"
+        android:id="@+id/scrollview_customActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:fadeScrollbars="true"
-        android:fadingEdgeLength="80dp"
+        android:fillViewport="true"
+        android:orientation="vertical"
+        android:overScrollMode="never"
         android:scrollbars="none"
-        android:requiresFadingEdge="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout_top">
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dividerOne">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
-
 
             <LinearLayout
                 android:id="@+id/ll_full"
@@ -215,7 +100,6 @@
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
                             android:layout_marginStart="@dimen/_12sdp"
-                            android:clickable="true"
                             android:padding="@dimen/_28sdp"
                             android:src="@drawable/keyboard_grey"
                             app:layout_constraintStart_toStartOf="parent"
@@ -225,18 +109,16 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp" />
+                            app:neumorph_strokeWidth="@dimen/_1sdp" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/keyboard_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -249,7 +131,6 @@
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
                             android:layout_marginStart="@dimen/_12sdp"
-                            android:clickable="true"
                             android:padding="@dimen/_28sdp"
                             android:src="@drawable/rain_selector"
                             app:layout_constraintStart_toStartOf="parent"
@@ -259,19 +140,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/rain_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -280,7 +159,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_thunder"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -294,21 +172,18 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/thunder_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -323,7 +198,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_ocean"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -337,19 +211,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/ocean_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -358,7 +230,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_wind"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -372,19 +243,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/wind_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -393,7 +262,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_musical"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -407,23 +275,19 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/music_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:id="@+id/ll_3"
@@ -437,7 +301,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_piano"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -451,19 +314,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/piano_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -472,7 +333,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_flute"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -486,19 +346,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/flute_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -507,7 +365,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_grass"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -521,21 +378,18 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/grass_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -550,7 +404,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_bowl"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -564,19 +417,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/bowl_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -585,7 +436,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_birds"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -599,19 +449,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/bird_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -620,7 +468,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_harp"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -634,21 +481,18 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/harp_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -663,7 +507,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_om"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -677,19 +520,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/om_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -698,7 +539,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_railway"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -712,19 +552,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/rail_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -733,7 +571,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_cat"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -747,19 +584,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/cat_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                 </LinearLayout>
@@ -768,7 +603,7 @@
                     android:id="@+id/ll_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_gravity="start"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -777,7 +612,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_fire"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -791,19 +625,17 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/fire_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -812,7 +644,6 @@
                         android:orientation="vertical">
 
                         <soup.neumorphism.NeumorphImageView
-
                             android:id="@+id/icon_tabla"
                             android:layout_width="@dimen/_80sdp"
                             android:layout_height="@dimen/_80sdp"
@@ -826,72 +657,80 @@
                             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                             app:neumorph_shapeType="basin"
                             app:neumorph_strokeColor="@color/black"
-                            app:neumorph_strokeWidth="1dp"
+                            app:neumorph_strokeWidth="@dimen/_1sdp"
                             app:tint="@color/secondary_text_dark" />
 
-                        <SeekBar
+                        <androidx.appcompat.widget.AppCompatSeekBar
                             android:id="@+id/tabla_volume"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/_10sdp"
                             android:max="19"
                             android:progress="19"
                             android:visibility="invisible" />
-
-
                     </LinearLayout>
-
-
                 </LinearLayout>
-
-
             </LinearLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionButton_customActivity_removeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@color/torquiese"
+        android:backgroundTint="@color/darkBackground"
+        android:src="@drawable/timer_off_icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/actionButton_customActivity_setTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/torquiese"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionButton_customActivity_stopPlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@color/torquiese"
+        android:backgroundTint="@color/darkBackground"
+        android:src="@drawable/ic_round_stop"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/torquiese"
+        tools:visibility="visible" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/actionButton_customActivity_setTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:background="@color/torquiese"
+        android:backgroundTint="@color/darkBackground"
+        android:src="@drawable/timer_icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/torquiese"
+        tools:visibility="visible" />
 
-        <soup.neumorphism.NeumorphImageView
-            android:id="@+id/neumorphImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-            app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            app:neumorph_shapeAppearance="@style/NeumorphismImageLarge"
-            app:neumorph_shapeType="pressed" />
-
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:src="@drawable/ic_round_stop"
-            android:backgroundTint="@color/darkBackground"
-            android:background="@color/torquiese"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:tint="@color/torquiese"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timer_countdown_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/_04_39_11"
+        android:textColor="@color/dark_shadow"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/actionButton_customActivity_setTime"
+        app:layout_constraintStart_toStartOf="@+id/actionButton_customActivity_setTime"
+        app:layout_constraintTop_toBottomOf="@+id/actionButton_customActivity_setTime"
+        tools:visibility="visible" />
 </androidx.constraintlayout.widget.ConstraintLayout>

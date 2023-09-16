@@ -10,106 +10,98 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fadeScrollbars="true"
-        android:fadingEdgeLength="80dp"
-        android:scrollbars="none"
+        android:fadingEdgeLength="@dimen/_60sdp"
         android:requiresFadingEdge="horizontal|vertical"
+        android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <soup.neumorphism.NeumorphCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="5dp"
-            android:padding="1dp"
-            app:neumorph_strokeColor="#060606"
-            app:neumorph_strokeWidth="2dp"
-            app:neumorph_shapeType="pressed"
+            android:padding="@dimen/_1sdp"
+            app:cardCornerRadius="@dimen/_9sdp"
+            app:cardElevation="@dimen/_4sdp"
             app:neumorph_shadowColorDark="@color/dark_shadow_dark"
             app:neumorph_shadowColorLight="@color/light_shadow_dark"
             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
-            app:cardCornerRadius="12dp">
+            app:neumorph_shapeType="pressed"
+            app:neumorph_strokeColor="#060606"
+            app:neumorph_strokeWidth="@dimen/_2sdp">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginVertical="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:padding="@dimen/_12sdp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="@dimen/_10sdp"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            android:orientation="vertical"
-            android:padding="16dp">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_12sdp"
+                    android:text="@string/about_snoozz_title"
+                    android:textSize="@dimen/_18ssp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:text="About Snoozz"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_12sdp"
+                    android:text="@string/about_snoozz_subtitle" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:text="Snoozz. is a leading tech company dedicated to creating innovative and immersive relaxation experiences for users seeking tranquility and inner peace. Established with a vision to revolutionize the way people unwind and find solace in their busy lives, Snoozz. has become synonymous with the art of relaxation." />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:text="@string/our_mission_title"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:text="Our Mission:"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_12sdp"
+                    android:text="@string/our_mission_description" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:text="At Snoozz, our mission is to empower individuals to achieve mental wellness and rejuvenation by providing them with a seamless and ad-free platform that offers an extensive array of soothing sounds and calming melodies. We strive to promote a healthier and happier lifestyle by encouraging users to disconnect from the world's chaos and find serenity within themselves." />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:text="@string/our_vision_title"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:text="Our Vision:"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_12sdp"
+                    android:text="@string/our_vision_description" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:text="Driven by our passion for enhancing the overall well-being of our users, we envision a world where every person can effortlessly access a sanctuary of peace through our cutting-edge relaxation solutions. We aim to be the go-to destination for anyone seeking respite from stress and anxiety, delivering an unparalleled auditory experience that touches the soul." />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_6sdp"
+                    android:text="@string/what_sets_us_apart_title"
+                    android:textSize="@dimen/_14ssp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:text="What Sets Us Apart:"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:gravity="center"
-                android:text="Snoozz. stands out from the crowd with our commitment to delivering an entirely ad-free experience to our users. We understand the value of uninterrupted tranquility and have diligently crafted a platform that ensures our users can immerse themselves in a world of calming melodies without any distractions.\n\nAdditionally, our team of expert sound engineers and meditation specialists work tirelessly to curate a diverse collection of high-quality sounds, encompassing everything from nature-inspired melodies to mindfulness-inducing compositions. This dedication to excellence ensures that Snoozz. remains at the forefront of relaxation technology." />
-
-        </LinearLayout>
-
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/_12sdp"
+                    android:gravity="center"
+                    android:text="@string/what_sets_us_apart_description" />
+            </LinearLayout>
         </soup.neumorphism.NeumorphCardView>
-
     </ScrollView>
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

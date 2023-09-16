@@ -18,13 +18,10 @@
     <color name="yellow">#EFcc00</color>
     <color name="red">#722f37</color>
 
-
-
     <color name="darkWood">#484848</color>
     <color name="leaveGreen">#697E50</color>
     <color name="bluishBackground">#2F3238</color>
     <color name="darkOrchid">#111111</color>
-
 
     <!--    cUSTOM STYLE-->
     <color name="primary">#A3B5BF</color>
@@ -48,8 +45,6 @@
     <color name="target_view_outer">#2E336D</color>
     <color name="target_view_discription">#C5C5C5</color>
 
-
     <color name="orange">#ED4E12</color>
     <color name="timer_dialog">#A3B5BF</color>
-
 </resources>

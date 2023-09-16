@@ -8,8 +8,8 @@ import android.os.Binder
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.fridayhouse.snoozz.activities.CustomActivity
 import com.fridayhouse.snoozz.R
+import com.fridayhouse.snoozz.activities.CustomActivity
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
@@ -109,7 +109,8 @@ class PlayerService : Service() {
         // move to the foreground if we are playing sound
         if (isPlaying()) {
             val notificationIntent = Intent(this, CustomActivity::class.java)
-            val pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,PendingIntent.FLAG_IMMUTABLE )
+            val pendingIntent =
+                PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
 
             val notification = NotificationCompat.Builder(this, "softsound")
                 .setContentTitle(getText(R.string.app_name))
@@ -148,5 +149,4 @@ class PlayerService : Service() {
         // call the change listener
         playerChangeListener?.invoke()
     }
-
 }

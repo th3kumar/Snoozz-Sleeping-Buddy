@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/darkBackground"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/darkBackground">
 
     <androidx.constraintlayout.helper.widget.Flow
         android:layout_width="match_parent"
@@ -13,17 +13,17 @@
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginBottom="@dimen/_36sdp"
         app:constraint_referenced_ids="imageShuffle , ivSkipPrevious, ivPlayPauseDetail, ivSkip, imageLoop"
-        app:flow_wrapMode="aligned"
         app:flow_maxElementsWrap="5"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:flow_wrapMode="aligned"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <soup.neumorphism.NeumorphImageView
         android:id="@+id/imageShuffle"
         android:layout_width="@dimen/_42sdp"
         android:layout_height="@dimen/_42sdp"
+        android:clickable="true"
         android:padding="@dimen/_14sdp"
         android:src="@drawable/ic_shuffle"
-        android:clickable="true"
         android:visibility="invisible"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
@@ -49,12 +49,12 @@
         android:layout_height="@dimen/_64sdp"
         android:padding="@dimen/_14sdp"
         android:src="@drawable/ic_pause"
-        app:neumorph_shapeType="basin"
-        tools:ignore="MissingConstraints"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismImageSmall"
-        app:tint="@color/primary"/>
+        app:neumorph_shapeType="basin"
+        app:tint="@color/primary"
+        tools:ignore="MissingConstraints" />
 
     <soup.neumorphism.NeumorphImageView
         android:id="@+id/ivSkip"
@@ -81,8 +81,6 @@
         app:tint="@color/secondary_text_dark"
         tools:ignore="MissingConstraints" />
 
-
-
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/cardSeekbar"
         android:layout_width="match_parent"
@@ -104,9 +102,7 @@
             android:progress="40"
             android:progressDrawable="@drawable/progress_background"
             android:splitTrack="false"
-            android:thumbTint="@android:color/transparent"
-             />
-
+            android:thumbTint="@android:color/transparent" />
     </soup.neumorphism.NeumorphCardView>
 
     <TextView
@@ -115,9 +111,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:text="3.32"
-        android:visibility="invisible"
         android:textColor="@color/primary_text_dark"
         android:textSize="@dimen/_10ssp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/cardSeekbar"
         app:layout_constraintStart_toStartOf="@id/cardSeekbar" />
 
@@ -126,12 +122,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
-        android:visibility="invisible"
         android:text="4.17"
         android:textColor="@color/primary_text_dark"
         android:textSize="@dimen/_10ssp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/cardSeekbar"
-        app:layout_constraintEnd_toEndOf="@id/cardSeekbar"/>
+        app:layout_constraintEnd_toEndOf="@id/cardSeekbar" />
 
     <TextView
         android:id="@+id/textArtist"
@@ -140,10 +136,10 @@
         android:layout_marginBottom="@dimen/_20sdp"
         android:gravity="center"
         android:text="Dan Brown"
-        android:visibility="invisible"
         android:textColor="@color/primary"
         android:textSize="@dimen/_15ssp"
-        app:layout_constraintBottom_toTopOf="@id/tvCurTime"/>
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/tvCurTime" />
 
     <TextView
         android:id="@+id/tvSongName"
@@ -155,8 +151,7 @@
         android:textColor="@color/primary_text"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/tvCurTime"/>
-
+        app:layout_constraintBottom_toTopOf="@id/tvCurTime" />
 
     <soup.neumorphism.NeumorphImageView
         android:id="@+id/imageMenu"
@@ -178,8 +173,8 @@
         android:id="@+id/imageSearch"
         android:layout_width="@dimen/_48sdp"
         android:layout_height="@dimen/_48sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:padding="@dimen/_16sdp"
         android:src="@drawable/ic_timer"
         android:visibility="invisible"
@@ -200,7 +195,7 @@
         app:layout_constraintBottom_toBottomOf="@id/imageMenu"
         app:layout_constraintEnd_toStartOf="@id/imageSearch"
         app:layout_constraintStart_toEndOf="@id/imageMenu"
-        app:layout_constraintTop_toTopOf="@id/imageMenu"/>
+        app:layout_constraintTop_toTopOf="@id/imageMenu" />
 
     <soup.neumorphism.NeumorphCardView
         android:layout_width="@dimen/_230sdp"
@@ -208,12 +203,12 @@
         app:layout_constraintBottom_toTopOf="@id/tvSongName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:neumorph_strokeColor="#060606"
-        app:neumorph_strokeWidth="@dimen/_3sdp"
         app:layout_constraintTop_toBottomOf="@id/imageMenu"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
-        app:neumorph_shapeAppearance="@style/NeumorphismCardImage">
+        app:neumorph_shapeAppearance="@style/NeumorphismCardImage"
+        app:neumorph_strokeColor="#060606"
+        app:neumorph_strokeWidth="@dimen/_3sdp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/ivSongImage"
@@ -221,13 +216,6 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/_2sdp"
             android:src="@drawable/orange_black_thumbnail"
-            app:riv_oval="true"/>
+            app:riv_oval="true" />
     </soup.neumorphism.NeumorphCardView>
-
-
-
-
-
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,51 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="@dimen/_12sdp"
     android:orientation="vertical"
-    android:layout_margin="16dp"
     tools:context=".activities.FeedbackActivity">
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Feedback"
-        android:textSize="@dimen/_30sdp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/_15sdp"/>
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:text="@string/feedback_title"
+        android:textSize="@dimen/_30sdp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/topicFA"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="@string/topic_feedback"
+        android:layout_height="@dimen/_60sdp"
         android:gravity="center|start"
+        android:hint="@string/topic_feedback"
         android:inputType="textEmailSubject"
-        android:paddingHorizontal="16dp"/>
+        android:paddingHorizontal="16dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/emailFA"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="@string/email_feedback"
+        android:layout_height="@dimen/_60sdp"
         android:gravity="center|start"
+        android:hint="@string/email_feedback"
         android:inputType="textEmailAddress"
-        android:paddingHorizontal="16dp"/>
+        android:paddingHorizontal="@dimen/_12sdp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/feedbackMsgFA"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:hint="@string/feedback"
+        android:layout_height="@dimen/_195sdp"
         android:gravity="center|start"
-        android:paddingHorizontal="16dp"/>
+        android:hint="@string/feedback"
+        android:paddingHorizontal="16dp" />
+
     <Button
         android:id="@+id/sendFA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/primary_text_dark"
-        android:text="@string/send"
         android:layout_gravity="center"
-        android:textColor="@color/black"
-        android:paddingHorizontal="16dp"/>
-
+        android:backgroundTint="@color/primary_text_dark"
+        android:paddingHorizontal="@dimen/_12sdp"
+        android:text="@string/send"
+        android:textColor="@color/black" />
 </LinearLayout>
