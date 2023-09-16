@@ -39,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         subscribeToObservers()
 
         val rvHorizontal: RecyclerView = view.findViewById(R.id.rvAllBreathe)
-        //scrollView = view.findViewById(R.id.scrollViewHome)
+        scrollView = view.findViewById(R.id.scrollViewHome)
 
         // Set up the LinearLayoutManager with horizontal orientation
         val layoutManager =
@@ -98,9 +98,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setupRecyclerView() = rvAllSongs.apply {
         adapter = songAdapter
-        layoutManager =
-            GridLayoutManager(requireContext(), 2, LinearLayoutManager.HORIZONTAL, false)
-        setHasFixedSize(true)
+        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun subscribeToObservers() {

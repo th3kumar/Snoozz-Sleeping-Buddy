@@ -76,6 +76,11 @@
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_8sdp</item>
     </style>
+
+    <style name="NeumorphismImageSongItem">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
+    </style>
     <style name="NeumorphismMenu">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_40sdp</item>

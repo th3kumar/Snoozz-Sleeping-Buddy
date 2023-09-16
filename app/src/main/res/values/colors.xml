@@ -36,8 +36,22 @@
     <color name="background_dark">#19191E</color>
     <color name="primary_text_dark">#A8AAAB</color>
     <color name="secondary_text_dark">#80858A</color>
-    <color name="dark_shadow_dark">#121215</color>
-    <color name="light_shadow_dark">#26262A</color>
+
+
+    <!--    previous colors (till 2.0.0)-->
+    <!--    <color name="dark_shadow_dark">#121215</color>-->
+    <!--    <color name="light_shadow_dark">#26262A</color>-->
+
+    <color name="dark_shadow_dark">#0F0F12</color>
+    <color name="light_shadow_dark">#1B1B1C</color>
+
+    <color name="dark_shadow_dark_try">#0F0F12</color>
+    <color name="light_shadow_dark_try">#1B1B1C</color>
+
+    <color name="torquise_light">#69A4A2</color>
+    <color name="torquise_mid">#296E6B</color>
+    <color name="torquise_dark">#2B4A4A</color>
+
 
     <color name="torquiese">#36D9AE</color>
     <color name="torquiese_light">#B6F1F0</color>

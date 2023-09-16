@@ -13,8 +13,8 @@ class SwipeSongAdapter : BaseSongAdapter(R.layout.swipe_item) {
         val sound = sounds[position]
         holder.itemView.apply {
             //val text = "${sound.title} - ${sound.subtitle}"
-            val text = "${sound.title}"
-            val textD = "${sound.subtitle}"
+            val text = sound.title
+            val textD = sound.subtitle
             tvPrimary.text = text
             tvDescription.text = textD
             setOnClickListener {
