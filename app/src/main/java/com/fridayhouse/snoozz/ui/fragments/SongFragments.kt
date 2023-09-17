@@ -2,7 +2,9 @@ package com.fridayhouse.snoozz.ui.fragments
 
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -11,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.RequestManager
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.data.entities.sound
+import com.fridayhouse.snoozz.databinding.FragmentSongCustomBinding
 import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.exoplayer.toSong
 import com.fridayhouse.snoozz.others.Status
@@ -35,7 +38,7 @@ import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class SongFragments : Fragment(R.layout.fragment_song_custom) {
+class SongFragments : Fragment() {
 
     @Inject
     lateinit var glide: RequestManager
@@ -44,6 +47,17 @@ class SongFragments : Fragment(R.layout.fragment_song_custom) {
     private var curplayingSong: sound? = null
     private var playbackState: PlaybackStateCompat? = null
     private var shouldUpdateSeekbar = true
+    private var _binding: FragmentSongCustomBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSongCustomBinding.inflate(inflater, container, false);
+        val view = binding.root;
+        return view;
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -74,7 +88,6 @@ class SongFragments : Fragment(R.layout.fragment_song_custom) {
                     shouldUpdateSeekbar = true
                 }
             }
-
         })
 
         ivSkipPrevious.setOnClickListener {

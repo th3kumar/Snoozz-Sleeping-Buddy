@@ -362,7 +362,7 @@ class CustomActivity : AppCompatActivity() {
                     fire_volume,
                     tabla_volume,
                 ).forEach { bar ->
-                    bar?.visibility = View.GONE
+                    bar?.visibility = View.INVISIBLE
                 }
                 this@CustomActivity.stopPlaying()
                 this@CustomActivity.cancelTimer()
@@ -407,7 +407,7 @@ class CustomActivity : AppCompatActivity() {
             fire_volume,
             tabla_volume,
         ).forEach { bar ->
-            bar?.visibility = View.GONE
+            bar?.visibility = View.INVISIBLE
         }
     }
 
