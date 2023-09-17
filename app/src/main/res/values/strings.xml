@@ -28,4 +28,9 @@
     <string name="about_us_text">About Us</string>
     <string name="review_text">Review</string>
     <string name="notifications_text">Notifications</string>
+    <string name="home_title">Redefining Rest for Mind, Body, and Soul</string>
+    <string name="home_halt_instruction">To halt the animation, simply click on it.</string>
+    <string name="home_breathing_title">Breathing Exercises</string>
+    <string name="home_relaxing_title">Relaxing Sounds</string>
+    <string name="home_scroll_title">Scroll for more</string>
 </resources>

@@ -1,20 +1,20 @@
 package com.fridayhouse.snoozz.ui.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ScrollView
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.adapters.HorizontalAdapter
 import com.fridayhouse.snoozz.adapters.SongAdapter
 import com.fridayhouse.snoozz.data.HorizontalItem
+import com.fridayhouse.snoozz.databinding.FragmentHomeBinding
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -24,22 +24,29 @@ import kotlinx.android.synthetic.main.fragment_home.rvAllSongs
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment() {
 
     lateinit var mainViewModel: MainViewModel
 
     @Inject
     lateinit var songAdapter: SongAdapter
-    private lateinit var scrollView: ScrollView
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false);
+        val view = binding.root;
+        return view;
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         setupRecyclerView()
         subscribeToObservers()
-
-        val rvHorizontal: RecyclerView = view.findViewById(R.id.rvAllBreathe)
-        scrollView = view.findViewById(R.id.scrollViewHome)
 
         // Set up the LinearLayoutManager with horizontal orientation
         val layoutManager =
@@ -60,18 +67,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             showLottieAnimation(selectedAnimationResource)
             scrollToTop()
         }
-        rvHorizontal.adapter = horizontalAdapter
-
-        val animationView = view.findViewById<LottieAnimationView>(R.id.homePageAnimation)
-        val pauseInstruction = view.findViewById<TextView>(R.id.instructionTextView)
-
-        animationView.setOnClickListener {
-            animationView.setAnimation(R.raw.animation_leaf_homepage)
-            pauseInstruction.visibility = View.INVISIBLE
-            animationView.loop(false)
-            animationView.playAnimation()
+        binding.rvAllBreathe.adapter = horizontalAdapter
+        binding.homePageAnimation.setOnClickListener {
+            binding.apply {
+                homePageAnimation.setAnimation(R.raw.animation_leaf_homepage)
+                instructionTextView.visibility = View.INVISIBLE
+                homePageAnimation.loop(false)
+                homePageAnimation.playAnimation()
+            }
         }
-
 
         songAdapter.setItemClickListener {
             mainViewModel.playOrToggleSound(it)
@@ -79,7 +83,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun scrollToTop() {
-        scrollView.smoothScrollTo(0, 0)
+        binding.scrollViewHome.smoothScrollTo(0, 0)
     }
 
     private fun showLottieAnimation(animationResource: Int) {
@@ -108,13 +112,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     loadingAnimationViewHome.isVisible = false
                     result.data?.let { sound ->
                         songAdapter.sounds = sound
-
                     }
                 }
 
                 Status.ERROR -> Unit
                 Status.LOADING -> loadingAnimationViewHome.isVisible = true
-
             }
         }
     }
