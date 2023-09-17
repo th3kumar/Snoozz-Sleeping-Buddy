@@ -18,10 +18,13 @@ import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.databinding.ActivityCustomBinding
 import com.fridayhouse.snoozz.exoplayer.PlayerService
+import kotlinx.android.synthetic.main.activity_custom.actionButton_customActivity_setTime
 import kotlinx.android.synthetic.main.activity_custom.bird_volume
 import kotlinx.android.synthetic.main.activity_custom.bowl_volume
 import kotlinx.android.synthetic.main.activity_custom.cat_volume
@@ -39,6 +42,7 @@ import kotlinx.android.synthetic.main.activity_custom.rain_volume
 import kotlinx.android.synthetic.main.activity_custom.tabla_volume
 import kotlinx.android.synthetic.main.activity_custom.thunder_volume
 import kotlinx.android.synthetic.main.activity_custom.wind_volume
+import soup.neumorphism.NeumorphImageView
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -115,9 +119,10 @@ class CustomActivity : AppCompatActivity() {
             playerService = (service as PlayerService.PlayerBinder).getService()
             // update the FAB
             if (playerService?.isPlaying() == true) {
-                binding.actionButtonCustomActivityStopPlay.show()
+                togglePlayPauseButton(true)
+                //binding.actionButtonCustomActivityStopPlay.visibility = View.VISIBLE
                 binding.icAtomAnim.resumeAnimation()
-            } else binding.actionButtonCustomActivityStopPlay.hide()
+            } else togglePlayPauseButton(false) //binding.actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
             playerService?.playerChangeListener = playerChangeListener
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
@@ -125,13 +130,30 @@ class CustomActivity : AppCompatActivity() {
 
     private val playerChangeListener = {
         if (playerService?.isPlaying() == true) {
-            binding.actionButtonCustomActivityStopPlay.show()
+            // To enable the "pause" view
+            togglePlayPauseButton(true)
+           // binding.actionButtonCustomActivityStopPlay.visibility = View.VISIBLE
             binding.icAtomAnim.resumeAnimation()
         } else {
-            binding.actionButtonCustomActivityStopPlay.hide()
+            togglePlayPauseButton(false)
+            //binding.actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
             binding.icAtomAnim.pauseAnimation()
         }
     }
+
+    fun togglePlayPauseButton(enablePause: Boolean) {
+        val pauseImageView = findViewById<NeumorphImageView>(R.id.actionButton_customActivity_stopPlay)
+        val playImageView = findViewById<NeumorphImageView>(R.id.actionButton_customActivity_play)
+
+        if (enablePause) {
+            pauseImageView.visibility = View.VISIBLE
+            playImageView.visibility = View.GONE
+        } else {
+            pauseImageView.visibility = View.GONE
+            playImageView.visibility = View.VISIBLE
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -340,33 +362,20 @@ class CustomActivity : AppCompatActivity() {
 
             actionButtonCustomActivityStopPlay.setOnClickListener {
                 playerService?.stopPlaying()
-                actionButtonCustomActivityStopPlay.hide()
+                togglePlayPauseButton(false)
+                //actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
                 icAtomAnim.pauseAnimation()
                 // hide all volume bars
-                arrayOf(
-                    keyboard_volume,
-                    rain_volume,
-                    thunder_volume,
-                    ocean_volume,
-                    wind_volume,
-                    music_volume,
-                    piano_volume,
-                    flute_volume,
-                    grass_volume,
-                    bowl_volume,
-                    bird_volume,
-                    harp_volume,
-                    om_volume,
-                    rail_volume,
-                    cat_volume,
-                    fire_volume,
-                    tabla_volume,
-                ).forEach { bar ->
-                    bar?.visibility = View.INVISIBLE
-                }
+                hideAllVolumeBars()
                 this@CustomActivity.stopPlaying()
                 this@CustomActivity.cancelTimer()
             }
+
+            actionButtonCustomActivityPlay.setOnClickListener {
+                //will change it later, toast for user feedback for now only.
+                Toast.makeText(this@CustomActivity, "Pick a sound to play 🎵👆", Toast.LENGTH_SHORT).show()
+            }
+
 
             actionButtonCustomActivitySetTime.setOnClickListener {
                 this@CustomActivity.startTimerClickHandler()
@@ -378,16 +387,7 @@ class CustomActivity : AppCompatActivity() {
         }
     }
 
-    private fun toggleProgressBar(progressBar: ProgressBar) {
-        progressBar.visibility =
-            if (progressBar.visibility == View.VISIBLE) View.INVISIBLE else View.VISIBLE
-    }
-
-    private fun stopPlaying() {
-        playerService?.stopPlaying()
-        binding.icAtomAnim.pauseAnimation()
-        binding.actionButtonCustomActivityStopPlay.hide()
-        // hide all volume bars
+    private fun hideAllVolumeBars() {
         arrayOf(
             keyboard_volume,
             rain_volume,
@@ -409,6 +409,20 @@ class CustomActivity : AppCompatActivity() {
         ).forEach { bar ->
             bar?.visibility = View.INVISIBLE
         }
+    }
+
+    private fun toggleProgressBar(progressBar: ProgressBar) {
+        progressBar.visibility =
+            if (progressBar.visibility == View.VISIBLE) View.INVISIBLE else View.VISIBLE
+    }
+
+    private fun stopPlaying() {
+        playerService?.stopPlaying()
+        binding.icAtomAnim.pauseAnimation()
+        togglePlayPauseButton(false)
+        //binding.actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
+        // hide all volume bars
+        hideAllVolumeBars()
     }
 
     private fun updateTimerState() {
@@ -440,7 +454,7 @@ class CustomActivity : AppCompatActivity() {
                 } else {
                     // Timer is running, hide the start button and show the timer countdown
                     //startTimer.visibility = View.VISIBLE
-                    actionButtonCustomActivitySetTime.visibility = View.VISIBLE
+                    actionButtonCustomActivitySetTime.visibility = View.INVISIBLE
                     actionButtonCustomActivityRemoveTime.visibility = View.VISIBLE
                     timerCountdownText.visibility = View.VISIBLE
                 }
@@ -521,7 +535,7 @@ class CustomActivity : AppCompatActivity() {
         updateTimerButtonState()
 
         // Show the countdown text and action button to set time and remove time
-        binding.actionButtonCustomActivitySetTime.visibility = View.VISIBLE
+        binding.actionButtonCustomActivitySetTime.visibility = View.INVISIBLE
         binding.actionButtonCustomActivityRemoveTime.visibility = View.VISIBLE
         binding.timerCountdownText.visibility = View.VISIBLE
     }
@@ -570,6 +584,7 @@ class CustomActivity : AppCompatActivity() {
         if (playerService?.isPlaying() == true) {
             binding.icAtomAnim.resumeAnimation()
         }
+
     }
 
     override fun onStart() {
@@ -577,6 +592,7 @@ class CustomActivity : AppCompatActivity() {
         val playerIntent = Intent(this, PlayerService::class.java)
         startService(playerIntent)
         bindService(playerIntent, serviceConnection, Context.BIND_AUTO_CREATE)
+
     }
 
     override fun onStop() {
