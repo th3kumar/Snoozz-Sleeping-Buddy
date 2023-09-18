@@ -125,7 +125,7 @@ class CustomActivity : AppCompatActivity() {
             } else togglePlayPauseButton(false) //binding.actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
             playerService?.playerChangeListener = playerChangeListener
 
-            // Call updateTimerButtonState once service in connected to update UI
+            // Call updateTimerButtonState once service is connected to update UI
             updateTimerButtonState()
 
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
