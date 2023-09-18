@@ -5,14 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkBackground"
-    android:backgroundTint="@color/darkBackground"
     tools:context=".activities.CustomActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/darkOrchid"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/dividerOne"/>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/ic_atom_anim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha=".2"
+        android:alpha=".1"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/hexgon_animation" />
@@ -24,6 +31,7 @@
         android:fontFamily="@font/alba"
         android:text="@string/custom_createTitle"
         android:textSize="@dimen/_24ssp"
+        android:layout_marginVertical="@dimen/_4sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,12 +40,13 @@
         android:id="@+id/textview_customActivity_subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_54sdp"
         android:gravity="center"
-        android:maxLines="1"
+        android:maxLines="2"
         android:text="@string/custom_createSubTitle"
         android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
+        android:textColor="@color/primary_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_customActivity_title" />
@@ -47,6 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginVertical="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@drawable/gradient_bottom_line"
         app:layout_constraintBottom_toTopOf="@+id/scrollview_customActivity"
@@ -691,6 +701,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="12dp"
+            android:layout_gravity="center_horizontal"
             app:neumorph_shadowColorDark="@color/dark_shadow_dark_try"
             app:neumorph_shadowColorLight="@color/light_shadow_dark_try"
             app:neumorph_shapeAppearance="@style/NeumorphismCreateBottom"
@@ -722,7 +733,7 @@
                             android:layout_gravity="center"
                             android:foregroundGravity="center"
                             android:gravity="center"
-                            android:padding="@dimen/_4sdp"
+                            android:padding="@dimen/_8sdp"
                             android:text="@string/_04_39_11"
                             android:visibility="invisible"
                             android:textColor="@color/dark_shadow"
@@ -741,7 +752,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_4sdp"
-                            android:padding="@dimen/_4sdp"
+                            android:padding="@dimen/_8sdp"
                             android:src="@drawable/timer_close_round"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/timer_countdown_text"
@@ -754,7 +765,7 @@
                             android:id="@+id/actionButton_customActivity_setTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="@dimen/_4sdp"
+                            android:padding="@dimen/_12sdp"
                             android:src="@drawable/timer_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -766,29 +777,7 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginHorizontal="@dimen/_2sdp"
-                        android:layout_marginStart="@dimen/_2sdp"
-                        android:background="@drawable/gradient_bottom_line_bottom" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:src="@drawable/favourite_round"
-                            app:tint="@color/primary_text" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
