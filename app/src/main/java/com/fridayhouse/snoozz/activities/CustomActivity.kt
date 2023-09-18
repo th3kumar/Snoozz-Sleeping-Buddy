@@ -124,6 +124,10 @@ class CustomActivity : AppCompatActivity() {
                 binding.icAtomAnim.resumeAnimation()
             } else togglePlayPauseButton(false) //binding.actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
             playerService?.playerChangeListener = playerChangeListener
+
+            // Call updateTimerButtonState once service in connected to update UI
+            updateTimerButtonState()
+
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
     }
