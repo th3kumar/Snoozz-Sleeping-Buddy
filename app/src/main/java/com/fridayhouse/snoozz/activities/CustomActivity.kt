@@ -20,11 +20,10 @@ import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.appcompat.widget.AppCompatSeekBar
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.databinding.ActivityCustomBinding
 import com.fridayhouse.snoozz.exoplayer.PlayerService
-import kotlinx.android.synthetic.main.activity_custom.actionButton_customActivity_setTime
 import kotlinx.android.synthetic.main.activity_custom.bird_volume
 import kotlinx.android.synthetic.main.activity_custom.bowl_volume
 import kotlinx.android.synthetic.main.activity_custom.cat_volume
@@ -244,107 +243,25 @@ class CustomActivity : AppCompatActivity() {
 
             createNotificationChannel()
 
-            iconKeyboard.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.KEYBOARD)
-                toggleProgressBar(keyboard_volume)
-                this@CustomActivity.updateTimerState()
-            }
+            // Use the setupSoundButton function for each button
+            setupSoundButton(iconKeyboard, PlayerService.Sound.KEYBOARD, keyboard_volume)
+            setupSoundButton(iconRain, PlayerService.Sound.RAIN, rain_volume)
+            setupSoundButton(iconThunder, PlayerService.Sound.THUNDER, thunder_volume)
+            setupSoundButton(iconOcean, PlayerService.Sound.OCEAN, ocean_volume)
+            setupSoundButton(iconWind, PlayerService.Sound.WIND, wind_volume)
+            setupSoundButton(iconMusical, PlayerService.Sound.MUSIC, music_volume)
+            setupSoundButton(iconPiano, PlayerService.Sound.PIANO, piano_volume)
+            setupSoundButton(iconFlute, PlayerService.Sound.FLUTE, flute_volume)
+            setupSoundButton(iconGrass, PlayerService.Sound.GRASS, grass_volume)
+            setupSoundButton(iconBowl, PlayerService.Sound.BOWL, bowl_volume)
+            setupSoundButton(iconBirds, PlayerService.Sound.BIRD, bird_volume)
+            setupSoundButton(iconHarp, PlayerService.Sound.HARP, harp_volume)
+            setupSoundButton(iconOm, PlayerService.Sound.OM, om_volume)
+            setupSoundButton(iconRailway, PlayerService.Sound.RAIL, rail_volume)
+            setupSoundButton(iconCat, PlayerService.Sound.CAT, cat_volume)
+            setupSoundButton(iconFire, PlayerService.Sound.FIRE, fire_volume)
+            setupSoundButton(iconTabla, PlayerService.Sound.TABLA, tabla_volume)
 
-            iconRain.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.RAIN)
-                toggleProgressBar(rain_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconThunder.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.THUNDER)
-                toggleProgressBar(thunder_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconOcean.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.OCEAN)
-                toggleProgressBar(ocean_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconWind.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.WIND)
-                toggleProgressBar(wind_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconMusical.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.MUSIC)
-                toggleProgressBar(music_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconPiano.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.PIANO)
-                toggleProgressBar(piano_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconFlute.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.FLUTE)
-                toggleProgressBar(flute_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconBowl.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.BOWL)
-                toggleProgressBar(bowl_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconGrass.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.GRASS)
-                toggleProgressBar(grass_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconBirds.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.BIRD)
-                toggleProgressBar(bird_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconHarp.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.HARP)
-                toggleProgressBar(harp_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconOm.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.OM)
-                toggleProgressBar(om_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconRailway.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.RAIL)
-                toggleProgressBar(rail_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconCat.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.CAT)
-                toggleProgressBar(cat_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconFire.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.FIRE)
-                toggleProgressBar(fire_volume)
-                this@CustomActivity.updateTimerState()
-            }
-
-            iconTabla.setOnClickListener {
-                playerService?.toggleSound(PlayerService.Sound.TABLA)
-                toggleProgressBar(tabla_volume)
-                this@CustomActivity.updateTimerState()
-            }
 
             keyboardVolume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.KEYBOARD))
             rainVolume.setOnSeekBarChangeListener(VolumeChangeListener(PlayerService.Sound.RAIN))
@@ -380,7 +297,6 @@ class CustomActivity : AppCompatActivity() {
                 Toast.makeText(this@CustomActivity, "Pick a sound to play 🎵👆", Toast.LENGTH_SHORT).show()
             }
 
-
             actionButtonCustomActivitySetTime.setOnClickListener {
                 this@CustomActivity.startTimerClickHandler()
             }
@@ -388,6 +304,16 @@ class CustomActivity : AppCompatActivity() {
             actionButtonCustomActivityRemoveTime.setOnClickListener {
                 this@CustomActivity.cancelTimer()
             }
+        }
+    }
+
+    private fun setupSoundButton(iconView: NeumorphImageView, soundType: PlayerService.Sound, volumeView: AppCompatSeekBar?) {
+        iconView.setOnClickListener {
+            playerService?.toggleSound(soundType)
+            if (volumeView != null) {
+                toggleProgressBar(volumeView)
+            }
+            this@CustomActivity.updateTimerState()
         }
     }
 
