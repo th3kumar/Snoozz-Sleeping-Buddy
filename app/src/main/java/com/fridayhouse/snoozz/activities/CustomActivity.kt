@@ -41,6 +41,10 @@ import kotlinx.android.synthetic.main.activity_custom.rain_volume
 import kotlinx.android.synthetic.main.activity_custom.tabla_volume
 import kotlinx.android.synthetic.main.activity_custom.thunder_volume
 import kotlinx.android.synthetic.main.activity_custom.wind_volume
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import soup.neumorphism.NeumorphImageView
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -115,19 +119,23 @@ class CustomActivity : AppCompatActivity() {
         override fun onServiceDisconnected(name: ComponentName?) {}
 
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-            playerService = (service as PlayerService.PlayerBinder).getService()
-            // update the FAB
-            if (playerService?.isPlaying() == true) {
-                togglePlayPauseButton(true)
-                //binding.actionButtonCustomActivityStopPlay.visibility = View.VISIBLE
-                binding.icAtomAnim.resumeAnimation()
-            } else togglePlayPauseButton(false) //binding.actionButtonCustomActivityStopPlay.visibility = View.INVISIBLE
-            playerService?.playerChangeListener = playerChangeListener
-
-            // Call updateTimerButtonState once service is connected to update UI
-            updateTimerButtonState()
-
-            window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+            // Use a coroutine to perform service connection and UI updates in the background
+            CoroutineScope(Dispatchers.IO).launch {
+                playerService = (service as PlayerService.PlayerBinder).getService()
+                // Update the FAB and UI on the main thread
+                withContext(Dispatchers.Main) {
+                    if (playerService?.isPlaying() == true) {
+                        togglePlayPauseButton(true)
+                        binding.icAtomAnim.resumeAnimation()
+                    } else {
+                        togglePlayPauseButton(false)
+                    }
+                    playerService?.playerChangeListener = playerChangeListener
+                    // Call updateTimerButtonState once service is connected to update UI
+                    updateTimerButtonState()
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+                }
+            }
         }
     }
 
