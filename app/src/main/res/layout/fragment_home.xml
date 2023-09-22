@@ -16,7 +16,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintUnderScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="60dp">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/animTitle"
@@ -159,5 +160,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scrollForMore" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

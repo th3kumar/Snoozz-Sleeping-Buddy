@@ -10,7 +10,10 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.RequestManager
 import com.fridayhouse.snoozz.R
@@ -23,6 +26,7 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -56,10 +60,43 @@ class MainActivity : AppCompatActivity() {
     private var curPlayingSong: sound? = null
     private var playbackState: PlaybackStateCompat? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.navHostFragment)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_compose, R.id.navigation_settings
+            )
+        )
+        navView.setupWithNavController(navController)
+
+        // Add the destination changed listener here
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.songFragments -> {
+                    hideBottomBar()
+                    hideNavigationBar()
+                }
+
+                R.id.navigation_home -> {
+                    showBottomBar()
+                    showNavigationBar()
+                }
+
+                else -> {
+                    hideBottomBar()
+                    showNavigationBar()
+                }
+            }
+        }
 
         subscribeToObservers()
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
@@ -110,14 +147,18 @@ class MainActivity : AppCompatActivity() {
                     R.id.globalActionToSongFragment
                 )
             }
-            navHostFragment.findNavController()
-                .addOnDestinationChangedListener { _, destination, _ ->
-                    when (destination.id) {
-                        R.id.songFragments -> hideBottomBar()
-                        R.id.homeFragment -> showBottomBar()
-                        else -> showBottomBar()
-                    }
-                }
+        }
+    }
+
+    private fun hideNavigationBar() {
+        binding.apply {
+            navView.isVisible = false
+        }
+    }
+
+    private fun showNavigationBar() {
+        binding.apply {
+            navView.isVisible = true
         }
     }
 
@@ -199,7 +240,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun hideBottomBar() {
         binding.apply {
-            ivDivider.isVisible = false
             ivCurSongImage.isVisible = false
             vpSong.isVisible = false
             ivPlayPause.isVisible = false
@@ -208,7 +248,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun showBottomBar() {
         binding.apply {
-            ivDivider.isVisible = true
             ivCurSongImage.isVisible = true
             vpSong.isVisible = true
             ivPlayPause.isVisible = true
