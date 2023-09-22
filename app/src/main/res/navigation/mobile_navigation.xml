@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.fridayhouse.snoozz.ui.fragments.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/songFragments"
+        android:name="com.fridayhouse.snoozz.ui.fragments.SongFragments"
+        android:label="SongFragments" />
+
+    <fragment
+        android:id="@+id/navigation_compose"
+        android:name="com.fridayhouse.snoozz.ui.fragments.ComposeFragment"
+        android:label="@string/title_compose"
+        tools:layout="@layout/fragment_compose" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.fridayhouse.snoozz.ui.fragments.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <action android:id="@+id/globalActionToSongFragment"
+        app:destination="@id/songFragments"/>
+</navigation>
