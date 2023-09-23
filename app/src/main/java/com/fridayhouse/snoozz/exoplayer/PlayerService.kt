@@ -79,7 +79,7 @@ class PlayerService : Service() {
             .createMediaSource(MediaItem.fromUri(Uri.parse("asset:///$soundFile")))
 
         // load the media
-        Log.d("MAIN", "loading $soundFile")
+        //Log.d("MAIN", "loading $soundFile")
         exoPlayer.setMediaSource(mediaSource)
         exoPlayer.prepare()
         //exoPlayer.play()
