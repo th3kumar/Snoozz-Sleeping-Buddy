@@ -23,6 +23,7 @@ import com.fridayhouse.snoozz.databinding.ActivityMainBinding
 import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.exoplayer.toSong
 import com.fridayhouse.snoozz.others.Status
+import com.fridayhouse.snoozz.ui.fragments.ComposeFragment
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetSequence
@@ -104,12 +105,12 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
 
-        if (!isTapTargetShown) {
-            // Delay showing the TapTargetView by 2 seconds
-            Handler().postDelayed({
-                showTapTargetView()
-            }, 2000)
-        }
+//        if (!isTapTargetShown) {
+//            // Delay showing the TapTargetView by 2 seconds
+//            Handler().postDelayed({
+//                showTapTargetView()
+//            }, 2000)
+//        }
 
         binding.apply {
             snoozzTitleMain.alpha = 0f
@@ -158,40 +159,41 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showTapTargetView() {
-        val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
-
-        if (!isTapTargetShown) {
-            val tapTarget = TapTarget.forView(
-                imageCustom,
-                "Music Creation: Your Unique Sound",
-                "Tap to create captivating music that's uniquely yours."
-            )
-                .cancelable(true)
-                .outerCircleColor(R.color.target_view_outer)
-                .targetCircleColor(android.R.color.white)
-                .titleTextColor(android.R.color.white)
-                .descriptionTextColor(android.R.color.white)
-                .transparentTarget(true)
-
-            TapTargetSequence(this)
-                .targets(tapTarget)
-                .listener(object : TapTargetSequence.Listener {
-                    override fun onSequenceFinish() {
-                        // Update shared preferences when the sequence is finished
-                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
-                    }
-
-                    override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
-
-                    override fun onSequenceCanceled(lastTarget: TapTarget?) {
-                        // Update shared preferences if the sequence is canceled
-                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
-                    }
-                })
-                .start()
-        }
-    }
+    //as we are no longer using imageCustom Button, we can use tapTargetView
+//    private fun showTapTargetView() {
+//        val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
+//
+//        if (!isTapTargetShown) {
+//            val tapTarget = TapTarget.forView(
+//                imageCustom,
+//                "Music Creation: Your Unique Sound",
+//                "Tap to create captivating music that's uniquely yours."
+//            )
+//                .cancelable(true)
+//                .outerCircleColor(R.color.target_view_outer)
+//                .targetCircleColor(android.R.color.white)
+//                .titleTextColor(android.R.color.white)
+//                .descriptionTextColor(android.R.color.white)
+//                .transparentTarget(true)
+//
+//            TapTargetSequence(this)
+//                .targets(tapTarget)
+//                .listener(object : TapTargetSequence.Listener {
+//                    override fun onSequenceFinish() {
+//                        // Update shared preferences when the sequence is finished
+//                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
+//                    }
+//
+//                    override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
+//
+//                    override fun onSequenceCanceled(lastTarget: TapTarget?) {
+//                        // Update shared preferences if the sequence is canceled
+//                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
+//                    }
+//                })
+//                .start()
+//        }
+//    }
 
     private fun checkForAppUpdates() {
         appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
