@@ -146,16 +146,19 @@
 
 
         <soup.neumorphism.NeumorphCardView
+            android:id="@+id/MusicBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:padding="12dp"
-            app:neumorph_backgroundColor="@color/darkBackground"
+            app:neumorph_backgroundColor="@color/torquise_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:neumorph_shadowColorDark="@color/dark_shadow_dark_try"
             app:neumorph_shadowColorLight="@color/light_shadow_dark_try"
-            app:neumorph_shapeAppearance="@style/NeumorphismCreateBottom"
+            app:neumorph_shapeAppearance="@style/NeumorphismMusicBar"
+            app:neumorph_strokeColor="@color/black"
+            app:neumorph_strokeWidth="@dimen/_1sdp"
             app:neumorph_shapeType="flat">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,7 +181,7 @@
                     android:id="@+id/vpSong"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_44sdp"
-                    android:paddingBottom="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ivPlayPause"
                     app:layout_constraintStart_toEndOf="@+id/ivCurSongImage" />
@@ -187,7 +190,7 @@
                     android:id="@+id/ivPlayPause"
                     android:layout_width="@dimen/_40sdp"
                     android:layout_height="@dimen/_44sdp"
-                    android:tint="@color/primary_text"
+                    android:tint="@color/primary_text_musicBar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/ic_play_round"

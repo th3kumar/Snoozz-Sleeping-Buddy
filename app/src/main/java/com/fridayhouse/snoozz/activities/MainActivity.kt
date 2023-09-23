@@ -239,19 +239,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideBottomBar() {
-        binding.apply {
-            ivCurSongImage.isVisible = false
-            vpSong.isVisible = false
-            ivPlayPause.isVisible = false
-        }
+
+        binding.MusicBar.isVisible = false
+//        binding.apply {
+//            ivCurSongImage.isVisible = false
+//            vpSong.isVisible = false
+//            ivPlayPause.isVisible = false
+//        }
     }
 
     private fun showBottomBar() {
-        binding.apply {
-            ivCurSongImage.isVisible = true
-            vpSong.isVisible = true
-            ivPlayPause.isVisible = true
-        }
+        binding.MusicBar.isVisible = true
+//        binding.apply {
+//            ivCurSongImage.isVisible = true
+//            vpSong.isVisible = true
+//            ivPlayPause.isVisible = true
+//        }
     }
 
     private fun switchViewPagerToCurrentSong(sound: sound) {
