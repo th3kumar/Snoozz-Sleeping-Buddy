@@ -138,10 +138,6 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, REQUEST_CUSTOM_ACTIVITY)
             }
 
-            imageSetting.setOnClickListener {
-                val i = Intent(this@MainActivity, SettingActivity::class.java)
-                startActivity(i)
-            }
             swipeSongAdapter.setItemClickListener {
                 navHostFragment.findNavController().navigate(
                     R.id.globalActionToSongFragment
