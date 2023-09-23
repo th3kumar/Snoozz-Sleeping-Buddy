@@ -95,7 +95,7 @@ class PlayerService : Service() {
         playerChangeListener = null
         if (!isPlaying()) {
             stopSelf()
-            Log.d(tag, "stopping service")
+            //Log.d(tag, "stopping service")
         }
         return super.onUnbind(intent)
     }
@@ -119,14 +119,14 @@ class PlayerService : Service() {
                 .setContentIntent(pendingIntent)
                 .build()
 
-            Log.d(tag, "starting foreground service...")
+            //Log.d(tag, "starting foreground service...")
             startForeground(notificationID, notification)
         }
     }
 
     fun stopForeground() {
         // we don't need to be foreground anymore
-        Log.d(tag, "stopping foreground service...")
+        //Log.d(tag, "stopping foreground service...")
         stopForeground(STOP_FOREGROUND_REMOVE)
     }
 
