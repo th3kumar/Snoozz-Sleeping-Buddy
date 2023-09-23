@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Snoozz</string>
+    <string name="title_home">Home</string>
+    <string name="title_compose">Compose</string>
+    <string name="title_settings">Settings</string>
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
     <string name="notification_message">Playing Create Mode</string>
@@ -23,7 +26,7 @@
     <string name="feedback_title">Feedback</string>
     <string name="custom_createTitle">Create</string>
     <string name="custom_createSubTitle">Your Musical Oasis Awaits. Explore, Mix, and Relax!</string>
-    <string name="made_in_india_text">Made in India</string>
+    <string name="made_in_india_text">Made with ❤️ in India</string>
     <string name="buy_me_a_coffee_text">Buy me a Coffee</string>
     <string name="about_us_text">About Us</string>
     <string name="review_text">Review</string>
@@ -33,4 +36,6 @@
     <string name="home_breathing_title">Breathing Exercises</string>
     <string name="home_relaxing_title">Relaxing Sounds</string>
     <string name="home_scroll_title">Scroll for more</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
