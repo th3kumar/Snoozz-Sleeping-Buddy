@@ -23,7 +23,7 @@ class HorizontalAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("Adapter", "Binding position $position")
+        //Log.d("Adapter", "Binding position $position")
         val item = items[position]
         holder.bind(item)
     }

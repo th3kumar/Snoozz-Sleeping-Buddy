@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.list_item.view.tvPrimary
 import kotlinx.android.synthetic.main.list_item.view.tvSecondary
 import javax.inject.Inject
 
-class SongAdapter @Inject constructor(
+class  SongAdapter @Inject constructor(
     private val glide: RequestManager
 ) : BaseSongAdapter(R.layout.list_item_exp) {
 

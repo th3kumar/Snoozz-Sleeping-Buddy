@@ -61,4 +61,7 @@
 
     <color name="orange">#ED4E12</color>
     <color name="timer_dialog">#A3B5BF</color>
+
+    <color name="sound_icon">#A0A0A6</color>
+    <color name="action_bar">#FFF1F1F1</color>
 </resources>
