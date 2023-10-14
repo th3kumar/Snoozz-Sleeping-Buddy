@@ -1,5 +1,6 @@
 package com.fridayhouse.snoozz.navigation
 
+import android.widget.ImageView
 import androidx.annotation.IdRes
 import androidx.navigation.fragment.NavHostFragment
 
@@ -17,6 +18,7 @@ interface Navigable {
    * @return `true` if this [Navigable] was able to set the selected destination. `false` otherwise.
    */
   fun onNavDestinationSelected(@IdRes destID: Int): Boolean
+  fun <T: ImageView> onImageViewClick(imageView: ImageView)
 
   companion object {
 

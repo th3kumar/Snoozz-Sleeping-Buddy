@@ -3,17 +3,20 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/round_home"
+        android:enabled="true"
+        android:icon="@drawable/home_tab_selector"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_compose"
-        android:icon="@drawable/round_compose"
+        android:enabled="true"
+        android:icon="@drawable/compose_tab_selector"
         android:title="@string/title_compose" />
 
     <item
         android:id="@+id/navigation_settings"
-        android:icon="@drawable/round_settings"
+        android:enabled="true"
+        android:icon="@drawable/setting_tab_selector"
         android:title="@string/title_settings" />
 
 </menu>

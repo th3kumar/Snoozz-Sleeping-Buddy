@@ -94,6 +94,11 @@ class MainActivity : AppCompatActivity() {
                     showNavigationBar()
                 }
 
+                R.id.navigation_compose -> {
+                    showBottomBar()
+                    showNavigationBar()
+                }
+
                 else -> {
                     hideBottomBar()
                     showNavigationBar()

@@ -2,6 +2,8 @@ package com.fridayhouse.snoozz.ui.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.LayoutInflater
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.LayoutRes
+import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -211,11 +214,16 @@ class LibraryFragment : Fragment() {
       }
 
       with((holder as SoundListItemViewHolder).binding) {
+        // Create a ColorStateList with a single color (e.g., magenta)
+        val blueColor = ColorStateList.valueOf(getColor(resources, R.color.torquise_mid, null))
+        val blackColor = ColorStateList.valueOf(Color.BLACK)
         title.text = context.getString(sound.titleResID)
         if (isPlaying) {
           playIndicator.visibility = View.VISIBLE
+          soundItemCardView.setStrokeColor(blueColor)
         } else {
           playIndicator.visibility = View.INVISIBLE
+          soundItemCardView.setStrokeColor(blackColor)
         }
 
         if (settingsRepository.shouldDisplaySoundIcons()) {
