@@ -296,4 +296,5 @@
     <string name="payment_pending">We\'ll notify you as soon as we finish processing your payment.</string>
     <string name="created_by">Created by</string>
   <string name="about">About</string>
+    <string name="preset">Preset</string>
 </resources>

@@ -23,6 +23,12 @@
         tools:layout="@layout/fragment_compose" />
 
     <fragment
+        android:id="@+id/navigation_presets"
+        android:name="com.fridayhouse.snoozz.fragments.SavedPresetsFragment"
+        android:label="@string/saved_presets"
+        tools:layout="@layout/saved_presets_fragment" />
+
+    <fragment
         android:id="@+id/navigation_settings"
         android:name="com.fridayhouse.snoozz.ui.fragments.SettingsFragment"
         android:label="@string/title_settings"
