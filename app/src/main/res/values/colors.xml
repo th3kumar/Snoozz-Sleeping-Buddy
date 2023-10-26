@@ -63,5 +63,6 @@
     <color name="timer_dialog">#A3B5BF</color>
 
     <color name="sound_icon">#989898</color>
-    <color name="action_bar">#FFF1F1F1</color>
+    <color name="action_bar">#171717</color>
+    <color name="action_menu_item">#C5C5C5</color>
 </resources>

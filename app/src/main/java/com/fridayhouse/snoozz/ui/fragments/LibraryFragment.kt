@@ -167,8 +167,6 @@ class LibraryFragment : Fragment() {
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
-    private val soundGroupListItemType = 1
-    private val soundListItemType = 2
 
     private val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
       override fun getSpanSize(position: Int): Int {
