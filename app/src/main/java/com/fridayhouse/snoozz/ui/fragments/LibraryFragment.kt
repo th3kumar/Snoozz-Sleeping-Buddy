@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fridayhouse.snoozz.MediaPlayerService
 import com.fridayhouse.snoozz.R
@@ -165,6 +167,25 @@ class LibraryFragment : Fragment() {
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val layoutInflater = LayoutInflater.from(context)
+    private val soundGroupListItemType = 1
+    private val soundListItemType = 2
+
+    private val spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+      override fun getSpanSize(position: Int): Int {
+        Log.d("LibraryFragment", "getSpanSize: $position")
+        return when (adapter?.getItemViewType(position)) {
+          R.layout.sound_group_list_item -> 3// Number of columns for sound_group_list_item
+          R.layout.sound_list_item -> 1 // Number of columns for sound_list_item
+          else -> 3 // Default span size
+        }
+      }
+    }
+
+    init {
+      val layoutManager = GridLayoutManager(context, 3) // Set your grid layout manager with 3 columns
+      layoutManager.spanSizeLookup = spanSizeLookup
+      binding.soundList.layoutManager = layoutManager
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
       return when (viewType) {
@@ -219,11 +240,15 @@ class LibraryFragment : Fragment() {
         val blackColor = ColorStateList.valueOf(Color.BLACK)
         title.text = context.getString(sound.titleResID)
         if (isPlaying) {
-          playIndicator.visibility = View.VISIBLE
+          //playIndicator.visibility = View.VISIBLE
           soundItemCardView.setStrokeColor(blueColor)
+          volumeButton.visibility = View.VISIBLE
+          timePeriodButton.visibility = View.VISIBLE
         } else {
-          playIndicator.visibility = View.INVISIBLE
+         // playIndicator.visibility = View.INVISIBLE
           soundItemCardView.setStrokeColor(blackColor)
+          volumeButton.visibility = View.INVISIBLE
+          timePeriodButton.visibility = View.INVISIBLE
         }
 
         if (settingsRepository.shouldDisplaySoundIcons()) {
@@ -234,11 +259,11 @@ class LibraryFragment : Fragment() {
         }
 
         @SuppressLint("SetTextI18n")
-        volumeButton.text = "${(volume * 100) / Player.MAX_VOLUME}%"
+        //volumeButton.text = "${(volume * 100) / Player.MAX_VOLUME}%"
         volumeButton.isEnabled = isPlaying
 
         @SuppressLint("SetTextI18n")
-        timePeriodButton.text = "${timePeriod / 60}m ${timePeriod % 60}s"
+       // timePeriodButton.text = "${timePeriod / 60}m ${timePeriod % 60}s"
         timePeriodButton.isEnabled = isPlaying
         if (sound.isLooping) {
           timePeriodButton.visibility = View.GONE
