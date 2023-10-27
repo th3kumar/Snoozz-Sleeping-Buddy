@@ -24,7 +24,7 @@
     android:title="@string/add_to_app_shortcuts" />
 
   <item
-      android:visible="false"
+     android:visible="false"
     android:id="@+id/action_remove_app_shortcut"
     android:title="@string/remove_from_app_shortcuts" />
 

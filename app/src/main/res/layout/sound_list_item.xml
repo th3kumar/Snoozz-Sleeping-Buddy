@@ -53,10 +53,10 @@
 
       <ImageView
           android:id="@+id/icon"
-          android:layout_width="@dimen/_54sdp"
-          android:layout_height="@dimen/_54sdp"
+          android:layout_width="@dimen/_44sdp"
+          android:layout_height="@dimen/_44sdp"
           app:tint="@color/sound_icon"
-          android:padding="@dimen/_2sdp"
+          android:padding="@dimen/_6sdp"
           tools:src="@drawable/bird_grey"
           />
 

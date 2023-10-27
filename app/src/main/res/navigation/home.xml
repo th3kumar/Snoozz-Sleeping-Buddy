@@ -16,6 +16,12 @@
     android:label="@string/saved_presets"
     tools:layout="@layout/saved_presets_fragment" />
 
+  <dialog
+      android:id="@+id/random_preset"
+      android:name="com.fridayhouse.snoozz.fragments.RandomPresetFragment"
+      android:label="@string/random_preset"
+      tools:layout="@layout/random_preset_fragment" />
+
   <fragment
     android:id="@+id/wake_up_timer"
     android:name="com.fridayhouse.snoozz.fragments.WakeUpTimerFragment"
