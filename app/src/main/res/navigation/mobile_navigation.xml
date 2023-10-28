@@ -34,6 +34,12 @@
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 
+    <fragment
+        android:id="@+id/navigation_timer"
+        android:name="com.fridayhouse.snoozz.ui.fragments.SleepTimerFragment"
+        android:label="@string/timer"
+        tools:layout="@layout/sleep_timer_fragment"/>
+
     <action android:id="@+id/globalActionToSongFragment"
         app:destination="@id/songFragments"/>
 </navigation>

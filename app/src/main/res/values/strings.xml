@@ -1,17 +1,15 @@
 <resources>
     <string name="app_name">Snoozz</string>
-    <string name="app_copyright">2019–21 the Noice Authors</string>
-    <string name="app_license_url">https://github.com/ashutoshgngwr/noice/blob/master/LICENSE</string>
-    <string name="app_authors_url">https://ashutoshgngwr.github.io/noice/contributors</string>
-    <string name="app_changelog">https://ashutoshgngwr.github.io/noice/CHANGELOG</string>
-    <string name="app_website">https://ashutoshgngwr.github.io/noice</string>
-    <string name="app_github_url">https://github.com/ashutoshgngwr/noice</string>
-    <string name="app_issues_github_url">https://github.com/ashutoshgngwr/noice/issues</string>
-    <string name="app_issues_form_url">
-    https://docs.google.com/forms/d/e/1FAIpQLSdYhyYjxhJ7IKyiqdc3AE3uINSoRWBw8ROB003gkZ47KeSjWw/viewform?usp=sf_link
-  </string>
-    <string name="feedback_form_url">
-    https://docs.google.com/forms/d/e/1FAIpQLSdEfOCyWfQ4QFMnLqlLj3BF27VKS1C-CQIokbmkXFchf6QZ6g/viewform?usp=sf_link
+    <string name="app_copyright">2019–21 the Snoozz Authors</string>
+    <string name="app_license_url">https://github.com/ashutoshgngwr/Snoozz/blob/master/LICENSE</string>
+    <string name="app_authors_url">https://ashutoshgngwr.github.io/Snoozz/contributors</string>
+    <string name="app_changelog">https://ashutoshgngwr.github.io/Snoozz/CHANGELOG</string>
+    <string name="app_website">https://ashutoshgngwr.github.io/Snoozz</string>
+    <string name="app_github_url">https://github.com/ashutoshgngwr/Snoozz</string>
+    <string name="app_issues_github_url">https://forms.gle/jgJyqEfpkjBUAYBK7</string>
+    <string name="app_issues_form_url">https://forms.gle/jgJyqEfpkjBUAYBK7
+    </string>
+    <string name="feedback_form_url">https://forms.gle/nagNaFWZdUn8qK579
   </string>
     <string name="plus1m">1m</string>
     <string name="plus5m">5m</string>
@@ -163,7 +161,7 @@
     <string name="auto_sleep_schedule_cancelled">Auto sleep timer cancelled!</string>
     <string name="reset">Reset</string>
     <string name="sleep_timer_description">
-    Noice will shutdown itself when the timer ends. Use the buttons below to add time and start
+    Snoozz will shutdown itself when the timer ends. Use the buttons below to add time and start
     the timer.
   </string>
     <string name="schedule">Schedule</string>
@@ -180,7 +178,7 @@
         <item quantity="other">%1$d minutes</item>
     </plurals>
     <string name="wake_up_timer_description">
-    Noice will start the selected preset when the timer ends. Use the buttons below to select a
+    Snoozz will start the selected preset when the timer ends. Use the buttons below to select a
     preset and set the desired time to start the wake-up timer.
   </string>
     <string name="use_24h_format">Use 24-hour format</string>
@@ -189,7 +187,7 @@
     <string name="app_theme_system_default">System default</string>
     <string name="app_description">Relax and boost productivity with minimal background noise.</string>
     <string name="appintro__chromecast_desc">
-    Use Noice to cast its ambience to other Chromecast enabled devices such as speakers, TVs, etc.
+    Use Snoozz to cast its ambience to other Chromecast enabled devices such as speakers, TVs, etc.
   </string>
     <string name="appintro__chromecast_title">Chromecast enabled</string>
     <string name="appintro__getting_started_desc_0">Swipe left to get to know all the features!</string>
@@ -206,7 +204,7 @@
   </string>
     <string name="appintro__library_title">Create your perfect surroundings</string>
     <string name="appintro__timer_desc">
-    A little ambience can help you fall asleep effortlessly. Use the sleep timer to let Noice shut
+    A little ambience can help you fall asleep effortlessly. Use the sleep timer to let Snoozz shut
     itself down. Similarly, to wake up to a calm environment, use the wake-up timer to set the alarm.
   </string>
     <string name="appintro__timer_title">Trouble falling asleep or waking up?</string>
@@ -220,18 +218,18 @@
     <string name="support_development__donate_google_play_description">Your payment will be securely handled by Google Play. Depending on your location, additional taxes _may be_ added to the final amount.</string>
     <string name="support_development__donate_thank_you">Thank you!</string>
     <string name="support_development__donate_thank_you_description">
-    We wholeheartedly thank you for your generous contribution to the Noice project.
+    We wholeheartedly thank you for your generous contribution to the Snoozz project.
   </string>
     <string name="support_development__share">Share with friends</string>
     <string name="support_development__share_description">
-    Sharing Noice with friends is similar to donating money. With higher downloads, we will be able
-    to receive feedback from a number of different perspectives which will help us in making Noice
+    Sharing Snoozz with friends is similar to donating money. With higher downloads, we will be able
+    to receive feedback from a number of different perspectives which will help us in making Snoozz
     better than ever.
   </string>
     <string name="support_development__why">Why should you support?</string>
     <string name="support_development__why_description">
     - To make future updates possible\n
-    - To keep Noice ad-free forever\n
+    - To keep Snoozz ad-free forever\n
   </string>
     <string name="cast_media">Connect to Chromecast</string>
     <string name="in_app_feedback__description">
@@ -244,7 +242,7 @@
     <string name="never">Never</string>
     <string name="notification_channel_default__description">Media playback controls</string>
     <string name="notification_channel_default__name">Media Playback</string>
-    <string name="app_authors">View list of the Noice Authors</string>
+    <string name="app_authors">View list of the Snoozz Authors</string>
     <string name="add_to_app_shortcuts">Add to app shortcuts</string>
     <string name="remove_from_app_shortcuts">Remove from app shortcuts</string>
     <string name="app_shortcut_removed">Preset has been removed from app shortcuts!</string>
@@ -280,7 +278,7 @@
     <string name="share_usage_data_consent_message">
         We collect app usage data to improve user experience. We also collect app behaviour data to
         analyse and diagnose errors encountered during app usage. Read our [privacy
-        policy](https://ashutoshgngwr.github.io/noice/privacy-policy) for further information.\n\n
+        policy](https://ashutoshgngwr.github.io/Snoozz/privacy-policy) for further information.\n\n
         You can configure automatic data sharing at any time inside the app by going to \"**Settings**
         &gt; **Share usage and behaviour data**\".
     </string>
@@ -297,4 +295,5 @@
     <string name="created_by">Created by</string>
   <string name="about">About</string>
     <string name="preset">Preset</string>
+    <string name="timer">Timer</string>
 </resources>

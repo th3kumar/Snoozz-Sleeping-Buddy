@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.app.ShareCompat
@@ -306,9 +307,15 @@ class SavedPresetsFragment : Fragment() {
 //    }
 
     private fun showSnackBar(@StringRes message: Int) {
-      Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
-        .setAction(R.string.dismiss) { }
-        .show()
+      val snackbar = Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
+
+      // Get the Snackbar text view and apply the custom style
+      val snackbarLayout = snackbar.view as Snackbar.SnackbarLayout
+      val textView = snackbarLayout.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+      textView.setTextAppearance(R.style.CustomSnackbarText) // Apply your custom style
+
+        snackbar.setAction(R.string.dismiss) { }
+        snackbar.show()
     }
   }
 }

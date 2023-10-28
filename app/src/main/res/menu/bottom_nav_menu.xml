@@ -5,7 +5,8 @@
         android:id="@+id/navigation_home"
         android:enabled="true"
         android:icon="@drawable/home_tab_selector"
-        android:title="@string/title_home" />
+        android:title="@string/title_home"
+       />
 
     <item
         android:id="@+id/navigation_compose"
@@ -18,6 +19,12 @@
         android:enabled="true"
         android:icon="@drawable/preset_tab_selector"
         android:title="@string/preset" />
+
+    <item
+        android:id="@+id/navigation_timer"
+        android:enabled="true"
+        android:icon="@drawable/timer_tab_selector"
+        android:title="@string/timer" />
 
     <item
         android:id="@+id/navigation_settings"

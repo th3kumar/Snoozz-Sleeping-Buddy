@@ -18,22 +18,38 @@
         <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
         <item name="popupMenuStyle">@style/Widget.App.PopupMenu</item>
         <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
-        <item name="bottomNavigationStyle">@style/Widget.Design.NavigationView</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >@color/darkBackground</item>
-        <item name="android:navigationBarColor">@color/primary_dark</item>
         <!-- Customize your theme here. -->
     </style>
     <style name="ActionBar.Solid" parent="Widget.MaterialComponents.ActionBar.Solid">
         <item name="android:titleTextStyle">@style/CustomActionBarTitleText</item>
     </style>
+
+    <style name="CustomSnackbarText" parent="Widget.Design.Snackbar">
+        <item name="android:fontFamily">@font/core_sans_medium</item>
+        <item name="android:textSize">16sp</item> <!-- Change the text size to your preference -->
+        <!-- Add other text attributes as needed -->
+    </style>
+
     <style name="ActionBarTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <!-- Change the font to your desired font resource -->
+        <item name="fontFamily">@font/alba</item>
         <item name="android:fontFamily">@font/alba</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
     <style name="CustomActionBarTitleText">
+        <item name="fontFamily">@font/alba</item>
         <item name="android:fontFamily">@font/alba</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/orange</item>
     </style>
 
     <style name="Widget.App.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
@@ -41,10 +57,17 @@
         <item name="popupMenuBackground">?android:attr/popupBackground</item>
     </style>
 
-    <style name="ThemeOverlay.App.ActionBar" parent="ThemeOverlay.MaterialComponents.ActionBar">
+    <style name="ThemeOverlay.App.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+
+        <item name="fontFamily">@font/alba</item>
+        <item name="android:fontFamily">@font/alba</item>
         <item name="colorPrimary">@color/action_bar</item>
         <item name="colorControlNormal">@color/action_menu_item</item>
-        <item name="android:textAppearance">@font/alba</item>
+        <item name="android:textAppearance">@style/TextAppearance.ActionBar.Title</item>
+    </style>
+
+    <style name="TextAppearance.ActionBar.Title" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.NoActionBar">
@@ -59,9 +82,7 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
 
-    </style>
 
     <style name="Widget.App.DurationPicker.Button.AddTime" parent="Widget.MaterialComponents.Button.TextButton.Icon">
         <item name="android:layout_width">wrap_content</item>
@@ -110,7 +131,7 @@
 
     <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@color/darkBackground</item>
-        <item name="backgroundTint">@color/torquiese_dark</item>
+        <item name="backgroundTint">@color/torquise_light</item>
     </style>
 
 

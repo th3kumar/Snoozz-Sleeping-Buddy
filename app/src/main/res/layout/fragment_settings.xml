@@ -92,6 +92,7 @@
                                 android:layout_toEndOf="@+id/notification_icon"
                                 android:fontFamily="@font/core_sans_medium"
                                 android:text="@string/notifications_text"
+                                android:textColor="@color/primary_text"
                                 android:textStyle="bold" />
 
                             <androidx.appcompat.widget.SwitchCompat
@@ -122,6 +123,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="20dp"
                                 android:layout_toEndOf="@+id/faqs_icon"
+                                android:textColor="@color/primary_text"
                                 android:fontFamily="@font/core_sans_medium"
                                 android:text="@string/review_text"
                                 android:textStyle="bold" />
@@ -156,6 +158,7 @@
                                 android:layout_marginStart="20dp"
                                 android:layout_toEndOf="@+id/about_us_icon"
                                 android:fontFamily="@font/core_sans_medium"
+                                android:textColor="@color/primary_text"
                                 android:text="@string/about_us_text"
                                 android:textStyle="bold" />
 
@@ -190,6 +193,7 @@
                                 android:layout_marginStart="20dp"
                                 android:layout_toEndOf="@+id/log_out_icon"
                                 android:fontFamily="@font/buyme"
+                                android:textColor="@color/primary_text"
                                 android:text="@string/buy_me_a_coffee_text"
                                 android:textStyle="bold" />
 
@@ -205,8 +209,8 @@
                 </soup.neumorphism.NeumorphCardView>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:visibility="invisible" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -216,6 +220,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                android:layout_marginBottom="@dimen/_44sdp"
                 android:layout_weight="1"
                 android:gravity="bottom"
                 android:orientation="vertical"

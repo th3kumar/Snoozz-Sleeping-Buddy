@@ -31,6 +31,7 @@
     <color name="dark_shadow">#C5C5C5</color>
     <color name="light_shadow">#FFFFFF</color>
     <color name="primary_text_musicBar">#838383</color>
+    <color name="action_bar_and_bottomnavigation">#DA232222</color>
 
     <!--    for dark theme -->
     <color name="primary_dark">#84898C</color>

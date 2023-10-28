@@ -16,6 +16,12 @@
     android:label="@string/saved_presets"
     tools:layout="@layout/saved_presets_fragment" />
 
+  <fragment
+      android:id="@+id/sleep_timer"
+      android:name="com.fridayhouse.snoozz.ui.fragments.SleepTimerFragment"
+      android:label="@string/sleep_timer"
+      tools:layout="@layout/sleep_timer_fragment" />
+
   <dialog
       android:id="@+id/random_preset"
       android:name="com.fridayhouse.snoozz.fragments.RandomPresetFragment"

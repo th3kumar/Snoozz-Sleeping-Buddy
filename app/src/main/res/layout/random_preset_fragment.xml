@@ -14,7 +14,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/random_preset"
-      android:textAppearance="?attr/titleTextAppearance" />
+      android:textAppearance="?attr/titleTextAppearance"
+        android:textColor="@color/primary_text"/>
 
     <Space
       android:layout_width="match_parent"
@@ -24,7 +25,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/random_preset_description"
-      android:textAppearance="?android:attr/textAppearance" />
+      android:textAppearance="?android:attr/textAppearance"
+        android:textColor="@color/primary_text"/>
 
     <Space
       android:layout_width="match_parent"
@@ -34,7 +36,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/mood"
-      android:textAppearance="?attr/textAppearanceHeadline6" />
+      android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/torquise_light"/>
 
     <Space
       android:layout_width="match_parent"
@@ -54,21 +57,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="@string/mood_any" />
+        android:text="@string/mood_any"
+          android:textColor="@color/primary_text"/>
 
       <RadioButton
         android:id="@+id/preset_type__focus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="@string/focus" />
+        android:text="@string/focus"
+          android:textColor="@color/primary_text"/>
 
       <RadioButton
         android:id="@+id/preset_type__relax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="@string/relax" />
+        android:text="@string/relax"
+          android:textColor="@color/primary_text"/>
 
     </com.hopenlib.flextools.FlexRadioGroup>
 
@@ -80,7 +86,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/intensity"
-      android:textAppearance="?attr/textAppearanceHeadline6" />
+      android:textAppearance="?attr/textAppearanceHeadline6"
+        android:textColor="@color/torquise_light"/>
 
     <Space
       android:layout_width="match_parent"
@@ -100,21 +107,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="@string/intensity_any" />
+        android:text="@string/intensity_any"
+          android:textColor="@color/primary_text"/>
 
       <RadioButton
         android:id="@+id/preset_intensity__light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="@string/light" />
+        android:text="@string/light"
+          android:textColor="@color/primary_text"/>
 
       <RadioButton
         android:id="@+id/preset_intensity__dense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:text="@string/dense" />
+        android:text="@string/dense"
+          android:textColor="@color/primary_text"/>
 
     </com.hopenlib.flextools.FlexRadioGroup>
 
