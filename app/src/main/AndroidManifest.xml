@@ -28,10 +28,6 @@
             android:name=".activities.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.CustomActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activities.SplashScreen"
             android:exported="true"
             android:screenOrientation="portrait"
@@ -51,11 +47,7 @@
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
-        <service
-            android:name=".exoplayer.PlayerService"
-            android:enabled="true"
-            android:foregroundServiceType="mediaPlayback"
-            android:exported="false" />
+
         <service android:name=".MediaPlayerService" />
 
         <activity

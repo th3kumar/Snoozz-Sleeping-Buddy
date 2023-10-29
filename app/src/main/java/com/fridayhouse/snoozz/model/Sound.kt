@@ -160,6 +160,13 @@ class Sound private constructor(
         iconID = R.drawable.ic_office_icon,
         tags = arrayOf(Tag.FOCUS)
       ),
+      "om_chanting" to Sound(
+        src = arrayOf("om_sound.ogg"),
+        titleResID = R.string.om_chanting,
+        displayGroupResID = R.string.sound_group__public_gatherings,
+        iconID = R.drawable.om_grey,
+        tags = arrayOf(Tag.RELAX)
+      ),
       "pink_noise" to Sound(
         src = arrayOf("pink_noise.mp3"),
         titleResID = R.string.pink_noise,
