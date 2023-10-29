@@ -79,7 +79,7 @@ class SettingsRepository private constructor(private val context: Context) {
    * Returns the value of switch preference with key [R.string.ignore_audio_focus_changes_key].
    */
   fun shouldIgnoreAudioFocusChanges(): Boolean {
-    return prefs.getBoolean(context.getString(R.string.ignore_audio_focus_changes_key), false)
+    return prefs.getBoolean(context.getString(R.string.ignore_audio_focus_changes_key), true)
   }
 
   /**

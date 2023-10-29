@@ -60,7 +60,7 @@
     <string name="buy_me_a_coffee_text">Buy me a Coffee</string>
     <string name="about_us_text">About Us</string>
     <string name="review_text">Review</string>
-    <string name="notifications_text">Notifications</string>
+    <string name="notifications_text">ignore_audio_focus_changes</string>
     <string name="home_title">Redefining Rest for Mind, Body, and Soul</string>
     <string name="home_halt_instruction">To halt the animation, simply click on it.</string>
     <string name="home_breathing_title">Breathing Exercises</string>
@@ -152,7 +152,7 @@
     <string name="preset_deleted">Preset deleted!</string>
     <string name="preset_does_not_exist">Preset does not exist. It may have been deleted!</string>
     <string name="preset_info__description">
-    You haven\'t created any presets yet. To create a preset, go to the Library and play sounds.
+    You haven\'t created any presets yet. To create a preset, go to the Compose and play sounds.
     Then click on the Save button that appears on the bottom corner of the screen.
   </string>
     <string name="rename">Rename</string>
@@ -296,4 +296,7 @@
     <string name="about">About</string>
     <string name="preset">Preset</string>
     <string name="timer">Timer</string>
+    <string name="support_development2">Support Development</string>
+    <string name="version_code">Version: 3.0.0</string>
+  <string name="overlay_other_audios">Overlay audios</string>
 </resources>

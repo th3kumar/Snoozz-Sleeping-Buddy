@@ -35,6 +35,21 @@ class SettingsFragment : Fragment() {
                 openUrl.data = Uri.parse("https://www.buymeacoffee.com/mantukumar")
                 startActivity(openUrl)
             }
+//            audioFocusSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+//                val ignoreAudioFocusChanges = shouldIgnoreAudioFocusChanges()
+//
+//                // Update the preference when the switch state changes
+//                if (ignoreAudioFocusChanges != isChecked) {
+//                    setIgnoreAudioFocusChanges(isChecked)
+//                }
+//
+//                // Now, you can use the updated value as needed.
+//                if (isChecked) {
+//                    // Do something when the switch is ON
+//                } else {
+//                    // Do something when the switch is OFF
+//                }
+//            }
             ratingBtn.setOnClickListener {
                 inAppReview()
             }
@@ -44,6 +59,15 @@ class SettingsFragment : Fragment() {
             }
         }
     }
+
+//    private fun setIgnoreAudioFocusChanges(checked: Boolean) {
+//        val prefsEditor = prefs.edit()
+//        prefsEditor.putBoolean(
+//            context?.getString(R.string.ignore_audio_focus_changes_key),
+//            shouldIgnore
+//        )
+//        prefsEditor.apply()
+//    }
 
     private fun inAppReview() {
         val reviewManager = ReviewManagerFactory.create(requireContext())

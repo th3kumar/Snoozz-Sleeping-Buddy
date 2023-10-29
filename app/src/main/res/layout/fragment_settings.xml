@@ -28,7 +28,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginVertical="@dimen/_12sdp"
                 android:gravity="center_horizontal"
-                android:text="Version: 2.3.1"
+                android:text="@string/version_code"
                 android:textColor="@color/secondary_text_dark"
                 android:textSize="@dimen/_12ssp" />
 
@@ -47,6 +47,8 @@
                     app:lottie_autoPlay="true"
                     app:lottie_loop="true"
                     app:lottie_rawRes="@raw/coffee_anim" />
+
+
 
                 <soup.neumorphism.NeumorphCardView
                     android:layout_width="match_parent"
@@ -82,7 +84,8 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                app:srcCompat="@drawable/notification_blue" />
+                                android:tint="@color/colorPrimary"
+                                app:srcCompat="@drawable/ic_settings_audio_focus" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -91,15 +94,18 @@
                                 android:layout_marginStart="20dp"
                                 android:layout_toEndOf="@+id/notification_icon"
                                 android:fontFamily="@font/core_sans_medium"
-                                android:text="@string/notifications_text"
+                                android:text="@string/overlay_other_audios"
                                 android:textColor="@color/primary_text"
                                 android:textStyle="bold" />
 
                             <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/audio_focus_switch"
+                                android:key="@string/ignore_audio_focus_changes_key"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
+                                android:checked="true"
                                 android:switchMinWidth="50dp" />
                         </RelativeLayout>
 
@@ -192,9 +198,8 @@
                                 android:layout_centerVertical="true"
                                 android:layout_marginStart="20dp"
                                 android:layout_toEndOf="@+id/log_out_icon"
-                                android:fontFamily="@font/buyme"
                                 android:textColor="@color/primary_text"
-                                android:text="@string/buy_me_a_coffee_text"
+                                android:text="@string/support_development2"
                                 android:textStyle="bold" />
 
                             <androidx.appcompat.widget.AppCompatImageView
@@ -209,8 +214,8 @@
                 </soup.neumorphism.NeumorphCardView>
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
                     android:layout_gravity="center"
                     android:visibility="invisible" />
             </androidx.appcompat.widget.LinearLayoutCompat>
