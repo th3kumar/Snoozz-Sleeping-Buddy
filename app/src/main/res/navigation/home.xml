@@ -34,4 +34,10 @@
     android:label="@string/wake_up_timer"
     tools:layout="@layout/wake_up_timer_fragment" />
 
+  <activity
+      android:id="@+id/help"
+      android:name="com.fridayhouse.snoozz.activities.AppIntroActivity"
+      android:label="@string/help"
+      tools:layout="@layout/appintro_intro_layout" />
+
 </navigation>

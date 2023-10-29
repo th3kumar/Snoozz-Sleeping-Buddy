@@ -154,6 +154,10 @@ dependencies {
     implementation 'androidx.media:media:1.6.0'
     implementation 'androidx.mediarouter:mediarouter:1.6.0'
 
+    //appIntro
+    implementation 'com.github.AppIntro:AppIntro:6.1.0'
+
+
     // Preference
     implementation 'androidx.preference:preference-ktx:1.2.1'
 

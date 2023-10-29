@@ -15,10 +15,16 @@ import androidx.media.AudioAttributesCompat
 import androidx.preference.PreferenceManager
 import com.fridayhouse.snoozz.MediaPlayerService
 import com.fridayhouse.snoozz.SnoozzApplication
+import com.fridayhouse.snoozz.exoplayer.MusicServiceConnection
 import com.fridayhouse.snoozz.model.Sound
 import kotlin.math.max
 
 object PlaybackController {
+
+  private val musicServiceConnection: MusicServiceConnection
+    get() {
+      TODO()
+    }
 
   internal const val ACTION_RESUME_PLAYBACK = "start_playback"
   internal const val ACTION_PAUSE_PLAYBACK = "pause_playback"
@@ -296,6 +302,9 @@ object PlaybackController {
     val atUptimeMillis = SystemClock.uptimeMillis() + afterDurationMillis
     PreferenceManager.getDefaultSharedPreferences(context)
       .edit(commit = true) { putLong(PREF_LAST_SCHEDULED_STOP_TIME, atUptimeMillis) }
+
+    //pause musicPlayer(internet) here, if isplaying
+
 
     context.startService(
       Intent(context, MediaPlayerService::class.java)

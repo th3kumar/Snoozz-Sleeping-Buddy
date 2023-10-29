@@ -21,7 +21,6 @@
         <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/darkBackground</item>
-        <item name="android:navigationBarDividerColor">@color/torquise_light</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>

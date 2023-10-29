@@ -119,12 +119,12 @@ class SavedPresetsFragment : Fragment() {
 
       val onMenuItemClickListener = PopupMenu.OnMenuItemClickListener {
         when (it.itemId) {
-          R.id.action_share -> showShareIntentSender()
+          //R.id.action_share -> showShareIntentSender()
           R.id.action_delete -> showDeletePresetConfirmation()
           R.id.action_rename -> showRenamePresetInput()
-          R.id.action_create_pinned_shortcut -> null
-          R.id.action_create_app_shortcut -> null
-          R.id.action_remove_app_shortcut -> null
+         // R.id.action_create_pinned_shortcut -> null
+          //R.id.action_create_app_shortcut -> null
+          //R.id.action_remove_app_shortcut -> null
         }
 
         true
@@ -134,7 +134,7 @@ class SavedPresetsFragment : Fragment() {
         PopupMenu(requireContext(), binding.menuButton).let {
           it.inflate(R.menu.preset)
           val hasAppShortcut = hasAppShortcut()
-          it.menu.findItem(R.id.action_create_app_shortcut).isVisible = !hasAppShortcut
+          //it.menu.findItem(R.id.action_create_app_shortcut).isVisible = !hasAppShortcut
           it.menu.findItem(R.id.action_remove_app_shortcut).isVisible = hasAppShortcut
           it.setOnMenuItemClickListener(onMenuItemClickListener)
           it.show()

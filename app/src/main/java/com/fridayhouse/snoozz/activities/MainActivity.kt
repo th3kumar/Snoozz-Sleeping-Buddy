@@ -106,6 +106,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        AppIntroActivity.maybeStart(this)
         subscribeToObservers()
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         checkForAppUpdates()
@@ -132,8 +133,6 @@ class MainActivity : AppCompatActivity() {
                     mainViewModel.playOrToggleSound(it, true)
                 }
             }
-
-
 
             swipeSongAdapter.setItemClickListener {
                 navHostFragment.findNavController().navigate(

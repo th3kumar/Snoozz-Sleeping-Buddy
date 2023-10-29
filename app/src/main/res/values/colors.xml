@@ -66,4 +66,15 @@
     <color name="sound_icon">#989898</color>
     <color name="action_bar">#171717</color>
     <color name="action_menu_item">#C5C5C5</color>
+
+<!--    for app intro-->
+    <color name="status_bar">#72000000</color>
+    <color name="appintro__text_color">@color/primary_text</color>
+    <color name="appintro__text_color_light">#CACACA</color>
+    <color name="appintro_slide_0__background">#dae4e5</color>
+    <color name="appintro_slide_1__background">#94c0c2</color>
+    <color name="appintro_slide_2__background">#69a4a2</color>
+    <color name="appintro_slide_3__background">#296e6b</color>
+    <color name="appintro_slide_4__background">#2b4a4a</color>
+    <color name="appintro_slide_5__background">@color/darkBackground</color>
 </resources>

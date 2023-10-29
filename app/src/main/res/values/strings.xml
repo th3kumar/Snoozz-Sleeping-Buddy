@@ -205,9 +205,9 @@
     <string name="appintro__library_title">Create your perfect surroundings</string>
     <string name="appintro__timer_desc">
     A little ambience can help you fall asleep effortlessly. Use the sleep timer to let Snoozz shut
-    itself down. Similarly, to wake up to a calm environment, use the wake-up timer to set the alarm.
+    itself down.
   </string>
-    <string name="appintro__timer_title">Trouble falling asleep or waking up?</string>
+    <string name="appintro__timer_title">Trouble falling asleep?</string>
     <string name="support_development__donate">Donate</string>
     <string name="support_development__donate_description">
     Donations will help us in\n
@@ -293,7 +293,7 @@
     <string name="failed_to_purchase">Failed to start payment flow. Please try again later!</string>
     <string name="payment_pending">We\'ll notify you as soon as we finish processing your payment.</string>
     <string name="created_by">Created by</string>
-  <string name="about">About</string>
+    <string name="about">About</string>
     <string name="preset">Preset</string>
     <string name="timer">Timer</string>
 </resources>
