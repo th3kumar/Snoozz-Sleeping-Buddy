@@ -110,6 +110,74 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/import_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/import_icon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:padding="10dp"
+                                android:src="@drawable/import_icon" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:layout_toEndOf="@+id/import_icon"
+                                android:textColor="@color/primary_text"
+                                android:fontFamily="@font/core_sans_medium"
+                                android:text="Import from a file"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/round_right"
+                                app:tint="@color/primary_text" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/export_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/export_icon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:padding="10dp"
+                                android:src="@drawable/export_icon" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:layout_toEndOf="@+id/export_icon"
+                                android:textColor="@color/primary_text"
+                                android:fontFamily="@font/core_sans_medium"
+                                android:text="Export to a file"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/round_right"
+                                app:tint="@color/primary_text" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
                             android:id="@+id/rating_btn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

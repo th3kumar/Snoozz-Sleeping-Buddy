@@ -44,6 +44,95 @@ class PresetRepository private constructor(context: Context) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     const val EXPORT_DATA_KEY = "data"
 
+    private const val DEFAULT_PRESETS = """[{
+      "id": "808feaed-f4ce-4d1e-9179-ae7aec31180e",
+      "name": "Thunderstorm",
+      "playerStates": [
+        {
+          "soundKey": "distant_thunder",
+          "timePeriod": 219,
+          "volume": 20
+        },
+        {
+          "soundKey": "heavy_rain",
+          "timePeriod": 300,
+          "volume": 20
+        },
+        {
+          "soundKey": "rolling_thunder",
+          "timePeriod": 294,
+          "volume": 4
+        },
+        {
+          "soundKey": "thunder_crack",
+          "timePeriod": 337,
+          "volume": 17
+        }
+      ]
+    },
+    {
+      "id": "13006e01-9413-45d7-bffc-dc577b077d67",
+      "name": "Beach",
+      "playerStates": [
+        {
+          "soundKey": "crickets",
+          "timePeriod": 300,
+          "volume": 6
+        },
+        {
+          "soundKey": "screeching_seagulls",
+          "timePeriod": 300,
+          "volume": 6
+        },
+        {
+          "soundKey": "seaside",
+          "timePeriod": 300,
+          "volume": 20
+        },
+        {
+          "soundKey": "soft_wind",
+          "timePeriod": 300,
+          "volume": 6
+        },
+        {
+          "soundKey": "wind_in_palm_trees",
+          "timePeriod": 300,
+          "volume": 15
+        }
+      ]
+    },
+    {
+      "id": "b76ac285-1265-472c-bcdc-aecba3a28fa2",
+      "name": "Camping",
+      "playerStates": [
+        {
+          "soundKey": "bonfire",
+          "timePeriod": 300,
+          "volume": 22
+        },
+        {
+          "soundKey": "howling_wolf",
+          "timePeriod": 964,
+          "volume": 3
+        },
+        {
+          "soundKey": "night",
+          "timePeriod": 300,
+          "volume": 6
+        },
+        {
+          "soundKey": "quiet_conversation",
+          "timePeriod": 300,
+          "volume": 5
+        },
+        {
+          "soundKey": "soft_wind",
+          "timePeriod": 300,
+          "volume": 8
+        }
+      ]
+    }]"""
+
     /**
      * Creates a new instance of [PresetRepository]. Needed because mockk is unable to mock
      * constructors on Android instrumented test and there's no cleaner way to inject mocks in
@@ -76,7 +165,7 @@ class PresetRepository private constructor(context: Context) {
    * Lists all [Preset]s present in the persistent storage.
    */
   fun list(): Array<Preset> {
-    return gson.fromJson(prefs.getString(PREFERENCE_KEY, "[]"), Array<Preset>::class.java)
+    return gson.fromJson(prefs.getString(PREFERENCE_KEY, DEFAULT_PRESETS), Array<Preset>::class.java)
   }
 
   /**
@@ -139,10 +228,10 @@ class PresetRepository private constructor(context: Context) {
    * is JSON.
    */
   @Throws(JsonIOException::class)
-  fun exportTo(stream: OutputStream) {
+  fun writeTo(stream: OutputStream) {
     val data = mapOf(
       EXPORT_VERSION_KEY to PREFERENCE_KEY,
-      EXPORT_DATA_KEY to prefs.getString(PREFERENCE_KEY, "[]")
+      EXPORT_DATA_KEY to prefs.getString(PREFERENCE_KEY, DEFAULT_PRESETS)
     )
 
     OutputStreamWriter(stream).use { gson.toJson(data, it) }
@@ -153,7 +242,7 @@ class PresetRepository private constructor(context: Context) {
    * [exportTo]. It overwrites any existing presets in the storage.
    */
   @Throws(JsonIOException::class, JsonSyntaxException::class, IllegalArgumentException::class)
-  fun importFrom(stream: InputStream) {
+  fun readFrom(stream: InputStream) {
     val data = InputStreamReader(stream).use {
       gson.fromJson(it, hashMapOf<String, String?>()::class.java)
     }
@@ -170,7 +259,7 @@ class PresetRepository private constructor(context: Context) {
   }
 
   private fun migrate() {
-    migrateToV1()
+   // migrateToV1()
     // the chain can continue, e.g. migrateToV2().
   }
 
