@@ -9,13 +9,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.media.AudioAttributesCompat
 import androidx.preference.PreferenceManager
 import com.fridayhouse.snoozz.MediaPlayerService
 import com.fridayhouse.snoozz.SnoozzApplication
+import com.fridayhouse.snoozz.data.entities.sound
 import com.fridayhouse.snoozz.exoplayer.MusicServiceConnection
+import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.model.Sound
 import kotlin.math.max
 
@@ -169,7 +172,11 @@ object PlaybackController {
         val atUptime = intent.getLongExtra(EXTRA_AT_UPTIME_MILLIS, 0)
         if (atUptime > SystemClock.uptimeMillis()) {
           // pause, not stop. give user a chance to resume if they chose to do so.
-          handler.postAtTime({ playerManager.pause() }, AUTO_STOP_CALLBACK_TOKEN, atUptime)
+          handler.postAtTime({
+            playerManager.pause()
+            playerManager.pauseExternalAudio()
+                             }, AUTO_STOP_CALLBACK_TOKEN, atUptime)
+
         }
       }
 
@@ -303,7 +310,6 @@ object PlaybackController {
     PreferenceManager.getDefaultSharedPreferences(context)
       .edit(commit = true) { putLong(PREF_LAST_SCHEDULED_STOP_TIME, atUptimeMillis) }
 
-    //pause musicPlayer(internet) here, if isplaying
 
 
     context.startService(

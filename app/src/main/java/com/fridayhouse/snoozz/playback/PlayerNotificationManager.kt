@@ -44,7 +44,7 @@ object PlayerNotificationManager {
     return with(NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)) {
       color = ContextCompat.getColor(context, R.color.primary_dark)
       setContentTitle(title)
-      setSmallIcon(R.drawable.ic_launcher_24dp)
+      setSmallIcon(R.drawable.app_banner)
       setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
       setShowWhen(false)
       setContentIntent(mediaSession.controller.sessionActivity)

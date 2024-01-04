@@ -60,7 +60,7 @@ class AppIntroActivity : AppIntro() {
             AppIntroFragment.newInstance(
                 title = getString(R.string.appintro__library_title),
                 description = getString(R.string.appintro__library_desc),
-                imageDrawable = R.drawable.library,
+                imageDrawable = R.drawable.create_your_illus,
                 titleColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 descriptionColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 backgroundColor = ActivityCompat.getColor(this, R.color.appintro_slide_1__background)
@@ -70,7 +70,7 @@ class AppIntroActivity : AppIntro() {
             AppIntroFragment.newInstance(
                 title = getString(R.string.appintro__saved_presets_title),
                 description = getString(R.string.appintro__saved_presets_desc),
-                imageDrawable = R.drawable.preset,
+                imageDrawable = R.drawable.save_your_fav_illustration,
                 titleColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 descriptionColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 backgroundColor = ActivityCompat.getColor(this, R.color.appintro_slide_2__background)
@@ -80,7 +80,7 @@ class AppIntroActivity : AppIntro() {
             AppIntroFragment.newInstance(
                 title = getString(R.string.appintro__timer_title),
                 description = getString(R.string.appintro__timer_desc),
-                imageDrawable = R.drawable.sleep_timer,
+                imageDrawable = R.drawable.sleep_eye_illustration,
                 titleColor = ActivityCompat.getColor(this, R.color.appintro__text_color_light),
                 descriptionColor = ActivityCompat.getColor(this, R.color.appintro__text_color_light),
                 backgroundColor = ActivityCompat.getColor(this, R.color.appintro_slide_4__background)

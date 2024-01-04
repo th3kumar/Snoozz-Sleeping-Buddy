@@ -9,18 +9,25 @@ import android.os.Looper
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.core.content.getSystemService
 import androidx.core.os.HandlerCompat
 import androidx.media.AudioAttributesCompat
 import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
+import com.fridayhouse.snoozz.data.entities.sound
+import com.fridayhouse.snoozz.exoplayer.MusicServiceConnection
+import com.fridayhouse.snoozz.exoplayer.isPlayEnabled
+import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.model.Sound
 import com.fridayhouse.snoozz.playback.strategy.LocalPlaybackStrategyFactory
 import com.fridayhouse.snoozz.repository.PresetRepository
 import com.fridayhouse.snoozz.repository.SettingsRepository
 import com.fridayhouse.snoozz.strategy.PlaybackStrategyFactory
+import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.github.ashutoshgngwr.noice.model.Preset
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 typealias PlaybackUpdateListener = (state: Int, players: Map<String, Player>) -> Unit
 
@@ -29,8 +36,14 @@ typealias PlaybackUpdateListener = (state: Int, players: Map<String, Player>) ->
  * It manages Android's audio focus implicitly. It also manages Playback routing to
  * cast enabled devices on-demand.
  */
-class PlayerManager(private val context: Context, private val mediaSession: MediaSessionCompat) :
+class PlayerManager(private val context: Context,
+                    private val mediaSession: MediaSessionCompat,
+                    private val musicServiceConnection: MusicServiceConnection) :
   AudioManager.OnAudioFocusChangeListener {
+
+    val playbackState = musicServiceConnection.playBackState
+
+
 
   companion object {
     private val TAG = PlayerManager::class.simpleName
@@ -452,4 +465,13 @@ class PlayerManager(private val context: Context, private val mediaSession: Medi
   fun playerCount(): Int {
     return players.size
   }
+
+    fun pauseExternalAudio() {
+      playbackState.value?.let { playbackState ->
+        when {
+          playbackState.isPlaying -> musicServiceConnection.transportControls.pause()
+          else -> Unit
+        }
+      }
+    }
 }

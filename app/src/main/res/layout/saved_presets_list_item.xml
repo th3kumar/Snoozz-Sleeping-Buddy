@@ -27,6 +27,7 @@
     android:layout_weight="1"
     android:ellipsize="end"
     android:singleLine="true"
+      android:fontFamily="@font/core_sans_medium"
     android:textAppearance="?attr/textAppearanceListItem" />
 
   <ImageButton

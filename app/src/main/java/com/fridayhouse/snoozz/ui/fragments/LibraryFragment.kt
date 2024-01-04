@@ -15,6 +15,9 @@ import androidx.annotation.LayoutRes
 import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,19 +31,22 @@ import com.fridayhouse.snoozz.playback.PlaybackController
 import com.fridayhouse.snoozz.playback.Player
 import com.fridayhouse.snoozz.repository.PresetRepository
 import com.fridayhouse.snoozz.repository.SettingsRepository
+import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.github.ashutoshgngwr.noice.model.Preset
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.navHostFragment
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-
+@AndroidEntryPoint
 class LibraryFragment : Fragment() {
 
+  lateinit var mainViewModel: MainViewModel
   private lateinit var binding: LibraryFragmentBinding
   private lateinit var presetRepository: PresetRepository
   private lateinit var settingsRepository: SettingsRepository
-
-
+  private var dynamicStrokeColor: ColorStateList? = null
   private var adapter: SoundListAdapter? = null
   private var players = emptyMap<String, Player>()
 
@@ -63,7 +69,6 @@ class LibraryFragment : Fragment() {
             )
           )
         }
-
         list.add(SoundListItem(R.layout.sound_list_item, it.key))
       }
     }
@@ -96,12 +101,43 @@ class LibraryFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     presetRepository = PresetRepository.newInstance(requireContext())
     settingsRepository = SettingsRepository.newInstance(requireContext())
+    mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
     //analyticsProvider = NoiceApplication.of(requireContext()).getAnalyticsProvider()
     adapter = SoundListAdapter(requireContext())
     binding.soundList.also {
       it.adapter = adapter
       it.setHasFixedSize(true)
       it.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+    }
+
+    binding.randomPresetButton.setOnLongClickListener {
+      Toast.makeText(requireContext(), R.string.random_preset, Toast.LENGTH_LONG).show()
+      true
+    }
+
+    binding.randomPresetButton.setOnClickListener {
+      findNavController().navigate(R.id.random_preset)
+        //navHostFragment.findNavController().navigate(R.id.navigation_random_preset)
+    }
+
+    mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->
+      // Check if the bitmap is not null
+      bitmap?.let { currentBitmap ->
+        // Perform color extraction logic using Palette library
+        Palette.from(currentBitmap).generate { palette ->
+          // Extract the muted color from the palette
+          val vibrantSwatch = palette?.vibrantSwatch
+          val mutedSwatch = palette?.mutedSwatch
+          val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+          val mutedLightColor = getMutedLightColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+
+          val colorStateList = ColorStateList.valueOf(mutedColor)
+          binding.randomPresetButton.backgroundTintList = colorStateList
+          binding.savePresetButton.backgroundTintList = colorStateList
+          dynamicStrokeColor = ColorStateList.valueOf(mutedLightColor)
+          adapter?.notifyDataSetChanged()
+        }
+      }
     }
 
     binding.savePresetButton.setOnLongClickListener {
@@ -150,15 +186,27 @@ class LibraryFragment : Fragment() {
     //analyticsProvider.setCurrentScreen("library", LibraryFragment::class)
   }
 
+  fun getMutedColor(color: Int?): Int {
+    if (color != null) {
+      val hsv = FloatArray(3)
+      Color.colorToHSV(color, hsv)
+
+      // Decrease saturation and brightness to mute the color
+      hsv[1] *= 0.4f // Decrease saturation by 60%
+      hsv[2] *= 0.4f // Decrease brightness by 60%
+
+      return Color.HSVToColor(hsv)
+    }
+    return Color.GRAY // Return a default grey color if the provided color is null
+  }
+
   override fun onDestroyView() {
     eventBus.unregister(this)
     super.onDestroyView()
   }
 
   private fun showPresetSavedMessage() {
-    Snackbar.make(requireView(), R.string.preset_saved, Snackbar.LENGTH_LONG)
-      .setAction(R.string.dismiss) { }
-      .show()
+    Snackbar.make(requireView(), R.string.preset_saved, Snackbar.LENGTH_LONG).show()
   }
 
   private class SoundListItem(@LayoutRes val layoutID: Int, val data: String)
@@ -234,12 +282,15 @@ class LibraryFragment : Fragment() {
 
       with((holder as SoundListItemViewHolder).binding) {
         // Create a ColorStateList with a single color (e.g., magenta)
-        val blueColor = ColorStateList.valueOf(getColor(resources, R.color.torquise_mid, null))
+        var blueColor = ColorStateList.valueOf(getColor(resources, R.color.torquise_mid, null))
         val blackColor = ColorStateList.valueOf(Color.BLACK)
         title.text = context.getString(sound.titleResID)
         if (isPlaying) {
           //playIndicator.visibility = View.VISIBLE
-          soundItemCardView.setStrokeColor(blueColor)
+          dynamicStrokeColor?.let {
+            soundItemCardView.setStrokeColor(it)
+          }
+          //soundItemCardView.setStrokeColor(blueColor)
           volumeButton.visibility = View.VISIBLE
           timePeriodButton.visibility = View.VISIBLE
         } else {
@@ -270,6 +321,19 @@ class LibraryFragment : Fragment() {
         }
       }
     }
+  }
+  private fun getMutedLightColor(color: Int?): Int {
+    if (color != null) {
+      val hsv = FloatArray(3)
+      Color.colorToHSV(color, hsv)
+
+      // Decrease saturation and brightness to mute the color
+      hsv[1] *= 0.7f // Decrease saturation by 30%
+      hsv[2] *= 0.7f // Decrease brightness by 30%
+
+      return Color.HSVToColor(hsv)
+    }
+    return Color.GRAY // Return a default grey color if the provided color is null
   }
 
   inner class SoundGroupListItemViewHolder(val binding: SoundGroupListItemBinding) :

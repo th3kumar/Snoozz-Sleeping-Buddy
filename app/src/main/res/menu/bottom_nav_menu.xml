@@ -5,31 +5,31 @@
         android:id="@+id/navigation_home"
         android:enabled="true"
         android:icon="@drawable/home_tab_selector"
-        android:title="@string/title_home"
+        android:title="@string/thick_dot"
        />
 
     <item
         android:id="@+id/navigation_compose"
         android:enabled="true"
         android:icon="@drawable/compose_tab_selector"
-        android:title="@string/title_compose" />
+        android:title="@string/thick_dot" />
 
     <item
         android:id="@+id/navigation_presets"
         android:enabled="true"
         android:icon="@drawable/preset_tab_selector"
-        android:title="@string/preset" />
+        android:title="@string/thick_dot" />
 
     <item
         android:id="@+id/navigation_timer"
         android:enabled="true"
         android:icon="@drawable/timer_tab_selector"
-        android:title="@string/timer" />
+        android:title="@string/thick_dot" />
 
     <item
         android:id="@+id/navigation_settings"
         android:enabled="true"
         android:icon="@drawable/setting_tab_selector"
-        android:title="@string/title_settings" />
+        android:title="@string/thick_dot" />
 
 </menu>

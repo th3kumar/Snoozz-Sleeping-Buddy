@@ -12,7 +12,7 @@
         <item name="colorSecondary">@color/teal_200</item>
         <item name="android:textColorPrimary">@color/action_menu_item</item>
         <item name="android:titleTextStyle">@style/ActionBarTextAppearance</item>
-        <item name="android:textAppearance">@font/alba</item>
+        <item name="android:textAppearance">@font/core_sans_medium</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
@@ -34,13 +34,13 @@
 
     <style name="ActionBarTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <!-- Change the font to your desired font resource -->
-        <item name="fontFamily">@font/alba</item>
-        <item name="android:fontFamily">@font/alba</item>
+        <item name="fontFamily">@font/core_sans_medium</item>
+        <item name="android:fontFamily">@font/core_sans_medium</item>
         <item name="android:layout_gravity">center_horizontal</item>
     </style>
     <style name="CustomActionBarTitleText">
-        <item name="fontFamily">@font/alba</item>
-        <item name="android:fontFamily">@font/alba</item>
+        <item name="fontFamily">@font/core_sans_medium</item>
+        <item name="android:fontFamily">@font/core_sans_medium</item>
     </style>
 
     <style name="Widget.App.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
@@ -59,8 +59,8 @@
 
     <style name="ThemeOverlay.App.ActionBar" parent="Widget.Material3.ActionBar.Solid">
 
-        <item name="fontFamily">@font/alba</item>
-        <item name="android:fontFamily">@font/alba</item>
+        <item name="fontFamily">@font/core_sans_medium</item>
+        <item name="android:fontFamily">@font/core_sans_medium</item>
         <item name="colorPrimary">@color/action_bar</item>
         <item name="colorControlNormal">@color/action_menu_item</item>
         <item name="android:textAppearance">@style/TextAppearance.ActionBar.Title</item>
@@ -134,6 +134,11 @@
         <item name="backgroundTint">@color/torquise_light</item>
     </style>
 
+    <style name="Widget.App.FloatingActionButton.Primary">
+        <item name="tint">@color/darkBackground</item>
+        <item name="backgroundTint">?attr/colorPrimarySurface</item>
+    </style>
+
     <style name="NeumorphismImageSmall">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_21sdp</item>
@@ -145,6 +150,10 @@
     <style name="NeumorphismImageLarge">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_32sdp</item>
+    </style>
+    <style name="NeumorphismCardHome">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_26sdp</item>
     </style>
     <style name="NeumorphismCardImage">
         <item name="neumorph_cornerFamily">rounded</item>
@@ -188,9 +197,19 @@
         <item name="neumorph_cornerSize">@dimen/_8sdp</item>
     </style>
 
+    <style name="NeumorphismImageBreathe">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
+    </style>
+
     <style name="NeumorphismCreateBottom">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_40sdp</item>
+    </style>
+
+    <style name="NeumorphismCardSplit">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_32sdp</item>
     </style>
 
     <style name="NeumorphismMusicBar">

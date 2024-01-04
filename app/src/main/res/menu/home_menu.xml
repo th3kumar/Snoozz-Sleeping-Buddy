@@ -2,12 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto">
 
-  <item
-    android:id="@+id/random_preset"
-    android:icon="@drawable/ic_action_shuffle"
-    android:title="@string/random_preset"
-    app:showAsAction="ifRoom" />
-
 
   <item
     android:id="@+id/support_development"

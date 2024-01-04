@@ -23,6 +23,7 @@
       android:layout_height="wrap_content"
       android:layout_margin="20dp"
       android:gravity="center"
+        android:fontFamily="@font/core_sans_medium"
       android:text="@string/sleep_timer_description"
       android:textColor="@color/primary_dark" />
 

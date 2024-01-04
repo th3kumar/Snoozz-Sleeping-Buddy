@@ -55,8 +55,8 @@ class ComposeFragment : Fragment(), Navigable {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
-        val shuffleAndPauseImageView = view?.findViewById<ImageView>(R.id.ivShuffleAndPause)
-        shuffleAndPauseImageView?.setOnClickListener { onImageViewClick<ImageView>(shuffleAndPauseImageView) }
+       // val shuffleAndPauseImageView = view?.findViewById<ImageView>(R.id.ivShuffleAndPause)
+        //shuffleAndPauseImageView?.setOnClickListener { onImageViewClick<ImageView>(shuffleAndPauseImageView) }
 
         val app = SnoozzApplication.of(requireContext())
         EventBus.getDefault().register(this)
@@ -82,13 +82,13 @@ class ComposeFragment : Fragment(), Navigable {
         childNavController.addOnDestinationChangedListener(childNavDestChangeListener)
 
         // Set the home screen to the saved presets fragment if the user has selected this option
-        view.findViewById<ImageView>(R.id.ivOpenPresetFragment)?.setOnClickListener {
-            // Use the NavController to navigate to the SavedPresetsFragment
-            navController.navigate(R.id.saved_presets)
-        }
+//        view.findViewById<ImageView>(R.id.ivOpenPresetFragment)?.setOnClickListener {
+//            // Use the NavController to navigate to the SavedPresetsFragment
+//            navController.navigate(R.id.saved_presets)
+//        }
 
-        val shuffleAndPauseImageView = view.findViewById<ImageView>(R.id.ivShuffleAndPause)
-        shuffleAndPauseImageView?.setOnClickListener { onImageViewClick<ImageView>(shuffleAndPauseImageView) }
+      //  val shuffleAndPauseImageView = view.findViewById<ImageView>(R.id.ivShuffleAndPause)
+       // shuffleAndPauseImageView?.setOnClickListener { onImageViewClick<ImageView>(shuffleAndPauseImageView) }
 
     }
 
@@ -106,7 +106,7 @@ class ComposeFragment : Fragment(), Navigable {
 
         inflater.inflate(R.menu.home_menu, menu)
         menu.findItem(R.id.sleep_timer)?.isVisible = displayPlaybackControls
-        menu.findItem(R.id.random_preset)?.isVisible = displayPlaybackControls
+        //menu.findItem(R.id.random_preset)?.isVisible = displayPlaybackControls
         super.onCreateOptionsMenu(menu, inflater)
     }
 

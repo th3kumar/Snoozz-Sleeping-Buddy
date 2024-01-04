@@ -8,6 +8,7 @@
   <TextView
     android:id="@+id/title"
     android:layout_width="wrap_content"
+      android:fontFamily="@font/core_sans_medium"
       android:layout_gravity="center_horizontal"
       android:textColor="@color/primary_dark"
     android:layout_height="wrap_content"

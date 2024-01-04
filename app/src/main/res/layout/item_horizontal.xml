@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/_1sdp"
-        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_15sdp"
         app:cardElevation="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
-        app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
+        app:neumorph_shapeAppearance="@style/NeumorphismImageBreathe"
         app:neumorph_shapeType="flat"
         app:neumorph_strokeColor="#060606"
         app:neumorph_strokeWidth="@dimen/_2sdp">
@@ -27,23 +27,25 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/_5sdp"
             android:background="@drawable/gradient1"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="@dimen/_4sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/itemIcon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="@dimen/_18sdp"
-                app:srcCompat="@drawable/bee_icon" />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:padding="@dimen/_16sdp"
+                app:srcCompat="@drawable/bellows_icon" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/itemTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_64sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:padding="@dimen/_4sdp"
-                android:text="@string/app_name"
+                android:text="bellows breathing"
+                android:minLines="2"
+                android:maxLines="2"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_11ssp"
                 android:textStyle="bold" />

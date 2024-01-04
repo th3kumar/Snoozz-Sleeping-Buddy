@@ -314,7 +314,7 @@ class SavedPresetsFragment : Fragment() {
       val textView = snackbarLayout.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
       textView.setTextAppearance(R.style.CustomSnackbarText) // Apply your custom style
 
-        snackbar.setAction(R.string.dismiss) { }
+        //snackbar.setAction(R.string.dismiss) { }
         snackbar.show()
     }
   }

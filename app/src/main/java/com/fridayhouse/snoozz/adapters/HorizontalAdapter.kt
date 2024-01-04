@@ -18,7 +18,7 @@ class HorizontalAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_horizontal, parent, false)
+            .inflate(R.layout.breathe_list_item, parent, false)
         return ViewHolder(itemView)
     }
 

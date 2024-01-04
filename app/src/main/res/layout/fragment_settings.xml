@@ -26,9 +26,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginVertical="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="center_horizontal"
                 android:text="@string/version_code"
+                android:fontFamily="@font/core_sans_medium"
                 android:textColor="@color/secondary_text_dark"
                 android:textSize="@dimen/_12ssp" />
 

@@ -17,6 +17,7 @@ import android.util.Log
 import androidx.core.content.getSystemService
 import androidx.mediarouter.media.MediaRouter
 import com.fridayhouse.snoozz.activities.MainActivity
+import com.fridayhouse.snoozz.exoplayer.MusicServiceConnection
 import com.fridayhouse.snoozz.playback.PlaybackController
 import com.fridayhouse.snoozz.playback.Player
 import com.fridayhouse.snoozz.playback.PlayerManager
@@ -24,9 +25,12 @@ import com.fridayhouse.snoozz.playback.PlayerNotificationManager
 import com.fridayhouse.snoozz.repository.PresetRepository
 import com.fridayhouse.snoozz.repository.SettingsRepository
 import com.github.ashutoshgngwr.noice.model.Preset
+import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MediaPlayerService : Service() {
   /**
    * [MediaPlayerService] publishes [PlaybackUpdateEvent] whenever there's an update to
@@ -47,6 +51,10 @@ class MediaPlayerService : Service() {
 
   private lateinit var wakeLock: PowerManager.WakeLock
   private lateinit var mediaSession: MediaSessionCompat
+
+  @Inject
+  lateinit var musicServiceConnection: MusicServiceConnection
+
   private lateinit var playerManager: PlayerManager
   private lateinit var presetRepository: PresetRepository
   private lateinit var settingsRepository: SettingsRepository
@@ -72,9 +80,7 @@ class MediaPlayerService : Service() {
 
     mediaSession = MediaSessionCompat(this, "$TAG.mediaSession").also {
       var piFlags = PendingIntent.FLAG_UPDATE_CURRENT
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        piFlags = piFlags or PendingIntent.FLAG_IMMUTABLE
-      }
+      piFlags = piFlags or PendingIntent.FLAG_IMMUTABLE
 
       it.setSessionActivity(
         PendingIntent.getActivity(
@@ -87,7 +93,7 @@ class MediaPlayerService : Service() {
       MediaRouter.getInstance(this).setMediaSessionCompat(it)
     }
 
-    playerManager = PlayerManager(this, mediaSession)
+    playerManager = PlayerManager(this, mediaSession, musicServiceConnection)
     playerManager.setPlaybackUpdateListener(this::onPlaybackUpdate)
 
     presetRepository = PresetRepository.newInstance(this)

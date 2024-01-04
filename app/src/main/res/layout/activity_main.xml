@@ -67,7 +67,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="12dp"
             app:neumorph_backgroundColor="@color/torquise_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -82,59 +81,13 @@
                 android:id="@+id/underMusicBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/nav_view"
                 app:layout_constraintEnd_toEndOf="parent">
-
-                <LinearLayout
-                    android:id="@+id/llComposeControls"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/ivLibrary"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_44sdp"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_8sdp"
-                        android:tint="@color/primary_text_musicBar"
-                        app:srcCompat="@drawable/ic_library_icon"
-                        tools:ignore="UseAppTint" />
-
-                    <ImageView
-                        android:id="@+id/ivOpenPresetFragment"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_44sdp"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_8sdp"
-                        android:tint="@color/primary_text_musicBar"
-                        app:srcCompat="@drawable/ic_preset_icon"
-                        tools:ignore="UseAppTint" />
-
-                    <ImageView
-                        android:id="@+id/ivShuffleAndPause"
-                        android:layout_width="@dimen/_40sdp"
-                        android:layout_height="@dimen/_44sdp"
-                        android:layout_weight="1"
-                        android:padding="@dimen/_8sdp"
-                        android:tint="@color/primary_text_musicBar"
-                        app:srcCompat="@drawable/ic_shuffle"
-                        tools:ignore="UseAppTint" />
-
-                </LinearLayout>
-
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivCurSongImage"
-                    android:layout_width="@dimen/_44sdp"
-                    android:layout_height="@dimen/_44sdp"
+                    android:layout_width="@dimen/_48sdp"
+                    android:layout_height="@dimen/_48sdp"
                     android:scaleType="centerCrop"
-                    android:padding="@dimen/_2sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/llComposeControls"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -143,7 +96,6 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_44sdp"
                     android:layout_marginBottom="@dimen/_4sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/llComposeControls"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ivPlayPause"
                     app:layout_constraintStart_toEndOf="@+id/ivCurSongImage" />
@@ -151,9 +103,10 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivPlayPause"
                     android:layout_width="@dimen/_40sdp"
+                    android:padding="@dimen/_6sdp"
                     android:layout_height="@dimen/_44sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/llComposeControls"
-                    android:tint="@color/primary_text_musicBar"
+                    android:tint="@color/light_shadow"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/ic_play_round"

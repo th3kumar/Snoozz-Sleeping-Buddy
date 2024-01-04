@@ -14,6 +14,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/random_preset"
+        android:fontFamily="@font/core_sans_medium"
       android:textAppearance="?attr/titleTextAppearance"
         android:textColor="@color/primary_text"/>
 
@@ -24,6 +25,7 @@
     <TextView
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+        android:fontFamily="@font/core_sans_medium"
       android:text="@string/random_preset_description"
       android:textAppearance="?android:attr/textAppearance"
         android:textColor="@color/primary_text"/>
@@ -36,6 +38,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/mood"
+        android:fontFamily="@font/core_sans_medium"
       android:textAppearance="?attr/textAppearanceHeadline6"
         android:textColor="@color/torquise_light"/>
 
@@ -86,6 +89,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:text="@string/intensity"
+        android:fontFamily="@font/core_sans_medium"
       android:textAppearance="?attr/textAppearanceHeadline6"
         android:textColor="@color/torquise_light"/>
 
