@@ -117,7 +117,6 @@ class LibraryFragment : Fragment() {
 
     binding.randomPresetButton.setOnClickListener {
       findNavController().navigate(R.id.random_preset)
-        //navHostFragment.findNavController().navigate(R.id.navigation_random_preset)
     }
 
     mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->

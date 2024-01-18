@@ -10,11 +10,8 @@ import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -32,34 +29,22 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.InstallStateUpdatedListener
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.InstallStatus
-import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.ktx.isFlexibleUpdateAllowed
-import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.ivCurSongImage
 import kotlinx.android.synthetic.main.activity_main.ivPlayPause
 import kotlinx.android.synthetic.main.activity_main.navHostFragment
 import kotlinx.android.synthetic.main.activity_main.rootLayout
-import kotlinx.android.synthetic.main.activity_main.songViewController
 import kotlinx.android.synthetic.main.activity_main.vpSong
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : ParentActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var appUpdateManager: AppUpdateManager
+
 
     private val REQUEST_UPDATE = 100
-    private val updateType = AppUpdateType.FLEXIBLE
     private val REQUEST_CUSTOM_ACTIVITY = 1
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -160,11 +145,6 @@ class MainActivity : AppCompatActivity() {
 
         AppIntroActivity.maybeStart(this)
         subscribeToObservers()
-        appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
-        if(updateType == AppUpdateType.FLEXIBLE){
-            appUpdateManager.registerListener(installStateUpdatedListener)
-        }
-        checkForAppUpdates()
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
 
 
@@ -200,18 +180,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if(updateType == AppUpdateType.IMMEDIATE){
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
-            if (info.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
-                appUpdateManager.startUpdateFlowForResult(
-                    info,
-                    updateType,
-                    this,
-                    123
-                )
-            }
-         }
-        }
     }
     private fun getDarkMutedColor(color: Int?): Int {
         if (color != null) {
@@ -244,51 +212,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private val installStateUpdatedListener = InstallStateUpdatedListener { state ->
-
-        if(state.installStatus() == InstallStatus.DOWNLOADED){
-            Toast.makeText(
-                applicationContext,
-                "app will be updated in 5 sec",
-                Toast.LENGTH_LONG
-            ).show()
-            lifecycleScope.launch {
-                delay(5000)
-                appUpdateManager.completeUpdate()
-            }
-        }
-    }
-
-    private fun checkForAppUpdates() {
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
-            val isUpdateAvailable = info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-            val isUpdateAllowed = when (updateType) {
-                AppUpdateType.FLEXIBLE -> info.isFlexibleUpdateAllowed
-                AppUpdateType.IMMEDIATE -> info.isImmediateUpdateAllowed
-                else -> false
-            }
-            if (isUpdateAvailable && isUpdateAllowed) {
-                appUpdateManager.startUpdateFlowForResult(
-                    info,
-                    updateType,
-                    this,
-                    123
-                )
-            }
-        }
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CUSTOM_ACTIVITY) {
             hideLoadingAnimation()
-        }
-
-        if (requestCode == 123) {
-            if (resultCode != RESULT_OK) {
-                println("something went wrong updating...")
-            }
         }
     }
 

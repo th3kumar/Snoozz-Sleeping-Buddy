@@ -2,6 +2,7 @@ package com.fridayhouse.snoozz.ui.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -44,10 +45,8 @@ import javax.inject.Inject
 class HomeFragment : Fragment() {
 
     lateinit var mainViewModel: MainViewModel
-
     @Inject
     lateinit var randomSongAdapter: randomSongAdapter
-
     @Inject
     lateinit var songAdapter: SongAdapter
     private var _binding: FragmentHomeBinding? = null
@@ -207,17 +206,11 @@ class HomeFragment : Fragment() {
         if (mainViewModel.isEmojiSelectionMadeToday()) {
             AnimationHelper.setVisibilityWithAnimation(binding.emojisLayout, View.GONE, requireContext())
             AnimationHelper.setVisibilityWithAnimation(binding.dateText, View.GONE, requireContext())
-
-            //binding.emojisLayout.visibility = View.GONE
-            //binding.dateText.visibility = View.GONE
             binding.emojiSelectedChecked.visibility = View.VISIBLE
             playLottieAnimation()
         } else {
             AnimationHelper.setVisibilityWithAnimation(binding.emojisLayout, View.VISIBLE, requireContext())
             AnimationHelper.setVisibilityWithAnimation(binding.dateText, View.VISIBLE, requireContext())
-
-            //binding.emojisLayout.visibility = View.VISIBLE
-            //binding.dateText.visibility = View.VISIBLE
             binding.emojiSelectedChecked.visibility = View.GONE
         }
     }
@@ -252,24 +245,6 @@ class HomeFragment : Fragment() {
             return Color.HSVToColor(hsv)
         }
         return Color.GRAY // Return a default grey color if the provided color is null
-    }
-
-    private fun scrollToTop() {
-        binding.scrollViewHome.smoothScrollTo(0, 0)
-    }
-
-    private fun showLottieAnimation(animationResource: Int) {
-        // Use the animation resource to show the Lottie animation
-        val animationView = view?.findViewById<LottieAnimationView>(R.id.homePageAnimation)
-        val pauseInstruction = view?.findViewById<TextView>(R.id.instructionTextView)
-        animationView?.loop(true)
-        animationView?.setAnimation(animationResource)
-        animationView?.playAnimation()
-        animationView?.visibility = View.VISIBLE
-
-        if (pauseInstruction != null) {
-            pauseInstruction.visibility = View.VISIBLE
-        }
     }
 
     private fun subscribeToObservers() {

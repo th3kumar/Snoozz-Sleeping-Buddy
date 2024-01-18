@@ -38,15 +38,16 @@
             android:id="@+id/userDiscHomeFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:maxWidth="@dimen/_180sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userNameHomeFragment"
             android:layout_marginVertical="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_18sdp"
             android:textColor="@color/primary_text_dark"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="bold"
             android:fontFamily="@font/core_sans_medium"
-            android:text="let's make today amazing"/>
+            android:text="find serenity and relaxation in the palm of your hand."/>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewFeeling"
