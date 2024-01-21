@@ -15,7 +15,7 @@ android {
         applicationId "com.fridayhouse.snoozz"
         minSdk 26
         targetSdk 34
-        versionCode 15
+        versionCode 14
         versionName "3.0.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -78,9 +78,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3'
 
-    // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.2"
 
     // Navigation Component
     implementation "androidx.navigation:navigation-fragment-ktx:2.7.6"
@@ -128,10 +125,6 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:6.1.0'
 
-    // Sending mail
-    implementation 'com.sun.mail:android-mail:1.6.2'
-    implementation 'com.sun.mail:android-activation:1.6.2'
-
     // InApp Review
     // This dependency is downloaded from the Google’s Maven repository.
     // So, make sure you also include that repository in your project's build.gradle file.
@@ -148,8 +141,6 @@ dependencies {
     // For Kotlin users also import the Kotlin extensions library for Play In-App Update:
     implementation("com.google.android.play:app-update-ktx:2.1.0")
 
-    // Tap-targetView
-    implementation 'com.getkeepsafe.taptargetview:taptargetview:1.13.3'
 
     //media
     implementation 'androidx.media:media:1.7.0'
@@ -159,16 +150,12 @@ dependencies {
     implementation 'com.github.AppIntro:AppIntro:6.1.0'
 
 
-    // Preference
-    implementation 'androidx.preference:preference-ktx:1.2.1'
-
     //others
     implementation 'com.google.android:flexbox:2.0.1'
     implementation 'com.hopenlib.library:flextools:1.0.1'
     implementation 'io.noties.markwon:core:4.6.2'
     implementation 'com.google.code.gson:gson:2.9.1'
     implementation 'androidx.browser:browser:1.7.0'
-    implementation 'androidx.drawerlayout:drawerlayout:1.2.0'
 
     // Event Bus
     implementation 'org.greenrobot:eventbus:3.1.1'
