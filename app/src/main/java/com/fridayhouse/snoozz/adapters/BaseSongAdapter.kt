@@ -1,5 +1,6 @@
 package com.fridayhouse.snoozz.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.fridayhouse.snoozz.data.entities.sound
 abstract class BaseSongAdapter(
     private val layoutId: Int
 ) : RecyclerView.Adapter<BaseSongAdapter.SongViewHolder>() {
+
     class SongViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     protected val diffCallback = object : DiffUtil.ItemCallback<sound>() {

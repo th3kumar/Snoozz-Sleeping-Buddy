@@ -13,6 +13,8 @@
         app:cardElevation="@dimen/_4sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+        app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:layout_constraintTop_toTopOf="parent"
         app:neumorph_backgroundColor="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismImageSongItem"

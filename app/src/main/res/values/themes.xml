@@ -153,7 +153,7 @@
     </style>
     <style name="NeumorphismCardHome">
         <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">@dimen/_26sdp</item>
+        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
     </style>
     <style name="NeumorphismCardImage">
         <item name="neumorph_cornerFamily">rounded</item>
@@ -214,16 +214,20 @@
 
     <style name="NeumorphismMusicBar">
         <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">@dimen/_12sdp</item>
+        <item name="neumorph_cornerSize">@dimen/_8sdp</item>
     </style>
 
     <style name="NeumorphismImageSongItem">
         <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
+        <item name="neumorph_cornerSize">@dimen/_14sdp</item>
     </style>
     <style name="NeumorphismMenu">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_40sdp</item>
+    </style>
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
 </resources>

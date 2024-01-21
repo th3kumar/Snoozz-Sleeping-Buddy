@@ -27,6 +27,7 @@ import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.exoplayer.toSong
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
+import com.fridayhouse.snoozz.utilities.AnimationHelper
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,6 +77,7 @@ class MainActivity : ParentActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         val navView: BottomNavigationView = binding.navView
 
@@ -229,12 +231,12 @@ class MainActivity : ParentActivity() {
     }
 
     private fun hideBottomBar() {
-        binding.MusicBar.isVisible = false
+        AnimationHelper.setVisibilityWithAnimation(binding.MusicBar, View.GONE, this)
 
     }
 
     private fun showBottomBar() {
-        binding.MusicBar.isVisible = true
+        AnimationHelper.setVisibilityWithAnimation(binding.MusicBar, View.VISIBLE, this)
 
     }
 

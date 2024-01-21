@@ -6,6 +6,7 @@
     android:id="@+id/scrollViewHome"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_4sdp"
     android:fadeScrollbars="true"
     android:fadingEdgeLength="@dimen/_62sdp"
     android:fillViewport="true"
@@ -20,42 +21,44 @@
         android:layout_height="wrap_content"
         android:paddingBottom="60dp">
 
-        <TextView
+        <ImageView
             android:id="@+id/userNameHomeFragment"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/cropped_snoozz_logo"
             android:layout_marginVertical="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_18sdp"
-            android:textColor="@color/primary_text_dark"
-            android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"
-            android:fontFamily="@font/core_sans_medium"
-            android:text="hello Snoozzer!"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <TextView
             android:id="@+id/userDiscHomeFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="@dimen/_180sdp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:maxWidth="@dimen/_240sdp"
+            app:layout_constraintStart_toStartOf="@id/userNameHomeFragment"
             app:layout_constraintTop_toBottomOf="@+id/userNameHomeFragment"
+            app:layout_constraintEnd_toEndOf="@id/userNameHomeFragment"
             android:layout_marginVertical="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_18sdp"
-            android:textColor="@color/primary_text_dark"
-            android:textSize="@dimen/_12ssp"
+            android:gravity="center"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/_18ssp"
             android:textStyle="bold"
             android:fontFamily="@font/core_sans_medium"
-            android:text="find serenity and relaxation in the palm of your hand."/>
+            android:text="find serenity and relaxation in the palm of your hand"/>
 
-        <androidx.cardview.widget.CardView
+        <soup.neumorphism.NeumorphCardView
             android:id="@+id/cardViewFeeling"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_22sdp"
-            android:layout_marginHorizontal="@dimen/_18sdp"
-            app:cardCornerRadius="@dimen/_26sdp"
+            android:layout_marginTop="@dimen/_32sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            app:cardCornerRadius="@dimen/_18sdp"
+            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
+            app:neumorph_shapeAppearance="@style/NeumorphismCardHome"
+            app:neumorph_shapeType="flat"
             app:layout_constraintTop_toBottomOf="@id/userDiscHomeFragment"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -103,6 +106,7 @@
                     android:layout_marginStart="@dimen/_18sdp"
                     android:padding="@dimen/_2sdp"
                     android:text="12 dec"
+                    android:visibility="gone"
                     android:fontFamily="@font/core_sans_medium"
                     android:textSize="@dimen/_10ssp"
                     android:textColor="@color/appintro_slide_0__background"
@@ -113,7 +117,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:gravity="center_horizontal">
                     <!-- Add ImageViews for your emojis here -->
 
@@ -162,7 +166,7 @@
                 </LinearLayout>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </soup.neumorphism.NeumorphCardView>
 
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -227,9 +231,9 @@
             android:id="@+id/textview_homeFragment_breathingTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_18sdp"
+            android:layout_marginStart="@dimen/_24sdp"
             android:text="@string/home_breathing_title"
             android:textColor="@color/primary_text_dark"
             android:textSize="@dimen/_1ssp"
@@ -242,7 +246,7 @@
             android:id="@+id/breathingCardHomeFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/_8sdp"
+            android:layout_marginVertical="@dimen/_2sdp"
             android:layout_marginHorizontal="@dimen/_4sdp"
             app:cardCornerRadius="@dimen/_14sdp"
             app:layout_constraintStart_toStartOf="parent"
@@ -287,7 +291,7 @@
                     android:id="@+id/discBreathingCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="breathing exercises with relaxing sounds"
+                    android:text="breathing exercises"
                     android:maxLines="2"
                     android:maxWidth="@dimen/_120sdp"
                     android:fontFamily="@font/core_sans_medium"
@@ -338,7 +342,7 @@
                     android:layout_marginVertical="@dimen/_4sdp"
                     android:layout_marginStart="@dimen/_18sdp"
                     android:fontFamily="@font/core_sans_medium"
-                    android:text="pause and recharge"
+                    android:text="mindful moods"
                     android:textColor="@color/primary_text_dark"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold"
@@ -361,7 +365,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/core_sans_medium"
-                    android:text="enjoy soothing music to help you focus"
+                    android:text="sound library"
                     android:maxLines="2"
                     android:maxWidth="@dimen/_120sdp"
                     android:textColor="@color/primary_text_dark"
@@ -403,16 +407,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_22sdp"
+            android:layout_marginTop="@dimen/_32sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             android:rotation="0"
-            android:text="today's recommended"
+            android:text="premium picks"
             android:fontFamily="@font/core_sans_medium"
             android:textColor="@color/primary_text_dark"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/textview_homeFragment_breathingTitle"
             app:layout_constraintTop_toBottomOf="@+id/relaxingSoundCardHomeFragment" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/refreshItems"
+            android:layout_width="@dimen/_58sdp"
+            android:layout_height="@dimen/_58sdp"
+            android:scaleType="centerCrop"
+            app:lottie_rawRes="@raw/reload_animation_lottie"
+            app:layout_constraintTop_toTopOf="@id/textView_homeFragment_relaxingSoundTitle"
+            app:layout_constraintEnd_toEndOf="@id/scrollForMore"
+            app:layout_constraintBottom_toBottomOf="@id/textView_homeFragment_relaxingSoundTitle"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/scrollForMore"
@@ -448,7 +462,7 @@
                 android:layout_marginTop="@dimen/_22sdp"
                 android:layout_marginBottom="@dimen/_16sdp"
                 android:layout_marginHorizontal="@dimen/_18sdp"
-                app:cardCornerRadius="@dimen/_26sdp"
+                app:cardCornerRadius="@dimen/_22sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 

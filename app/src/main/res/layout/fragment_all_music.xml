@@ -6,11 +6,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.AllMusicFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_64sdp"
+        android:orientation="vertical">
+
+
+
     <TextView
         android:id="@+id/allSongTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="choose your companion"
+        android:layout_gravity="center"
         android:fontFamily="@font/core_sans_medium"
         android:textSize="@dimen/_18sdp"
         android:textStyle="bold"
@@ -23,12 +32,12 @@
         android:id="@+id/rvAllSongs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_28sdp"
+        android:layout_marginTop="@dimen/_22sdp"
         android:layout_marginHorizontal="@dimen/_16sdp"
         android:fadeScrollbars="true"
         android:fadingEdgeLength="@dimen/_38sdp"
         android:requiresFadingEdge="vertical"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_margin"
+        app:layout_constraintBottom_toTopOf="@id/bottom_margin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +46,10 @@
     <ImageView
         android:id="@+id/bottom_margin"
         android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

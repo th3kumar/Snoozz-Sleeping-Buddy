@@ -2,17 +2,13 @@ package com.fridayhouse.snoozz.ui.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,12 +16,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.airbnb.lottie.LottieAnimationView
 import com.fridayhouse.snoozz.R
-import com.fridayhouse.snoozz.adapters.HorizontalAdapter
 import com.fridayhouse.snoozz.adapters.SongAdapter
 import com.fridayhouse.snoozz.adapters.randomSongAdapter
-import com.fridayhouse.snoozz.data.HorizontalItem
 import com.fridayhouse.snoozz.databinding.FragmentHomeBinding
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
@@ -34,7 +27,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.navHostFragment
 import kotlinx.android.synthetic.main.fragment_home.loadingAnimationViewHome
-import kotlinx.android.synthetic.main.fragment_home.rvAllBreathe
 import kotlinx.android.synthetic.main.fragment_home.rvAllSongs
 import kotlinx.android.synthetic.main.fragment_home.rvRandomSongs
 import java.time.LocalDate
@@ -42,7 +34,7 @@ import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment: Fragment() {
 
     lateinit var mainViewModel: MainViewModel
     @Inject
@@ -51,6 +43,8 @@ class HomeFragment : Fragment() {
     lateinit var songAdapter: SongAdapter
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    var mutedColorCardView: Int = Color.GRAY // Default color
+    var darkMutedColorCardView: Int = Color.BLACK // Default color
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,11 +58,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        setupRecyclerView()
-        subscribeToObservers()
+        //setupRecyclerView()
+        //subscribeToObservers()
         setupRecommendRecylerView()
         subscribeToRecommendObservers()
 
+
+        binding.cardViewFeeling.setShadowColorLight(mutedColorCardView)
         binding.breathingCardHomeFragment.setOnClickListener {
             navHostFragment.findNavController().navigate(R.id.action_currentFragment_to_breatheFragment)
         }
@@ -91,6 +87,14 @@ class HomeFragment : Fragment() {
             revertEmojiSelection()
         }
 
+        binding.refreshItems.setOnClickListener{
+            binding.refreshItems.playAnimation()
+            Handler(Looper.getMainLooper()).postDelayed({
+                scrollToRecommendedLayout()
+                subscribeToRecommendObservers()
+            }, 650)
+        }
+
         mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->
             // Check if the bitmap is not null
             bitmap?.let { currentBitmap ->
@@ -101,11 +105,15 @@ class HomeFragment : Fragment() {
                     val mutedSwatch = palette?.mutedSwatch
                     val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
                     val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val lightShadow = getLightShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val darkShadow = getDarkShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
 
                     // Set the background color of the CardView
-                    binding.cardViewFeeling.setCardBackgroundColor(mutedColor)
-                    binding.cardViewRecommend.setCardBackgroundColor(darkMutedColor)
-
+                    binding.apply {
+                        cardViewFeeling.setShadowColorLight(darkShadow)
+                        cardViewFeeling.setBackgroundColor(mutedColor)
+                        cardViewRecommend.setCardBackgroundColor(darkMutedColor)
+                    }
                 }
             }
         }
@@ -172,6 +180,32 @@ class HomeFragment : Fragment() {
         return Color.GRAY // Return a default grey color if the provided color is null
     }
 
+    private fun getLightShadow(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            // Decrease saturation and brightness to mute the color
+            hsv[1] *= 0.4f // Decrease saturation by 70%
+            hsv[2] *= 0.4f // Decrease brightness by 70%
+
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY // Return a default grey color if the provided color is null
+    }
+
+    private fun getDarkShadow(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            // Decrease saturation and brightness to mute the color
+            hsv[1] *= 0.2f // Decrease saturation by 70%
+            hsv[2] *= 0.2f // Decrease brightness by 70%
+
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY // Return a default grey color if the provided color is null
+    }
+
     private fun setupRecommendRecylerView() = rvRandomSongs.apply {
         adapter = randomSongAdapter
         layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
@@ -192,7 +226,7 @@ class HomeFragment : Fragment() {
                     }
                 }
                 Status.ERROR -> Unit
-                Status.LOADING -> loadingAnimationViewHome.isVisible = true
+                Status.LOADING -> Unit
             }
         }
     }

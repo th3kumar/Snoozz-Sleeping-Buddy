@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkBackground"
@@ -58,6 +59,7 @@
         android:id="@+id/songViewController"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_2sdp"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -74,27 +76,35 @@
             app:neumorph_shadowColorLight="@color/light_shadow_dark_try"
             app:neumorph_shapeAppearance="@style/NeumorphismMusicBar"
             app:neumorph_strokeColor="@color/black"
-            app:neumorph_strokeWidth="@dimen/_1sdp"
+            app:neumorph_strokeWidth="@dimen/_2sdp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:elevation="@dimen/_4sdp"
             app:neumorph_shapeType="flat">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/underMusicBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivCurSongImage"
-                    android:layout_width="@dimen/_48sdp"
-                    android:layout_height="@dimen/_48sdp"
-                    android:scaleType="centerCrop"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    app:strokeWidth="1.5dp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    app:strokeColor="@color/background_dark"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/vpSong"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_44sdp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_marginBottom="@dimen/_4sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ivPlayPause"
@@ -102,10 +112,11 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivPlayPause"
-                    android:layout_width="@dimen/_40sdp"
-                    android:padding="@dimen/_6sdp"
-                    android:layout_height="@dimen/_44sdp"
+                    android:layout_width="@dimen/_36sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_height="@dimen/_36sdp"
                     android:tint="@color/light_shadow"
+                    android:layout_marginEnd="@dimen/_2sdp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

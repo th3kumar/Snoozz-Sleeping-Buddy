@@ -1,9 +1,14 @@
 package com.fridayhouse.snoozz.utilities
 
+import android.animation.Animator
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.content.Context
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.Interpolator
 import androidx.annotation.AnimRes
 import com.fridayhouse.snoozz.R
 
@@ -48,6 +53,42 @@ class AnimationHelper {
                     }
                 }
             }
+        }
+
+        /**
+         * Animates the background color of a view.
+         *
+         * @param view The view whose background color will be animated.
+         * @param fromColor The starting color.
+         * @param toColor The ending color.
+         * @param duration The duration of the animation in milliseconds.
+         * @param interpolator The interpolator to be used for the animation.
+         * @param onAnimationEnd Callback to be executed when the animation ends.
+         */
+        fun animateColorChange(
+            view: View,
+            fromColor: Int,
+            toColor: Int,
+            duration: Long = 500,
+            interpolator: Interpolator = AccelerateDecelerateInterpolator(),
+            onAnimationEnd: () -> Unit = {}
+        ) {
+            val colorAnimator = ValueAnimator.ofObject(ArgbEvaluator(), fromColor, toColor)
+            colorAnimator.addUpdateListener { animator ->
+                view.setBackgroundColor(animator.animatedValue as Int)
+            }
+            colorAnimator.duration = duration
+            colorAnimator.interpolator = interpolator
+            colorAnimator.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {}
+
+                override fun onAnimationEnd(animation: Animator) {
+                    onAnimationEnd.invoke()
+                }
+                override fun onAnimationCancel(animation: Animator) {}
+                override fun onAnimationRepeat(animation: Animator) {}
+            })
+            colorAnimator.start()
         }
     }
 }

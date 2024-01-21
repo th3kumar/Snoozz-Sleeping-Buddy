@@ -44,8 +44,11 @@
     <!--    <color name="dark_shadow_dark">#121215</color>-->
     <!--    <color name="light_shadow_dark">#26262A</color>-->
 
+<!--    app:neumorph_shadowColorDark="@color/dark_shadow_dark"-->
+<!--    app:neumorph_shadowColorLight="@color/light_shadow_dark"-->
+
     <color name="dark_shadow_dark">#0F0F12</color>
-    <color name="light_shadow_dark">#1B1B1C</color>
+    <color name="light_shadow_dark">#7E323233</color>
 
     <color name="dark_shadow_dark_try">#0F0F12</color>
     <color name="light_shadow_dark_try">#1B1B1C</color>
