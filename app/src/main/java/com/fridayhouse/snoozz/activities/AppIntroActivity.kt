@@ -5,15 +5,17 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.annotation.VisibleForTesting
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.ui.fragments.AppIntroFragment
 import com.github.appintro.AppIntro
+import com.github.appintro.AppIntro2
 import com.github.appintro.AppIntroPageTransformerType
 
-class AppIntroActivity : AppIntro() {
+class AppIntroActivity : AppIntro2() {
 
     companion object {
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -39,6 +41,7 @@ class AppIntroActivity : AppIntro() {
         showStatusBar(true)
 
         setStatusBarColor(ActivityCompat.getColor(this, R.color.status_bar))
+        window.statusBarColor = ContextCompat.getColor(this, R.color.action_bar)
         setTransformer(
             AppIntroPageTransformerType.Parallax(
                 titleParallaxFactor = 1.0,
@@ -60,7 +63,7 @@ class AppIntroActivity : AppIntro() {
             AppIntroFragment.newInstance(
                 title = getString(R.string.appintro__library_title),
                 description = getString(R.string.appintro__library_desc),
-                imageDrawable = R.drawable.create_your_illus,
+                imageDrawable = R.drawable.yoga_leaf_illsutration,
                 titleColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 descriptionColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 backgroundColor = ActivityCompat.getColor(this, R.color.appintro_slide_1__background)
