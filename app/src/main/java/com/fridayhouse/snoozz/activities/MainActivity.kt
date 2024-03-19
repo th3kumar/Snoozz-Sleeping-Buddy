@@ -11,6 +11,7 @@ import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
@@ -25,9 +26,11 @@ import com.fridayhouse.snoozz.data.entities.sound
 import com.fridayhouse.snoozz.databinding.ActivityMainBinding
 import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.exoplayer.toSong
+import com.fridayhouse.snoozz.others.Constants
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.fridayhouse.snoozz.utilities.AnimationHelper
+import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -73,13 +76,25 @@ class MainActivity : ParentActivity() {
         return Color.GRAY // Return a default grey color if the provided color is null
     }
 
+    fun getDayMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            hsv[1] *= 0.4f
+            hsv[2] *= 0.8f
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val navView: BottomNavigationView = binding.navView
+        window.statusBarColor = ContextCompat.getColor(this, R.color.action_bar)
+
 
         val navController = findNavController(R.id.navHostFragment)
         // Passing each menu ID as a set of Ids because each
@@ -135,12 +150,23 @@ class MainActivity : ParentActivity() {
                     val mutedSwatch = palette?.mutedSwatch
                     val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
                     val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val dayDarkMutedColor = getDayDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
 
                     val colorStateList = ColorStateList.valueOf(mutedColor)
                     val darkColorStateList = ColorStateList.valueOf(darkMutedColor)
-                    navView.itemTextColor = colorStateList
-                    navView.itemRippleColor = darkColorStateList
-                    // Set the background color of the CardView
+
+                    val daycolorStateList = ColorStateList.valueOf(dayMutedColor)
+                    val dayDarkColorStateList = ColorStateList.valueOf(dayDarkMutedColor)
+
+                    if(PrefrenceUtils.retriveDataInBoolean(this, Constants.DARK_MODE_ENABLED)){
+                        navView.itemTextColor = colorStateList
+                        navView.itemRippleColor = darkColorStateList
+                    } else {
+                        navView.itemTextColor = daycolorStateList
+                        navView.itemRippleColor = dayDarkColorStateList
+                        // Set the background color of the CardView
+                    }
                 }
             }
         }
@@ -195,6 +221,18 @@ class MainActivity : ParentActivity() {
             return Color.HSVToColor(hsv)
         }
         return Color.GRAY // Return a default grey color if the provided color is null
+    }
+
+    private fun getDayDarkMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            hsv[1] *= 0.2f
+            hsv[2] *= 0.9f
+
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY
     }
 
     override fun onDestroy() {
@@ -290,8 +328,13 @@ class MainActivity : ParentActivity() {
                 val vibrantSwatch = palette?.vibrantSwatch
                 val mutedSwatch = palette?.mutedSwatch
                 val backgroundColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                val dayBackGroundColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
                 // Set the background color of the ConstraintLayout
-                binding.underMusicBar.setBackgroundColor(backgroundColor)
+                if(PrefrenceUtils.retriveDataInBoolean(this, Constants.DARK_MODE_ENABLED)){
+                    binding.underMusicBar.setBackgroundColor(backgroundColor)
+                } else {
+                    binding.underMusicBar.setBackgroundColor(dayBackGroundColor)
+                }
             }
         }
 

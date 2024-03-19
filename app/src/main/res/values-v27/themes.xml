@@ -19,6 +19,7 @@
         <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
         <item name="popupMenuStyle">@style/Widget.App.PopupMenu</item>
         <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
+        <item name="android:navigationBarColor">@color/navigation_bar_color</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/darkBackground</item>
         <!-- Customize your theme here. -->

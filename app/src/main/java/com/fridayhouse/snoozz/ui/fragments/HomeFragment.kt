@@ -9,25 +9,23 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.adapters.SongAdapter
 import com.fridayhouse.snoozz.adapters.randomSongAdapter
 import com.fridayhouse.snoozz.databinding.FragmentHomeBinding
+import com.fridayhouse.snoozz.others.Constants
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.fridayhouse.snoozz.utilities.AnimationHelper
+import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.navHostFragment
-import kotlinx.android.synthetic.main.fragment_home.loadingAnimationViewHome
-import kotlinx.android.synthetic.main.fragment_home.rvAllSongs
 import kotlinx.android.synthetic.main.fragment_home.rvRandomSongs
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -36,23 +34,21 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeFragment: Fragment() {
 
-    lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
     @Inject
     lateinit var randomSongAdapter: randomSongAdapter
     @Inject
     lateinit var songAdapter: SongAdapter
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    var mutedColorCardView: Int = Color.GRAY // Default color
-    var darkMutedColorCardView: Int = Color.BLACK // Default color
+    private var mutedColorCardView: Int = Color.GRAY
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false);
-        val view = binding.root;
-        return view;
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,7 +56,7 @@ class HomeFragment: Fragment() {
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         //setupRecyclerView()
         //subscribeToObservers()
-        setupRecommendRecylerView()
+        setupRecommendRecyclerview()
         subscribeToRecommendObservers()
 
 
@@ -76,11 +72,11 @@ class HomeFragment: Fragment() {
         binding.dateText.text = currentDate
 
         binding.apply {
-            tiredEmoji.setOnClickListener{ handleEmojiSelection(); showMoodAckg() }
-            sadEmoji.setOnClickListener{ handleEmojiSelection(); showMoodAckg() }
-            smileEmoji.setOnClickListener{ handleEmojiSelection(); showMoodAckg() }
-            moreSmileEmoji.setOnClickListener{ handleEmojiSelection(); showMoodAckg() }
-            grinningEmoji.setOnClickListener{ handleEmojiSelection(); showMoodAckg() }
+            tiredEmoji.setOnClickListener{ handleEmojiSelection(); refreshRecommendedList() }
+            sadEmoji.setOnClickListener{ handleEmojiSelection(); refreshRecommendedList() }
+            smileEmoji.setOnClickListener{ handleEmojiSelection(); refreshRecommendedList() }
+            moreSmileEmoji.setOnClickListener{ handleEmojiSelection(); refreshRecommendedList() }
+            grinningEmoji.setOnClickListener{ handleEmojiSelection(); refreshRecommendedList() }
         }
 
         binding.emojiSelectedChecked.setOnClickListener{
@@ -96,24 +92,32 @@ class HomeFragment: Fragment() {
         }
 
         mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->
-            // Check if the bitmap is not null
             bitmap?.let { currentBitmap ->
-                // Perform color extraction logic using Palette library
                 Palette.from(currentBitmap).generate { palette ->
-                    // Extract the muted color from the palette
                     val vibrantSwatch = palette?.vibrantSwatch
                     val mutedSwatch = palette?.mutedSwatch
                     val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
                     val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val dayDarkMutedColor =  getDayDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
                     val lightShadow = getLightShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
                     val darkShadow = getDarkShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
 
-                    // Set the background color of the CardView
-                    binding.apply {
-                        cardViewFeeling.setShadowColorLight(darkShadow)
-                        cardViewFeeling.setBackgroundColor(mutedColor)
-                        cardViewRecommend.setCardBackgroundColor(darkMutedColor)
-                    }
+
+                   if(PrefrenceUtils.retriveDataInBoolean(context, Constants.DARK_MODE_ENABLED)){
+                       binding.apply {
+                           cardViewFeeling.setShadowColorLight(darkShadow)
+                           cardViewFeeling.setBackgroundColor(mutedColor)
+                           cardViewRecommend.setCardBackgroundColor(darkMutedColor)
+                       }
+                   } else {
+                       binding.apply {
+                           cardViewFeeling.setShadowColorLight(Color.WHITE)
+                           cardViewFeeling.setBackgroundColor(dayMutedColor)
+                           cardViewRecommend.setCardBackgroundColor(Color.WHITE)
+                       }
+                   }
+
                 }
             }
         }
@@ -136,7 +140,7 @@ class HomeFragment: Fragment() {
         updateEmojiLayoutVisibility()
     }
 
-    private fun showMoodAckg() {
+    private fun refreshRecommendedList() {
 
         scrollToRecommendedLayout()
         Handler(Looper.getMainLooper()).postDelayed({
@@ -145,18 +149,15 @@ class HomeFragment: Fragment() {
         }, 750)
     }
     private fun scrollToRecommendedLayout() {
-        val targetView = binding.cardViewRecommend
+        val targetView = binding.gapView
         smoothScrollToView(targetView)
     }
     private fun smoothScrollToView(targetView: View) {
         val scrollView = binding.scrollViewHome
         val targetTop = targetView.bottom
         val startScrollY = scrollView.scrollY
+        val duration = 700
 
-        // Duration of the scroll
-        val duration = 700 // milliseconds
-
-        // ValueAnimator for smooth scrolling
         val animator = ValueAnimator.ofInt(startScrollY, targetTop).apply {
             this.duration = duration.toLong()
             addUpdateListener { animation ->
@@ -164,56 +165,53 @@ class HomeFragment: Fragment() {
                 scrollView.scrollTo(0, animatedValue)
             }
         }
-        // Start the animation
         animator.start()
     }
     private fun getDarkMutedColor(color: Int?): Int {
         if (color != null) {
             val hsv = FloatArray(3)
             Color.colorToHSV(color, hsv)
-            // Decrease saturation and brightness to mute the color
-            hsv[1] *= 0.3f // Decrease saturation by 70%
-            hsv[2] *= 0.3f // Decrease brightness by 70%
+            hsv[1] *= 0.3f
+            hsv[2] *= 0.3f
 
             return Color.HSVToColor(hsv)
         }
-        return Color.GRAY // Return a default grey color if the provided color is null
+        return Color.GRAY
+    }
+
+    private fun getDayDarkMutedColor(color: Int?): Int {
+        if (color != null) {
+            return Color.WHITE
+        }
+        return Color.GRAY
     }
 
     private fun getLightShadow(color: Int?): Int {
         if (color != null) {
             val hsv = FloatArray(3)
             Color.colorToHSV(color, hsv)
-            // Decrease saturation and brightness to mute the color
-            hsv[1] *= 0.4f // Decrease saturation by 70%
-            hsv[2] *= 0.4f // Decrease brightness by 70%
-
-            return Color.HSVToColor(hsv)
+            hsv[1] *= 0.05f
+            hsv[2] *= 0.95f
+           // return Color.HSVToColor(hsv)
+            return Color.WHITE
         }
-        return Color.GRAY // Return a default grey color if the provided color is null
+        return Color.GRAY
     }
 
     private fun getDarkShadow(color: Int?): Int {
         if (color != null) {
             val hsv = FloatArray(3)
             Color.colorToHSV(color, hsv)
-            // Decrease saturation and brightness to mute the color
-            hsv[1] *= 0.2f // Decrease saturation by 70%
-            hsv[2] *= 0.2f // Decrease brightness by 70%
-
+            hsv[1] *= 0.2f
+            hsv[2] *= 0.2f
             return Color.HSVToColor(hsv)
         }
-        return Color.GRAY // Return a default grey color if the provided color is null
+        return Color.GRAY
     }
 
-    private fun setupRecommendRecylerView() = rvRandomSongs.apply {
+    private fun setupRecommendRecyclerview() = rvRandomSongs.apply {
         adapter = randomSongAdapter
         layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-    }
-
-    private fun setupRecyclerView() = rvAllSongs.apply {
-        adapter = songAdapter
-        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
     private fun subscribeToRecommendObservers() {
@@ -267,32 +265,26 @@ class HomeFragment: Fragment() {
         }
     }
 
-    fun getMutedColor(color: Int?): Int {
+    private fun getMutedColor(color: Int?): Int {
         if (color != null) {
             val hsv = FloatArray(3)
             Color.colorToHSV(color, hsv)
-
-            // Decrease saturation and brightness to mute the color
-            hsv[1] *= 0.4f // Decrease saturation by 60%
-            hsv[2] *= 0.4f // Decrease brightness by 60%
-
+            hsv[1] *= 0.4f
+            hsv[2] *= 0.4f
             return Color.HSVToColor(hsv)
         }
-        return Color.GRAY // Return a default grey color if the provided color is null
+        return Color.GRAY
     }
 
-    private fun subscribeToObservers() {
-        mainViewModel.mediaItems.observe(viewLifecycleOwner) { result ->
-            when (result.status) {
-                Status.SUCCESS -> {
-                    loadingAnimationViewHome.isVisible = false
-                    result.data?.let { sound ->
-                        songAdapter.sounds = sound
-                    }
-                }
-                Status.ERROR -> Unit
-                Status.LOADING -> loadingAnimationViewHome.isVisible = true
-            }
+    private fun getDayMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            hsv[1] *= 0.2f
+            hsv[2] *= 0.9f
+            return Color.HSVToColor(hsv)
         }
+        return Color.GRAY
     }
+
 }

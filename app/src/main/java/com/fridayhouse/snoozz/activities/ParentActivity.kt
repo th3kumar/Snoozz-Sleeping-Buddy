@@ -26,6 +26,7 @@ open class ParentActivity : AppCompatActivity() {
         //remember, any logic written in onCreate will also called by MainActivity & AboutActivity
     }
 
+
     protected fun tryAppUpdateFlow() {
         appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
         if(updateType == AppUpdateType.FLEXIBLE){

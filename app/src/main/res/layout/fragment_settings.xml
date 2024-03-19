@@ -16,8 +16,6 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/_20sdp"
-            android:layout_marginRight="@dimen/_20sdp"
             android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,18 +34,8 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="@dimen/_8sdp"
                 android:orientation="vertical">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/ic_atom_anim2"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_134sdp"
-                    android:layout_gravity="end"
-                    android:layout_marginVertical="@dimen/_10sdp"
-                    android:padding="@dimen/_4sdp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/coffee_anim" />
 
 
 
@@ -61,7 +49,7 @@
                     app:neumorph_shadowColorLight="@color/light_shadow_dark"
                     app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
                     app:neumorph_shapeType="pressed"
-                    app:neumorph_strokeColor="#060606"
+                    app:neumorph_strokeColor="@color/sound_border_color"
                     app:neumorph_strokeWidth="2dp">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -80,13 +68,48 @@
                             android:layout_marginTop="8dp">
 
                             <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/night_icon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerVertical="true"
+                                android:padding="10dp"
+                                app:tint="@color/setting_icons"
+                                app:srcCompat="@drawable/ic_dark_mode_vector" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:layout_toEndOf="@+id/night_icon"
+                                android:fontFamily="@font/core_sans_medium"
+                                android:text="dark mode"
+                                android:textColor="@color/primary_text"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/dark_mode_switch"
+                                android:key="@string/ignore_audio_focus_changes_key"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:switchMinWidth="50dp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/notification_icon"
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                android:tint="@color/colorPrimary"
-                                app:srcCompat="@drawable/ic_settings_audio_focus" />
+                                app:tint="@color/setting_icons"
+                                app:srcCompat="@drawable/ic_audio_overlay_vector" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -122,7 +145,8 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                android:src="@drawable/import_icon" />
+                                app:tint="@color/setting_icons"
+                                android:src="@drawable/ic_import_vector" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -156,7 +180,8 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                android:src="@drawable/export_icon" />
+                                app:tint="@color/setting_icons"
+                                android:src="@drawable/ic_export_vector" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -190,7 +215,8 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                android:src="@drawable/review_yellow" />
+                                app:tint="@color/setting_icons"
+                                android:src="@drawable/ic_review_vector" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -224,7 +250,8 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                android:src="@drawable/about_us_orange" />
+                                app:tint="@color/setting_icons"
+                                android:src="@drawable/ic_about_us_vector" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -259,7 +286,8 @@
                                 android:layout_height="40dp"
                                 android:layout_centerVertical="true"
                                 android:padding="10dp"
-                                android:src="@drawable/coffee_grey" />
+                                app:tint="@color/setting_icons"
+                                android:src="@drawable/ic_coffee_vector" />
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
@@ -279,12 +307,43 @@
                                 android:src="@drawable/round_link"
                                 app:tint="@color/primary_text" />
                         </RelativeLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/made_in_india"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:layout_marginTop="@dimen/_24sdp"
+                            android:layout_marginBottom="4dp">
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/madeInIndia_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:textColor="@color/primary_text"
+                                android:text="Made in India"
+                                android:textStyle="bold" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_4sdp"
+                                android:layout_toEndOf="@id/madeInIndia_text"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/ic_heart_vector"
+                                app:tint="@color/setting_icons"
+                                />
+                        </RelativeLayout>
+
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </soup.neumorphism.NeumorphCardView>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="10dp"
-                    android:layout_height="10dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:visibility="invisible" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -294,7 +353,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:layout_marginBottom="@dimen/_44sdp"
+                android:layout_marginBottom="@dimen/_4sdp"
                 android:layout_weight="1"
                 android:gravity="bottom"
                 android:orientation="vertical"
@@ -302,15 +361,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"
-                    android:text="@string/made_in_india_text"
-                    android:textColor="@color/secondary_text_dark"
-                    android:textSize="@dimen/_12ssp"
-                    android:textStyle="bold|italic" />
 
                 <soup.neumorphism.NeumorphCardView
                     android:layout_width="match_parent"

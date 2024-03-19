@@ -1,11 +1,13 @@
 package com.fridayhouse.snoozz.ui.fragments
 
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -37,6 +39,7 @@ class BreatheFragment : Fragment() {
 
     private var _binding: FragmentBreatheBinding? = null
     private val binding get() = _binding!!
+    private var colorFilter: PorterDuffColorFilter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,10 +108,38 @@ class BreatheFragment : Fragment() {
                     binding.animationPlayPauseFab.backgroundTintList = colorStateList
                     binding.titleTextView.setTextColor(mutedColor)
 
-                    binding.lottieAnimationView.addValueCallback(
-                        KeyPath("**"),
-                        LottieProperty.COLOR_FILTER
-                    ) { PorterDuffColorFilter(lightMutedColor, PorterDuff.Mode.SRC_ATOP) }
+                    Log.d("BreatheFragment", "Before saving colorFilter: $colorFilter")
+                    colorFilter = PorterDuffColorFilter(lightMutedColor, PorterDuff.Mode.SRC_ATOP)
+                    Log.d("BreatheFragment", "After saving colorFilter: $colorFilter")
+                    // Call the callback function to update the color filter
+                    addColorFilterCallback()
+                }
+            }
+        }
+    }
+
+    private fun addColorFilterCallback() {
+        binding.lottieAnimationView.addValueCallback(
+            KeyPath("**"),
+            LottieProperty.COLOR_FILTER
+        ) { _ ->
+            colorFilter ?: return@addValueCallback null // If colorFilter is null, return null
+            return@addValueCallback colorFilter
+        }
+    }
+
+
+    private fun observeCurrentBitmap() {
+        mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->
+
+            bitmap?.let { currentBitmap ->
+                Palette.from(currentBitmap).generate { palette ->
+                    val vibrantSwatch = palette?.vibrantSwatch
+                    val mutedSwatch = palette?.mutedSwatch
+                    val lightMutedColor = getLightMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    colorFilter = PorterDuffColorFilter(lightMutedColor, PorterDuff.Mode.SRC_ATOP)
+                    // Call the callback function to update the color filter
+                    addColorFilterCallback()
                 }
             }
         }
@@ -157,11 +188,28 @@ class BreatheFragment : Fragment() {
         val pauseInstruction = view?.findViewById<TextView>(R.id.instructionTextView)
         animationView?.loop(true)
         animationView?.setAnimation(animationResource)
+
+        mainViewModel.currentBitmap.value?.let { bitmap ->
+            applyColorModifications(bitmap)
+        }
         animationView?.playAnimation()
         animationView?.visibility = View.VISIBLE
 
         if (pauseInstruction != null) {
             pauseInstruction.visibility = View.VISIBLE
+        }
+    }
+
+    private fun applyColorModifications(bitmap: Bitmap) {
+        // Perform color extraction logic using Palette library
+        Palette.from(bitmap).generate { palette ->
+            // Extract the muted color from the palette
+            val vibrantSwatch = palette?.vibrantSwatch
+            val mutedSwatch = palette?.mutedSwatch
+            val lightMutedColor = getLightMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+
+            colorFilter = PorterDuffColorFilter(lightMutedColor, PorterDuff.Mode.SRC_ATOP)
+            addColorFilterCallback()
         }
     }
 

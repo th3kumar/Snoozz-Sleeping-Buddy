@@ -27,11 +27,13 @@ import com.fridayhouse.snoozz.databinding.LibraryFragmentBinding
 import com.fridayhouse.snoozz.databinding.SoundGroupListItemBinding
 import com.fridayhouse.snoozz.databinding.SoundListItemBinding
 import com.fridayhouse.snoozz.model.Sound
+import com.fridayhouse.snoozz.others.Constants
 import com.fridayhouse.snoozz.playback.PlaybackController
 import com.fridayhouse.snoozz.playback.Player
 import com.fridayhouse.snoozz.repository.PresetRepository
 import com.fridayhouse.snoozz.repository.SettingsRepository
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
+import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import com.github.ashutoshgngwr.noice.model.Preset
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -128,12 +130,22 @@ class LibraryFragment : Fragment() {
           val vibrantSwatch = palette?.vibrantSwatch
           val mutedSwatch = palette?.mutedSwatch
           val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+          val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
           val mutedLightColor = getMutedLightColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+          val dayMutedLightColor = getDayMutedLightColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
 
           val colorStateList = ColorStateList.valueOf(mutedColor)
-          binding.randomPresetButton.backgroundTintList = colorStateList
-          binding.savePresetButton.backgroundTintList = colorStateList
-          dynamicStrokeColor = ColorStateList.valueOf(mutedLightColor)
+          val dayColorStateList = ColorStateList.valueOf(dayMutedColor)
+
+          if(PrefrenceUtils.retriveDataInBoolean(context, Constants.DARK_MODE_ENABLED)){
+            binding.randomPresetButton.backgroundTintList = colorStateList
+            binding.savePresetButton.backgroundTintList = colorStateList
+            dynamicStrokeColor = ColorStateList.valueOf(mutedLightColor)
+          } else {
+            binding.randomPresetButton.backgroundTintList = dayColorStateList
+            binding.savePresetButton.backgroundTintList = dayColorStateList
+            dynamicStrokeColor = ColorStateList.valueOf(dayMutedLightColor)
+          }
           adapter?.notifyDataSetChanged()
         }
       }
@@ -185,6 +197,17 @@ class LibraryFragment : Fragment() {
     //analyticsProvider.setCurrentScreen("library", LibraryFragment::class)
   }
 
+  private fun getDayMutedLightColor(color: Int?): Int {
+    if (color != null) {
+      val hsv = FloatArray(3)
+      Color.colorToHSV(color, hsv)
+      hsv[1] *= 0.2f
+      hsv[2] *= 0.9f
+      return Color.HSVToColor(hsv)
+    }
+    return Color.GRAY
+  }
+
   fun getMutedColor(color: Int?): Int {
     if (color != null) {
       val hsv = FloatArray(3)
@@ -197,6 +220,17 @@ class LibraryFragment : Fragment() {
       return Color.HSVToColor(hsv)
     }
     return Color.GRAY // Return a default grey color if the provided color is null
+  }
+
+  fun getDayMutedColor(color: Int?): Int {
+    if (color != null) {
+      val hsv = FloatArray(3)
+      Color.colorToHSV(color, hsv)
+      hsv[1] *= 0.2f
+      hsv[2] *= 0.8f
+      return Color.HSVToColor(hsv)
+    }
+    return Color.GRAY
   }
 
   override fun onDestroyView() {
@@ -281,7 +315,7 @@ class LibraryFragment : Fragment() {
 
       with((holder as SoundListItemViewHolder).binding) {
         // Create a ColorStateList with a single color (e.g., magenta)
-        var blueColor = ColorStateList.valueOf(getColor(resources, R.color.torquise_mid, null))
+        var blueColor = ColorStateList.valueOf(getColor(resources, R.color.sound_border_color, null))
         val blackColor = ColorStateList.valueOf(Color.BLACK)
         title.text = context.getString(sound.titleResID)
         if (isPlaying) {
@@ -294,7 +328,7 @@ class LibraryFragment : Fragment() {
           timePeriodButton.visibility = View.VISIBLE
         } else {
          // playIndicator.visibility = View.INVISIBLE
-          soundItemCardView.setStrokeColor(blackColor)
+          soundItemCardView.setStrokeColor(blueColor)
           volumeButton.visibility = View.INVISIBLE
           timePeriodButton.visibility = View.INVISIBLE
         }

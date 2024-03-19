@@ -2,31 +2,37 @@ package com.fridayhouse.snoozz.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import com.fridayhouse.snoozz.adapters.SongAdapter
 import com.fridayhouse.snoozz.databinding.ActivitySplashScreenBinding
+import com.fridayhouse.snoozz.others.Constants
 import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
+import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_splash_screen.fridayHouse
 import kotlinx.android.synthetic.main.activity_splash_screen.snoozzTitle
-import kotlinx.android.synthetic.main.dialog_fragment__base.content
-import kotlinx.android.synthetic.main.fragment_home.loadingAnimationViewHome
 import java.util.concurrent.CompletableFuture
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashScreen : AppCompatActivity() {
     private lateinit var binding: ActivitySplashScreenBinding
-    lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     @Inject
     lateinit var songAdapter: SongAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
+        val isDarkMode = PrefrenceUtils.retriveDataInBoolean(this, Constants.DARK_MODE_ENABLED)
+        AppCompatDelegate.setDefaultNightMode(
+            if (isDarkMode) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
+        )
         super.onCreate(savedInstanceState)
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,7 +40,6 @@ class SplashScreen : AppCompatActivity() {
 
         fridayHouse.alpha = 0f
         fridayHouse.animate().setDuration(1750).alpha(1f).withEndAction {
-            // Data loading is complete, proceed to MainActivity
             val i = Intent(this, MainActivity::class.java)
             startActivity(i)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)

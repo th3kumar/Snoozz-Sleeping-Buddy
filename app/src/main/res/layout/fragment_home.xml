@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_4sdp"
     android:fadeScrollbars="true"
-    android:fadingEdgeLength="@dimen/_62sdp"
+    android:fadingEdgeLength="@dimen/_22sdp"
     android:fillViewport="true"
     android:orientation="vertical"
     android:requiresFadingEdge="horizontal|vertical"
@@ -19,7 +19,7 @@
         android:id="@+id/constraintUnderScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="60dp">
+        android:paddingBottom="50dp">
 
         <ImageView
             android:id="@+id/userNameHomeFragment"
@@ -56,6 +56,7 @@
             android:layout_marginTop="@dimen/_32sdp"
             android:layout_marginHorizontal="@dimen/_12sdp"
             app:cardCornerRadius="@dimen/_18sdp"
+            app:neumorph_shadowColorLight="@color/light_shadow_dark"
             app:neumorph_shadowColorDark="@color/dark_shadow_dark"
             app:neumorph_shapeAppearance="@style/NeumorphismCardHome"
             app:neumorph_shapeType="flat"
@@ -95,7 +96,7 @@
                     android:padding="@dimen/_2sdp"
                     android:layout_marginStart="@dimen/_18sdp"
                     android:fontFamily="@font/core_sans_medium"
-                    android:textColor="@color/primary_text_dark"
+                    android:textColor="@color/light_shadow"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
 
@@ -463,6 +464,8 @@
                 android:layout_marginBottom="@dimen/_16sdp"
                 android:layout_marginHorizontal="@dimen/_18sdp"
                 app:cardCornerRadius="@dimen/_22sdp"
+                android:paddingBottom="@dimen/_12sdp"
+                app:cardElevation="@dimen/_4sdp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -479,6 +482,14 @@
                     app:layout_constraintStart_toStartOf="parent" />
 
             </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/gap_view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cardViewRecommend"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

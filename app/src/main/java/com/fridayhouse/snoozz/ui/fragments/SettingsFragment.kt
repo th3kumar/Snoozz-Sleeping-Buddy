@@ -11,16 +11,20 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.annotation.VisibleForTesting
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.activities.AboutActivity
 import com.fridayhouse.snoozz.databinding.FragmentSettingsBinding
+import com.fridayhouse.snoozz.others.Constants
 import com.fridayhouse.snoozz.repository.PresetRepository
 import com.fridayhouse.snoozz.repository.SettingsRepository
+import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.gson.JsonIOException
 import com.google.gson.JsonSyntaxException
+import kotlinx.android.synthetic.main.fragment_settings.dark_mode_switch
 import java.io.FileInputStream
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -170,6 +174,18 @@ class SettingsFragment : Fragment() {
                 startActivity(i)
             }
         }
+
+        val isDarkMode = (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
+        dark_mode_switch.isChecked = isDarkMode
+
+        dark_mode_switch.setOnCheckedChangeListener { _, isChecked ->
+            toggleDayNightMode(isChecked)
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 
 //    private fun setIgnoreAudioFocusChanges(checked: Boolean) {
@@ -180,6 +196,11 @@ class SettingsFragment : Fragment() {
 //        )
 //        prefsEditor.apply()
 //    }
+
+    private fun toggleDayNightMode(isDesabled: Boolean) {
+        PrefrenceUtils.insertDataInBoolean(context,Constants.DARK_MODE_ENABLED, isDesabled)
+    }
+
 
     private fun inAppReview() {
         val reviewManager = ReviewManagerFactory.create(requireContext())

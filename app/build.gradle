@@ -123,7 +123,7 @@ dependencies {
     api "com.google.android.exoplayer:extension-mediasession:2.19.1"
 
     // Lottie
-    implementation 'com.airbnb.android:lottie:6.1.0'
+    implementation 'com.airbnb.android:lottie:6.4.0'
 
     // InApp Review
     // This dependency is downloaded from the Google’s Maven repository.
@@ -162,7 +162,4 @@ dependencies {
 
     //for dynamic colors
     implementation 'androidx.palette:palette-ktx:1.0.0'
-
-
-
 }

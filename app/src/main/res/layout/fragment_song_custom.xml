@@ -209,7 +209,7 @@
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismCardImage"
-        app:neumorph_strokeColor="#060606"
+        app:neumorph_strokeColor="@color/sound_border_color"
         app:neumorph_strokeWidth="@dimen/_3sdp">
 
         <com.makeramen.roundedimageview.RoundedImageView
