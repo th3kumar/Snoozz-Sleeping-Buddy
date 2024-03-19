@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootLayout"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkBackground"
     tools:context=".activities.MainActivity">
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -15,97 +15,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/light_shadow_dark"
+        app:itemIconSize="@dimen/_22sdp"
+        app:itemIconTint="@color/bottom_navigation_icon_tint"
+        app:labelVisibilityMode="selected"
+        android:background="@color/dark_shadow_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:menu="@menu/bottom_nav_menu" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar_homeActivity"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_46sdp"
-        android:background="@drawable/gradient_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <soup.neumorphism.NeumorphImageView
-            android:id="@+id/imageSetting"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:padding="@dimen/_16sdp"
-            android:visibility="invisible"
-            android:src="@drawable/ic_setting"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-            app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
-            app:neumorph_strokeColor="@color/black"
-            app:neumorph_strokeWidth="@dimen/_1sdp"
-            app:tint="@color/secondary_text_dark" />
-
-        <soup.neumorphism.NeumorphImageView
-            android:id="@+id/breatheButton"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginStart="@dimen/_62sdp"
-            android:padding="@dimen/_16sdp"
-            android:src="@drawable/breathe_icon"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-            app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
-            app:neumorph_strokeColor="@color/black"
-            app:neumorph_strokeWidth="@dimen/_1sdp"
-            app:tint="@color/secondary_text_dark" />
-
-        <soup.neumorphism.NeumorphImageView
-            android:id="@+id/imageCustom"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:padding="@dimen/_16sdp"
-            android:visibility="invisible"
-            android:src="@drawable/ic_eco"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-            app:neumorph_shadowColorLight="@color/light_shadow_dark"
-            app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
-            app:neumorph_strokeColor="@color/black"
-            app:neumorph_strokeWidth="@dimen/_1sdp"
-            app:tint="@color/torquiese" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/snoozz_title_main"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/alba"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textColor="@color/primary_text_dark"
-            android:textSize="@dimen/_24ssp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/imageSetting"
-            app:layout_constraintEnd_toStartOf="@id/imageCustom"
-            app:layout_constraintStart_toEndOf="@id/imageSetting"
-            app:layout_constraintTop_toTopOf="@id/imageSetting" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_2sdp"
-            android:layout_gravity="bottom"
-            android:background="@drawable/gradient_bottom_line"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/snoozz_title_main"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
         android:id="@+id/flFragmentContainer"
@@ -115,7 +32,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_homeActivity">
+        tools:visibilty="false"
+        app:layout_constraintTop_toTopOf="parent">
 
         <fragment
             android:id="@+id/navHostFragment"
@@ -141,6 +59,7 @@
         android:id="@+id/songViewController"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_2sdp"
         app:layout_constraintBottom_toTopOf="@id/nav_view"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -150,7 +69,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="12dp"
             app:neumorph_backgroundColor="@color/torquise_dark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -158,29 +76,35 @@
             app:neumorph_shadowColorLight="@color/light_shadow_dark_try"
             app:neumorph_shapeAppearance="@style/NeumorphismMusicBar"
             app:neumorph_strokeColor="@color/black"
-            app:neumorph_strokeWidth="@dimen/_1sdp"
+            app:neumorph_strokeWidth="@dimen/_2sdp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:elevation="@dimen/_4sdp"
             app:neumorph_shapeType="flat">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/underMusicBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/nav_view"
+                android:clipToPadding="false"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivCurSongImage"
-                    android:layout_width="@dimen/_44sdp"
-                    android:layout_height="@dimen/_44sdp"
-                    android:scaleType="centerCrop"
-                    android:padding="@dimen/_2sdp"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_5sdp"
+                    app:strokeWidth="1.5dp"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    app:strokeColor="@color/background_dark"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/vpSong"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_44sdp"
+                    android:layout_height="@dimen/_36sdp"
                     android:layout_marginBottom="@dimen/_4sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/ivPlayPause"
@@ -188,9 +112,12 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivPlayPause"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_44sdp"
-                    android:tint="@color/primary_text_musicBar"
+                    android:layout_width="@dimen/_36sdp"
+                    android:padding="@dimen/_3sdp"
+                    android:layout_height="@dimen/_36sdp"
+                    android:tint="@color/light_shadow"
+                    android:layout_marginEnd="@dimen/_2sdp"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:srcCompat="@drawable/ic_play_round"

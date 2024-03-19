@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/darkBackground"
     tools:context=".activities.AboutActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fadeScrollbars="true"
-        android:fadingEdgeLength="@dimen/_60sdp"
+        android:fadingEdgeLength="@dimen/_12sdp"
         android:requiresFadingEdge="horizontal|vertical"
         android:scrollbars="none"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +27,7 @@
             app:neumorph_shadowColorLight="@color/light_shadow_dark"
             app:neumorph_shapeAppearance="@style/NeumorphismImageOther"
             app:neumorph_shapeType="pressed"
-            app:neumorph_strokeColor="#060606"
+            app:neumorph_strokeColor="@color/sound_border_color"
             app:neumorph_strokeWidth="@dimen/_2sdp">
 
             <LinearLayout
@@ -43,6 +44,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/_12sdp"
                     android:text="@string/about_snoozz_title"
+                    android:fontFamily="@font/core_sans_medium"
+                    android:textColor="@color/primary_text"
                     android:textSize="@dimen/_18ssp"
                     android:textStyle="bold" />
 
@@ -50,6 +53,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:textColor="@color/primary_text"
+                    android:fontFamily="@font/core_sans_medium"
                     android:layout_marginBottom="@dimen/_12sdp"
                     android:text="@string/about_snoozz_subtitle" />
 
@@ -58,6 +63,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/_6sdp"
+                    android:fontFamily="@font/core_sans_medium"
+                    android:textColor="@color/primary_text"
                     android:text="@string/our_mission_title"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
@@ -66,6 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:textColor="@color/primary_text"
+                    android:fontFamily="@font/core_sans_medium"
                     android:layout_marginBottom="@dimen/_12sdp"
                     android:text="@string/our_mission_description" />
 
@@ -74,6 +83,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/_6sdp"
+                    android:textColor="@color/primary_text"
+                    android:fontFamily="@font/core_sans_medium"
                     android:text="@string/our_vision_title"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
@@ -82,6 +93,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:textColor="@color/primary_text"
+                    android:fontFamily="@font/core_sans_medium"
                     android:layout_marginBottom="@dimen/_12sdp"
                     android:text="@string/our_vision_description" />
 
@@ -89,7 +102,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:textColor="@color/primary_text"
                     android:layout_marginBottom="@dimen/_6sdp"
+                    android:fontFamily="@font/core_sans_medium"
                     android:text="@string/what_sets_us_apart_title"
                     android:textSize="@dimen/_14ssp"
                     android:textStyle="bold" />
@@ -98,6 +113,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:textColor="@color/primary_text"
+                    android:fontFamily="@font/core_sans_medium"
                     android:layout_marginBottom="@dimen/_12sdp"
                     android:gravity="center"
                     android:text="@string/what_sets_us_apart_description" />

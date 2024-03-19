@@ -23,11 +23,52 @@
         tools:layout="@layout/fragment_compose" />
 
     <fragment
+        android:id="@+id/navigation_presets"
+        android:name="com.fridayhouse.snoozz.fragments.SavedPresetsFragment"
+        android:label="@string/saved_presets"
+        tools:layout="@layout/saved_presets_fragment" />
+
+    <fragment
         android:id="@+id/navigation_settings"
         android:name="com.fridayhouse.snoozz.ui.fragments.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 
+    <fragment
+        android:id="@+id/navigation_timer"
+        android:name="com.fridayhouse.snoozz.ui.fragments.SleepTimerFragment"
+        android:label="@string/timer"
+        tools:layout="@layout/sleep_timer_fragment"/>
+
+    <fragment
+        android:id="@+id/navigation_breathe"
+        android:name="com.fridayhouse.snoozz.ui.fragments.BreatheFragment"
+        android:label="Breathe"
+        tools:layout="@layout/fragment_breathe" />
+
+    <fragment
+        android:id="@+id/navigation_all_music"
+        android:name="com.fridayhouse.snoozz.ui.fragments.AllMusicFragment"
+        android:label="allMusic"
+        tools:layout="@layout/fragment_all_music"/>
+
+    <dialog
+        android:id="@+id/navigation_random_preset"
+        android:name="com.fridayhouse.snoozz.fragments.RandomPresetFragment"
+        android:label="@string/random_preset"
+        tools:layout="@layout/random_preset_fragment" />
+
+
     <action android:id="@+id/globalActionToSongFragment"
         app:destination="@id/songFragments"/>
+
+    <action
+        android:id="@+id/action_currentFragment_to_breatheFragment"
+        app:destination="@id/navigation_breathe" />
+
+    <action
+        android:id="@+id/action_to_allMusicFragment"
+        app:destination="@id/navigation_all_music"/>
+
+
 </navigation>

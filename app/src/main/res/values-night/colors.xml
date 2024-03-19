@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#F44336</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#C6E48E</color>
+
+    <color name="colorPrimary">#08FF04</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#08FF04</color>
+    <color name="mediumDarkBackground">#303030</color>
+    <color name="darkBackground">#171717</color>
+    <color name="lightBackground">#1F1E1E</color>
+
+    <color name="yellow">#EFcc00</color>
+    <color name="red">#722f37</color>
+
+    <color name="darkWood">#858585</color>
+    <color name="leaveGreen">#697E50</color>
+    <color name="bluishBackground">#2F3238</color>
+    <color name="darkOrchid">#111111</color>
+
+    <!--    cUSTOM STYLE-->
+    <color name="primary">#A3B5BF</color>
+    <color name="background">#EBEBEB</color>
+    <color name="primary_text">#676767</color>
+    <color name="bottom_navigation_icon_tint">#676767</color>
+    <color name="secondary_text">#212121</color>
+    <color name="dark_shadow">#C5C5C5</color>
+    <color name="light_shadow">#FFFFFF</color>
+    <color name="primary_text_musicBar">#838383</color>
+    <color name="action_bar_and_bottomnavigation">#DA232222</color>
+
+    <!--    for dark theme -->
+    <color name="primary_dark">#84898C</color>
+    <color name="background_dark">#19191E</color>
+    <color name="primary_text_dark">#A8AAAB</color>
+    <color name="secondary_text_dark">#80858A</color>
+
+
+    <!--    previous colors (till 2.0.0)-->
+    <!--    <color name="dark_shadow_dark">#121215</color>-->
+    <!--    <color name="light_shadow_dark">#26262A</color>-->
+
+    <!--    app:neumorph_shadowColorDark="@color/dark_shadow_dark"-->
+    <!--    app:neumorph_shadowColorLight="@color/light_shadow_dark"-->
+
+    <color name="dark_shadow_dark">#0F0F12</color>
+    <color name="light_shadow_dark">#7E323233</color>
+
+    <color name="dark_shadow_dark_try">#0F0F12</color>
+    <color name="light_shadow_dark_try">#1B1B1C</color>
+
+    <color name="torquise_light">#69A4A2</color>
+    <color name="torquise_mid">#296E6B</color>
+    <color name="torquise_dark">#2B4A4A</color>
+
+    <color name="torquiese">#36D9AE</color>
+    <color name="torquiese_light">#B6F1F0</color>
+    <color name="torquiese_dark">#36D9AE</color>
+    <color name="target_view_outer">#2E336D</color>
+    <color name="target_view_discription">#C5C5C5</color>
+
+    <color name="sound_border_color">#000000</color>
+    <color name="orange">#ED4E12</color>
+    <color name="timer_dialog">#A3B5BF</color>
+    <color name="setting_icons">#C5C5C5</color>
+
+    <color name="sound_icon">#989898</color>
+    <color name="action_bar">#171717</color>
+    <color name="action_menu_item">#C5C5C5</color>
+    <color name="action_bar_dark_shade">#171717</color>
+    <color name="action_bar_light_shade">#171717</color>
+    <color name="navigation_bar_color">#111111</color>
+
+    <!--    for app intro-->
+    <color name="status_bar">#72000000</color>
+    <color name="appintro__text_color">@color/primary_text</color>
+    <color name="appintro__text_color_light">#CACACA</color>
+    <color name="appintro_slide_0__background">#dae4e5</color>
+    <color name="appintro_slide_1__background">#94c0c2</color>
+    <color name="appintro_slide_2__background">#69a4a2</color>
+    <color name="appintro_slide_3__background">#296e6b</color>
+    <color name="appintro_slide_4__background">#2b4a4a</color>
+    <color name="appintro_slide_5__background">@color/darkBackground</color>
+</resources>

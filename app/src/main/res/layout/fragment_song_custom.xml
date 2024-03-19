@@ -95,7 +95,7 @@
         <SeekBar
             android:id="@+id/seekBar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_6sdp"
+            android:layout_height="@dimen/_8sdp"
             android:layout_margin="@dimen/_2sdp"
             android:paddingStart="0dp"
             android:paddingEnd="0dp"
@@ -148,6 +148,7 @@
         android:layout_marginBottom="@dimen/_2sdp"
         android:gravity="center"
         android:text="Concide with me"
+        android:fontFamily="@font/core_sans_medium"
         android:textColor="@color/primary_text"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
@@ -189,7 +190,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Now Playing"
+        android:text="now playing"
+        android:fontFamily="@font/core_sans_medium"
         android:textColor="@color/primary_text"
         android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toBottomOf="@id/imageMenu"
@@ -207,7 +209,7 @@
         app:neumorph_shadowColorDark="@color/dark_shadow_dark"
         app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismCardImage"
-        app:neumorph_strokeColor="#060606"
+        app:neumorph_strokeColor="@color/sound_border_color"
         app:neumorph_strokeWidth="@dimen/_3sdp">
 
         <com.makeramen.roundedimageview.RoundedImageView

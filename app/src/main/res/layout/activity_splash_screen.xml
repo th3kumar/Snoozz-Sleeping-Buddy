@@ -8,14 +8,6 @@
     android:orientation="vertical"
     tools:context=".activities.SplashScreen">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/gradient_title"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/fridayHouse"
@@ -35,8 +27,8 @@
 
 
             <soup.neumorphism.NeumorphImageView
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_70sdp"
+                android:layout_width="@dimen/_74sdp"
+                android:layout_height="@dimen/_74sdp"
                 android:layout_gravity="center_horizontal"
                 android:padding="@dimen/_12sdp"
                 android:src="@drawable/friday_house_logo_final"
@@ -51,8 +43,9 @@
                 android:layout_width="@dimen/_165sdp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/alba"
+                android:fontFamily="@font/core_sans_medium"
                 android:text="SNOOZZ"
+                android:visibility="gone"
                 android:textColor="@color/darkBackground"
                 android:textSize="@dimen/_45ssp"
                 android:textStyle="bold"

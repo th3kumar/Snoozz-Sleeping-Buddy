@@ -2,18 +2,22 @@ package com.fridayhouse.snoozz.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.os.Handler
 import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.palette.graphics.Palette
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.RequestManager
 import com.fridayhouse.snoozz.R
@@ -22,36 +26,32 @@ import com.fridayhouse.snoozz.data.entities.sound
 import com.fridayhouse.snoozz.databinding.ActivityMainBinding
 import com.fridayhouse.snoozz.exoplayer.isPlaying
 import com.fridayhouse.snoozz.exoplayer.toSong
+import com.fridayhouse.snoozz.others.Constants
 import com.fridayhouse.snoozz.others.Status
-import com.fridayhouse.snoozz.ui.fragments.ComposeFragment
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
-import com.getkeepsafe.taptargetview.TapTarget
-import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.fridayhouse.snoozz.utilities.AnimationHelper
+import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.ktx.isFlexibleUpdateAllowed
-import com.google.android.play.core.ktx.isImmediateUpdateAllowed
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.imageCustom
 import kotlinx.android.synthetic.main.activity_main.ivCurSongImage
 import kotlinx.android.synthetic.main.activity_main.ivPlayPause
 import kotlinx.android.synthetic.main.activity_main.navHostFragment
 import kotlinx.android.synthetic.main.activity_main.rootLayout
 import kotlinx.android.synthetic.main.activity_main.vpSong
+import org.greenrobot.eventbus.EventBus
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : ParentActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var sharedPreferences: SharedPreferences
-    private lateinit var appUpdateManager: AppUpdateManager
-    private val updateType = AppUpdateType.IMMEDIATE
+
+
+    private val REQUEST_UPDATE = 100
     private val REQUEST_CUSTOM_ACTIVITY = 1
     private val mainViewModel: MainViewModel by viewModels()
+
 
     @Inject
     lateinit var swipeSongAdapter: SwipeSongAdapter
@@ -62,12 +62,39 @@ class MainActivity : AppCompatActivity() {
     private var playbackState: PlaybackStateCompat? = null
 
 
+    fun getMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+
+            // Decrease saturation and brightness to mute the color
+            hsv[1] *= 0.8f // Decrease saturation by 20%
+            hsv[2] *= 0.8f // Decrease brightness by 20%
+
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY // Return a default grey color if the provided color is null
+    }
+
+    fun getDayMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            hsv[1] *= 0.4f
+            hsv[2] *= 0.8f
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
+        window.statusBarColor = ContextCompat.getColor(this, R.color.action_bar)
+
 
         val navController = findNavController(R.id.navHostFragment)
         // Passing each menu ID as a set of Ids because each
@@ -92,29 +119,66 @@ class MainActivity : AppCompatActivity() {
                     showNavigationBar()
                 }
 
-                else -> {
+                R.id.navigation_compose -> {
                     hideBottomBar()
+                    showNavigationBar()
+                }
+
+                R.id.navigation_breathe -> {
+                    showBottomBar()
+                    hideNavigationBar()
+                }
+
+                R.id.navigation_all_music -> {
+                    showBottomBar()
+                    hideNavigationBar()
+                }
+                else -> {
+                    showBottomBar()
                     showNavigationBar()
                 }
             }
         }
 
-        subscribeToObservers()
-        appUpdateManager = AppUpdateManagerFactory.create(applicationContext)
-        checkForAppUpdates()
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
+        mainViewModel.currentBitmap.observe(this) { bitmap ->
+            // Check if the bitmap is not null
+            bitmap?.let { currentBitmap ->
+                // Perform color extraction logic using Palette library
+                Palette.from(currentBitmap).generate { palette ->
+                    // Extract the muted color from the palette
+                    val vibrantSwatch = palette?.vibrantSwatch
+                    val mutedSwatch = palette?.mutedSwatch
+                    val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                    val dayDarkMutedColor = getDayDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
 
-//        if (!isTapTargetShown) {
-//            // Delay showing the TapTargetView by 2 seconds
-//            Handler().postDelayed({
-//                showTapTargetView()
-//            }, 2000)
-//        }
+                    val colorStateList = ColorStateList.valueOf(mutedColor)
+                    val darkColorStateList = ColorStateList.valueOf(darkMutedColor)
+
+                    val daycolorStateList = ColorStateList.valueOf(dayMutedColor)
+                    val dayDarkColorStateList = ColorStateList.valueOf(dayDarkMutedColor)
+
+                    if(PrefrenceUtils.retriveDataInBoolean(this, Constants.DARK_MODE_ENABLED)){
+                        navView.itemTextColor = colorStateList
+                        navView.itemRippleColor = darkColorStateList
+                    } else {
+                        navView.itemTextColor = daycolorStateList
+                        navView.itemRippleColor = dayDarkColorStateList
+                        // Set the background color of the CardView
+                    }
+                }
+            }
+        }
+
+        AppIntroActivity.maybeStart(this)
+        subscribeToObservers()
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+
 
         binding.apply {
-            snoozzTitleMain.alpha = 0f
-            snoozzTitleMain.animate().setDuration(2000).alpha(1f).withEndAction {}
+             //snoozzTitleMain.alpha = 0f
+             //snoozzTitleMain.animate().setDuration(2000).alpha(1f).withEndAction {}
             vpSong.adapter = swipeSongAdapter
             vpSong.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
@@ -133,18 +197,47 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            imageCustom.setOnClickListener {
-                showLoadingAnimation()
-                val intent = Intent(this@MainActivity, CustomActivity::class.java)
-                startActivityForResult(intent, REQUEST_CUSTOM_ACTIVITY)
-            }
-
             swipeSongAdapter.setItemClickListener {
                 navHostFragment.findNavController().navigate(
                     R.id.globalActionToSongFragment
                 )
             }
         }
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+    }
+    private fun getDarkMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+
+            // Decrease saturation and brightness to mute the color
+            hsv[1] *= 0.4f // Decrease saturation by 60%
+            hsv[2] *= 0.4f // Decrease brightness by 60%
+
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY // Return a default grey color if the provided color is null
+    }
+
+    private fun getDayDarkMutedColor(color: Int?): Int {
+        if (color != null) {
+            val hsv = FloatArray(3)
+            Color.colorToHSV(color, hsv)
+            hsv[1] *= 0.2f
+            hsv[2] *= 0.9f
+
+            return Color.HSVToColor(hsv)
+        }
+        return Color.GRAY
+    }
+
+    override fun onDestroy() {
+        EventBus.getDefault().unregister(this)
+        super.onDestroy()
     }
 
     private fun hideNavigationBar() {
@@ -159,72 +252,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //as we are no longer using imageCustom Button, we can use tapTargetView
-//    private fun showTapTargetView() {
-//        val isTapTargetShown = sharedPreferences.getBoolean("isTapTargetShown", false)
-//
-//        if (!isTapTargetShown) {
-//            val tapTarget = TapTarget.forView(
-//                imageCustom,
-//                "Music Creation: Your Unique Sound",
-//                "Tap to create captivating music that's uniquely yours."
-//            )
-//                .cancelable(true)
-//                .outerCircleColor(R.color.target_view_outer)
-//                .targetCircleColor(android.R.color.white)
-//                .titleTextColor(android.R.color.white)
-//                .descriptionTextColor(android.R.color.white)
-//                .transparentTarget(true)
-//
-//            TapTargetSequence(this)
-//                .targets(tapTarget)
-//                .listener(object : TapTargetSequence.Listener {
-//                    override fun onSequenceFinish() {
-//                        // Update shared preferences when the sequence is finished
-//                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
-//                    }
-//
-//                    override fun onSequenceStep(lastTarget: TapTarget?, targetClicked: Boolean) {}
-//
-//                    override fun onSequenceCanceled(lastTarget: TapTarget?) {
-//                        // Update shared preferences if the sequence is canceled
-//                        sharedPreferences.edit().putBoolean("isTapTargetShown", true).apply()
-//                    }
-//                })
-//                .start()
-//        }
-//    }
-
-    private fun checkForAppUpdates() {
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { info ->
-            val isUpdateAvailable = info.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-            val isUpdateAllowed = when (updateType) {
-                AppUpdateType.FLEXIBLE -> info.isFlexibleUpdateAllowed
-                AppUpdateType.IMMEDIATE -> info.isImmediateUpdateAllowed
-                else -> false
-            }
-            if (isUpdateAvailable && isUpdateAllowed) {
-                appUpdateManager.startUpdateFlowForResult(
-                    info,
-                    updateType,
-                    this,
-                    123
-                )
-            }
-        }
-    }
-
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CUSTOM_ACTIVITY) {
             hideLoadingAnimation()
-        }
-
-        if (requestCode == 123) {
-            if (resultCode != RESULT_OK) {
-                println("something went wrong updating...")
-            }
         }
     }
 
@@ -237,22 +269,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hideBottomBar() {
+        AnimationHelper.setVisibilityWithAnimation(binding.MusicBar, View.GONE, this)
 
-        binding.MusicBar.isVisible = false
-//        binding.apply {
-//            ivCurSongImage.isVisible = false
-//            vpSong.isVisible = false
-//            ivPlayPause.isVisible = false
-//        }
     }
 
     private fun showBottomBar() {
-        binding.MusicBar.isVisible = true
-//        binding.apply {
-//            ivCurSongImage.isVisible = true
-//            vpSong.isVisible = true
-//            ivPlayPause.isVisible = true
-//        }
+        AnimationHelper.setVisibilityWithAnimation(binding.MusicBar, View.VISIBLE, this)
+
     }
 
     private fun switchViewPagerToCurrentSong(sound: sound) {
@@ -284,14 +307,53 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        fun getMutedColor(color: Int?): Int {
+            if (color != null) {
+                val hsv = FloatArray(3)
+                Color.colorToHSV(color, hsv)
+
+                // Decrease saturation and brightness to mute the color
+                hsv[1] *= 0.7f // Decrease saturation by 30%
+                hsv[2] *= 0.7f // Decrease brightness by 30%
+
+                return Color.HSVToColor(hsv)
+            }
+            return Color.GRAY // Return a default grey color if the provided color is null
+        }
+
+        fun setConstraintLayoutBackgroundColorFromImage(bitmap: Bitmap) {
+            // Generate the palette asynchronously
+            Palette.from(bitmap).generate { palette ->
+                // Extract different swatches of colors
+                val vibrantSwatch = palette?.vibrantSwatch
+                val mutedSwatch = palette?.mutedSwatch
+                val backgroundColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                val dayBackGroundColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+                // Set the background color of the ConstraintLayout
+                if(PrefrenceUtils.retriveDataInBoolean(this, Constants.DARK_MODE_ENABLED)){
+                    binding.underMusicBar.setBackgroundColor(backgroundColor)
+                } else {
+                    binding.underMusicBar.setBackgroundColor(dayBackGroundColor)
+                }
+            }
+        }
+
         mainViewModel.curPlayingSound.observe(this) {
             if (it == null) return@observe
             curPlayingSong = it.toSong()
             glide.load(curPlayingSong?.imageUrl).into(ivCurSongImage)
+            // assigning colors to the music bar w.r.t imageColor
+            val drawable = ivCurSongImage.drawable
+            if (drawable is BitmapDrawable) {
+                val bitmap = drawable.bitmap
+                mainViewModel.setCurrentBitmap(bitmap) // Store the bitmap in ViewModel
+                setConstraintLayoutBackgroundColorFromImage(bitmap)
+            }
             switchViewPagerToCurrentSong(curPlayingSong ?: return@observe)
         }
         mainViewModel.playbackState.observe(this) {
             playbackState = it
+           // if(playbackState?.isPlaying == false) songViewController.alpha = 0.4f else songViewController.alpha = 1f
             ivPlayPause.setImageResource(
                 if (playbackState?.isPlaying == true) R.drawable.ic_round_pause else R.drawable.ic_play_round
             )

@@ -3,21 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_4sdp"
-    android:layout_marginHorizontal="@dimen/_2sdp">
+    android:layout_margin="@dimen/_4sdp">
 
     <soup.neumorphism.NeumorphCardView
+        android:id="@+id/songCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_1sdp"
         app:cardCornerRadius="@dimen/_21sdp"
         app:cardElevation="@dimen/_4sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:neumorph_backgroundColor="@color/light_shadow_dark"
-        app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-        app:neumorph_shadowColorLight="@color/light_shadow_dark"
         app:neumorph_shapeAppearance="@style/NeumorphismImageSongItem"
         app:neumorph_shapeType="flat"
         >
@@ -27,20 +24,20 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/gradient1"
-            android:padding="@dimen/_8sdp">
-
-
-
+            >
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvPrimary"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_70sdp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:ellipsize="end"
+                android:gravity="center_horizontal"
                 android:layout_gravity="center_horizontal"
+                android:minLines="2"
                 android:maxLines="2"
                 android:text="@string/app_name"
+                android:fontFamily="@font/core_sans_medium"
                 android:textColor="@color/primary_text"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
@@ -50,23 +47,20 @@
                 android:id="@+id/tvSecondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:ellipsize="end"
                 android:layout_gravity="center_horizontal"
                 android:lines="1"
                 android:text="@string/app_name"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:textColor="@color/primary_text"
                 />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivItemImage"
-                android:layout_width="@dimen/_116sdp"
-                android:layout_height="@dimen/_74sdp"
-                android:src="@drawable/awake_icon"
-                android:maxHeight="@dimen/_78sdp"
-                android:layout_marginBottom="@dimen/_8sdp"
-                android:layout_gravity="center_horizontal"
+                android:layout_width="@dimen/_112sdp"
+                android:layout_height="@dimen/_112sdp"
+                android:src="@drawable/breathing_icon_cardview"
                 />
 
         </LinearLayout>

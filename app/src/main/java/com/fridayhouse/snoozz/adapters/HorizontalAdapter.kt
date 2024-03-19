@@ -18,12 +18,12 @@ class HorizontalAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_horizontal, parent, false)
+            .inflate(R.layout.breathe_list_item, parent, false)
         return ViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("Adapter", "Binding position $position")
+        //Log.d("Adapter", "Binding position $position")
         val item = items[position]
         holder.bind(item)
     }

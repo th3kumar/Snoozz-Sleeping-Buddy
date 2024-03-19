@@ -1,19 +1,72 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Snoozz" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Theme.Snoozz" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/torquise_light</item>
         <item name="colorPrimaryVariant">@color/darkOrchid</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
+        <item name="actionBarStyle">@style/ActionBar.Solid</item>
+        <item name="actionBarTheme">@style/ThemeOverlay.App.ActionBar</item>
+        <item name="actionBarPopupTheme">@style/Widget.App.PopupMenu</item>
         <item name="colorSecondary">@color/teal_200</item>
+        <item name="android:textColorPrimary">@color/action_menu_item</item>
+        <item name="android:titleTextStyle">@style/ActionBarTextAppearance</item>
+        <item name="android:textAppearance">@font/core_sans_medium</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
+        <item name="floatingActionButtonStyle">@style/Widget.App.FloatingActionButton</item>
+        <item name="popupMenuStyle">@style/Widget.App.PopupMenu</item>
+        <item name="bottomSheetDialogTheme">@style/Theme.App.BottomSheetDialog</item>
+        <item name="android:navigationBarColor">@color/navigation_bar_color</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
-        <item name="android:navigationBarColor">@color/darkOrchid</item>
+        <item name="android:statusBarColor" >@color/darkBackground</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="ActionBar.Solid" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/CustomActionBarTitleText</item>
+    </style>
+
+    <style name="CustomSnackbarText" parent="Widget.Design.Snackbar">
+        <item name="android:fontFamily">@font/core_sans_medium</item>
+        <item name="android:textSize">16sp</item> <!-- Change the text size to your preference -->
+        <!-- Add other text attributes as needed -->
+    </style>
+
+    <style name="ActionBarTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <!-- Change the font to your desired font resource -->
+        <item name="fontFamily">@font/core_sans_medium</item>
+        <item name="android:fontFamily">@font/core_sans_medium</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    <style name="CustomActionBarTitleText">
+        <item name="fontFamily">@font/core_sans_medium</item>
+        <item name="android:fontFamily">@font/core_sans_medium</item>
+    </style>
+
+
+    <style name="Widget.App.PopupMenu" parent="Widget.MaterialComponents.PopupMenu">
+        <item name="android:popupBackground">@drawable/popup_menu_bg</item>
+        <item name="popupMenuBackground">?android:attr/popupBackground</item>
+    </style>
+
+    <style name="ThemeOverlay.App.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+
+        <item name="fontFamily">@font/core_sans_medium</item>
+        <item name="android:fontFamily">@font/core_sans_medium</item>
+        <item name="colorPrimary">@color/action_bar</item>
+        <item name="colorControlNormal">@color/action_menu_item</item>
+        <item name="android:textAppearance">@style/TextAppearance.ActionBar.Title</item>
+    </style>
+
+    <style name="TextAppearance.ActionBar.Title" parent="ThemeOverlay.MaterialComponents.ActionBar">
+        <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.NoActionBar">
+        <!-- Other theme attributes specific to your SplashScreen can go here. -->
+    </style>
+
 
     <style name="Fullscreen" parent="Theme.Snoozz">
         <item name="android:windowNoTitle">true</item>
@@ -22,6 +75,62 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+
+
+    <style name="Widget.App.DurationPicker.Button.AddTime" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:padding">14dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline6</item>
+        <item name="icon">@drawable/ic_action_add</item>
+    </style>
+
+    <style name="TextAppearance.App.CountdownTextView" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="TextAppearance.App.CountdownTextView.Disabled">
+        <item name="android:textColor">@color/material_on_background_disabled</item>
+    </style>
+
+    <style name="Theme.App.BottomSheetDialog" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="colorPrimary">@color/primary</item>
+        <!-- RadioButtons use the secondary color but we don't really have a secondary color so... -->
+        <item name="colorSecondary">@color/primary</item>
+        <item name="bottomSheetStyle">@style/Widget.App.BottomSheet.Modal</item>
+        <item name="titleTextAppearance">@style/TextAppearance.App.BottomSheetDialog.Title</item>
+        <!-- following attributes are mostly unnecessary with current values. just for reference -->
+        <item name="buttonStyle">@style/Widget.MaterialComponents.Button.TextButton.Dialog</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Body1</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
+    </style>
+    <style name="Widget.App.BottomSheet.Modal" parent="Widget.Design.BottomSheet.Modal">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.BottomSheetDialog</item>
+    </style>
+
+    <style name="ShapeAppearance.App.BottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">8dp</item>
+        <item name="cornerSizeTopLeft">8dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="TextAppearance.App.BottomSheetDialog.Title" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/darkBackground</item>
+        <item name="backgroundTint">@color/torquise_light</item>
+    </style>
+
+    <style name="Widget.App.FloatingActionButton.Primary">
+        <item name="tint">@color/darkBackground</item>
+        <item name="backgroundTint">?attr/colorPrimarySurface</item>
+    </style>
 
     <style name="NeumorphismImageSmall">
         <item name="neumorph_cornerFamily">rounded</item>
@@ -34,6 +143,10 @@
     <style name="NeumorphismImageLarge">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_32sdp</item>
+    </style>
+    <style name="NeumorphismCardHome">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
     </style>
     <style name="NeumorphismCardImage">
         <item name="neumorph_cornerFamily">rounded</item>
@@ -77,23 +190,37 @@
         <item name="neumorph_cornerSize">@dimen/_8sdp</item>
     </style>
 
+    <style name="NeumorphismImageBreathe">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
+    </style>
+
     <style name="NeumorphismCreateBottom">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_40sdp</item>
     </style>
 
+    <style name="NeumorphismCardSplit">
+        <item name="neumorph_cornerFamily">rounded</item>
+        <item name="neumorph_cornerSize">@dimen/_32sdp</item>
+    </style>
+
     <style name="NeumorphismMusicBar">
         <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">@dimen/_12sdp</item>
+        <item name="neumorph_cornerSize">@dimen/_8sdp</item>
     </style>
 
     <style name="NeumorphismImageSongItem">
         <item name="neumorph_cornerFamily">rounded</item>
-        <item name="neumorph_cornerSize">@dimen/_18sdp</item>
+        <item name="neumorph_cornerSize">@dimen/_14sdp</item>
     </style>
     <style name="NeumorphismMenu">
         <item name="neumorph_cornerFamily">rounded</item>
         <item name="neumorph_cornerSize">@dimen/_40sdp</item>
+    </style>
+    <style name="circleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
 </resources>
