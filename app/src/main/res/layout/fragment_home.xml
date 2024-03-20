@@ -19,7 +19,27 @@
         android:id="@+id/constraintUnderScroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="50dp">
+        android:paddingBottom="@dimen/_40sdp">
+
+        <ImageView
+            android:layout_width="@dimen/_96sdp"
+            android:layout_height="@dimen/_96sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/_145sdp"
+            android:src="@drawable/snoozz_logo_brown"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintUnderConstraint"
+        android:layout_width="match_parent"
+        tools:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/constraintUnderScroll"
+        android:layout_height="wrap_content">
+
+
 
         <ImageView
             android:id="@+id/userNameHomeFragment"
@@ -521,6 +541,8 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recommendedSoundsLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
