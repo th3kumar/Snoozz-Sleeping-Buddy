@@ -7,8 +7,10 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.support.v4.media.session.PlaybackStateCompat
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
@@ -95,6 +97,15 @@ class MainActivity : ParentActivity() {
         val navView: BottomNavigationView = binding.navView
         window.statusBarColor = ContextCompat.getColor(this, R.color.action_bar)
 
+        val fromSplash = intent.getBooleanExtra("fromSplash", false)
+        if (fromSplash) {
+            showLoadingAnimation()
+            binding.flFragmentContainer.visibility = View.GONE
+            Handler().postDelayed({
+                hideLoadingAnimation()
+                AnimationHelper.setVisibilityWithAnimation(binding.flFragmentContainer, View.VISIBLE, this)
+            }, 600)
+        }
 
         val navController = findNavController(R.id.navHostFragment)
         // Passing each menu ID as a set of Ids because each
@@ -115,7 +126,12 @@ class MainActivity : ParentActivity() {
                 }
 
                 R.id.navigation_home -> {
-                    showBottomBar()
+                    //showBottomBar()
+                    if (fromSplash) {
+                        Handler().postDelayed({
+                            showBottomBar()
+                        }, 900)
+                    } else { showBottomBar() }
                     showNavigationBar()
                 }
 
@@ -261,7 +277,8 @@ class MainActivity : ParentActivity() {
     }
 
     private fun hideLoadingAnimation() {
-        binding.loadingAnimationView.visibility = View.GONE
+       // binding.loadingAnimationView.visibility = View.GONE
+        AnimationHelper.setVisibilityWithAnimation(binding.loadingAnimationView, View.GONE, this)
     }
 
     private fun showLoadingAnimation() {

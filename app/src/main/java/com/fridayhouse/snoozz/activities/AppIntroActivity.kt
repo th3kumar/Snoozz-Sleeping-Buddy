@@ -53,7 +53,7 @@ class AppIntroActivity : AppIntro2() {
             AppIntroFragment.newInstance(
                 title = getString(R.string.appintro__getting_started_title),
                 description = "${getString(R.string.app_description)}\n\n${getString(R.string.appintro__getting_started_desc_0)}",
-                imageDrawable = R.drawable.app_banner,
+                imageDrawable = R.drawable.snoozz_logo_brown,
                 titleColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 descriptionColor = ActivityCompat.getColor(this, R.color.appintro__text_color),
                 backgroundColor = ActivityCompat.getColor(this, R.color.appintro_slide_0__background)

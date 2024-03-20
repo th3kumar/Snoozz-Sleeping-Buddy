@@ -2,6 +2,7 @@ package com.fridayhouse.snoozz.ui.fragments
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
@@ -93,34 +94,40 @@ class HomeFragment: Fragment() {
 
         mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->
             bitmap?.let { currentBitmap ->
-                Palette.from(currentBitmap).generate { palette ->
-                    val vibrantSwatch = palette?.vibrantSwatch
-                    val mutedSwatch = palette?.mutedSwatch
-                    val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
-                    val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
-                    val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
-                    val dayDarkMutedColor =  getDayDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
-                    val lightShadow = getLightShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
-                    val darkShadow = getDarkShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
-
-
-                   if(PrefrenceUtils.retriveDataInBoolean(context, Constants.DARK_MODE_ENABLED)){
-                       binding.apply {
-                           cardViewFeeling.setShadowColorLight(darkShadow)
-                           cardViewFeeling.setBackgroundColor(mutedColor)
-                           cardViewRecommend.setCardBackgroundColor(darkMutedColor)
-                       }
-                   } else {
-                       binding.apply {
-                           cardViewFeeling.setShadowColorLight(Color.WHITE)
-                           cardViewFeeling.setBackgroundColor(dayMutedColor)
-                           cardViewRecommend.setCardBackgroundColor(Color.WHITE)
-                       }
-                   }
-
-                }
-            }
+                assignColorsFromBitmap(currentBitmap)
+            } ?: retryAssigningColorsAfterDelay()
         }
+
+//        mainViewModel.currentBitmap.observe(viewLifecycleOwner) { bitmap ->
+//            bitmap?.let { currentBitmap ->
+//                Palette.from(currentBitmap).generate { palette ->
+//                    val vibrantSwatch = palette?.vibrantSwatch
+//                    val mutedSwatch = palette?.mutedSwatch
+//                    val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+//                    val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+//                    val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+//                    val dayDarkMutedColor =  getDayDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+//                    val lightShadow = getLightShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+//                    val darkShadow = getDarkShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+//
+//
+//                   if(PrefrenceUtils.retriveDataInBoolean(context, Constants.DARK_MODE_ENABLED)){
+//                       binding.apply {
+//                           cardViewFeeling.setShadowColorLight(darkShadow)
+//                           cardViewFeeling.setBackgroundColor(mutedColor)
+//                           cardViewRecommend.setCardBackgroundColor(darkMutedColor)
+//                       }
+//                   } else {
+//                       binding.apply {
+//                           cardViewFeeling.setShadowColorLight(Color.WHITE)
+//                           cardViewFeeling.setBackgroundColor(dayMutedColor)
+//                           cardViewRecommend.setCardBackgroundColor(Color.WHITE)
+//                       }
+//                   }
+//
+//                }
+//            }
+//        }
 
         songAdapter.setItemClickListener {
             mainViewModel.playOrToggleSound(it)
@@ -129,6 +136,41 @@ class HomeFragment: Fragment() {
         randomSongAdapter.setItemClickListener {
             mainViewModel.playOrToggleSound(it)
         }
+    }
+
+    private fun assignColorsFromBitmap(bitmap: Bitmap) {
+        Palette.from(bitmap).generate { palette ->
+            val vibrantSwatch = palette?.vibrantSwatch
+            val mutedSwatch = palette?.mutedSwatch
+            val mutedColor = getMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+            val dayMutedColor = getDayMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+            val darkMutedColor = getDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+            val dayDarkMutedColor =  getDayDarkMutedColor(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+            val lightShadow = getLightShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+            val darkShadow = getDarkShadow(vibrantSwatch?.rgb ?: mutedSwatch?.rgb)
+
+            if(PrefrenceUtils.retriveDataInBoolean(context, Constants.DARK_MODE_ENABLED)){
+                binding.apply {
+                    cardViewFeeling.setShadowColorLight(darkShadow)
+                    cardViewFeeling.setBackgroundColor(mutedColor)
+                    cardViewRecommend.setCardBackgroundColor(darkMutedColor)
+                }
+            } else {
+                binding.apply {
+                    cardViewFeeling.setShadowColorLight(Color.WHITE)
+                    cardViewFeeling.setBackgroundColor(dayMutedColor)
+                    cardViewRecommend.setCardBackgroundColor(Color.WHITE)
+                }
+            }
+        }
+    }
+
+    private fun retryAssigningColorsAfterDelay() {
+        Handler(Looper.getMainLooper()).postDelayed({
+            mainViewModel.currentBitmap.value?.let { bitmap ->
+                assignColorsFromBitmap(bitmap)
+            }
+        }, 2000) // Adjust the delay as per your requirement
     }
 
     private fun revertEmojiSelection() {
