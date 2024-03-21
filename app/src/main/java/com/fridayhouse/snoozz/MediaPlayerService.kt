@@ -140,7 +140,7 @@ class MediaPlayerService : Service() {
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     intent?.also { PlaybackController.handleServiceIntent(this, playerManager, it) }
-    return START_STICKY
+    return START_NOT_STICKY
   }
 
   override fun onDestroy() {
