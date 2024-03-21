@@ -4,7 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
+import com.fridayhouse.snoozz.R
 import com.fridayhouse.snoozz.adapters.SongAdapter
 import com.fridayhouse.snoozz.databinding.ActivitySplashScreenBinding
 import com.fridayhouse.snoozz.others.Constants
@@ -12,8 +14,6 @@ import com.fridayhouse.snoozz.others.Status
 import com.fridayhouse.snoozz.ui.viewmodels.MainViewModel
 import com.fridayhouse.snoozz.utilities.PrefrenceUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_splash_screen.fridayHouse
-import kotlinx.android.synthetic.main.activity_splash_screen.snoozzTitle
 import java.util.concurrent.CompletableFuture
 import javax.inject.Inject
 
@@ -37,9 +37,10 @@ class SplashScreen : AppCompatActivity() {
         binding = ActivitySplashScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        window.statusBarColor = ContextCompat.getColor(this, R.color.darkBackground)
 
-        fridayHouse.alpha = 0f
-        fridayHouse.animate().setDuration(550).alpha(1f).withEndAction {
+        binding.loadingAnimationView.alpha = 0f
+        binding.loadingAnimationView.animate().setDuration(350).alpha(1f).withEndAction {
             val i = Intent(this, MainActivity::class.java)
             i.putExtra("fromSplash", true)
             startActivity(i)

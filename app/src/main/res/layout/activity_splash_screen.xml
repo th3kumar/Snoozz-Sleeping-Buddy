@@ -8,49 +8,16 @@
     android:orientation="vertical"
     tools:context=".activities.SplashScreen">
 
-
-    <LinearLayout
-        android:id="@+id/fridayHouse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/loadingAnimationView"
+        android:layout_width="@dimen/_126sdp"
+        android:layout_height="@dimen/_126sdp"
+        android:foregroundGravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-
-            <soup.neumorphism.NeumorphImageView
-                android:layout_width="@dimen/_74sdp"
-                android:layout_height="@dimen/_74sdp"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/_12sdp"
-                android:src="@drawable/friday_house_logo_final"
-                app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-                app:neumorph_shadowColorLight="@color/light_shadow_dark"
-                app:neumorph_shapeAppearance="@style/NeumorphismCardImage"
-                app:neumorph_strokeColor="@color/black"
-                app:neumorph_strokeWidth="2dp" />
-
-            <soup.neumorphism.NeumorphTextView
-                android:id="@+id/snoozzTitle"
-                android:layout_width="@dimen/_165sdp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/core_sans_medium"
-                android:text="SNOOZZ"
-                android:visibility="gone"
-                android:textColor="@color/darkBackground"
-                android:textSize="@dimen/_45ssp"
-                android:textStyle="bold"
-                app:neumorph_shadowColorDark="@color/dark_shadow_dark"
-                app:neumorph_shadowColorLight="@color/light_shadow_dark" />
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:src="@drawable/snoozz_logo_brown"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,16 +21,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_40sdp">
 
-        <ImageView
-            android:layout_width="@dimen/_96sdp"
-            android:layout_height="@dimen/_96sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/_145sdp"
-            android:src="@drawable/snoozz_logo_brown"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintUnderConstraint"
