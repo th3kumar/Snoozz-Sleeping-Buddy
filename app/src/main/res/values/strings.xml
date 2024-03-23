@@ -298,7 +298,7 @@
     <string name="preset">Preset</string>
     <string name="timer">Timer</string>
     <string name="support_development2">Support Development</string>
-    <string name="version_code">Version: 1.5.0</string>
+    <string name="version_code">Version: 1.6.0</string>
     <string name="overlay_other_audios">Overlay audios</string>
     <string name="export_presets_successful">Successfully exported presets to the file!</string>
     <string name="import_presets_successful">Successfully imported presets from the file!</string>
